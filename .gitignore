@@ -1,10 +1,9 @@
-requests.http
-config.php
-config.json
 usr.js
-
+config.json
 .DS_Store
 node_modules
+/pasteme
+/dist
 
 # local env files
 .env.local
@@ -23,10 +22,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-.well-known
-.file
-.idea
-test.html
-test.php
-config.php
-tmp
