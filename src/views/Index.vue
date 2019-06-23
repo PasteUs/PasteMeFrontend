@@ -35,9 +35,8 @@
                     this.view = 'home';
                 } else {
                     this.view = 'loading';
-                    this.api.get(this.$store.state.config.api, {
-                        browser: true,
-                        token: this.$route.params.Key
+                    this.api.get(this.$store.state.config.api + this.$route.params.Key, {
+                        browser: true
                     }).then(response => {
                         if (response.status === 200) {
                             this.view = 'paste_view';

@@ -58,7 +58,6 @@
         data() {
             return {
                 form: {
-                    Key: null,
                     Lang: 'plain',
                     Content: null,
                     Password: null,
@@ -69,12 +68,13 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault();
+                let Key = "";
                 if (this.$route.params.Key !== '') {
-                    this.form.Key = this.$route.params.Key;
+                    Key = this.$route.params.Key;
                 } else if (this.read_once.length > 0) {
-                    this.form.Key = "read_once"
+                    Key = "read_once"
                 }
-                this.api.post(this.$store.state.config.api, this.form).then(response => {
+                this.api.post(this.$store.state.config.api + Key, this.form).then(response => {
                     if (response.status === 201) {
                         this.$parent.view = 'success';
                         this.$parent.Key = response.Key;

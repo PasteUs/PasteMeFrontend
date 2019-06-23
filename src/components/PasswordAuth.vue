@@ -30,9 +30,9 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault();
-                this.api.get(this.$store.state.config.api, {
-                    browser: '',
-                    token: this.$route.params.Key + ',' + this.form.password,
+                let token = this.$route.params.Key + ',' + this.form.password;
+                this.api.get(this.$store.state.config.api + token, {
+                    browser: 'true'
                 }).then(response => {
                     if (response.status === 200) {
                         this.$parent.Content = response.Content;
