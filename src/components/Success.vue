@@ -6,7 +6,7 @@
                 <h2>
                     {{ $t('lang.success.h2') }}
                 </h2>
-                <p v-html="$t('lang.success.p[0].text', { keyword: $parent.keyword })"></p>
+                <p v-html="$t('lang.success.p[0].text', { Key: $parent.Key })"></p>
                 <ul>
                     <li><a v-html="$t('lang.success.ul.li[0].text')"></a>&nbsp;<b-badge
                             pill class="badge-fixed"
@@ -17,15 +17,15 @@
                     <li>{{ $t('lang.success.ul.li[1].browser') }}
                         <a
                                 v-b-tooltip.hover="$t('lang.success.ul.li[1].tooltip')"
-                                :href="base_url + $parent.keyword"
+                                :href="base_url + $parent.Key"
                                 target="_blank"
                         >
-                            {{ base_url + $parent.keyword }}
+                            {{ base_url + $parent.Key }}
                         </a>&nbsp;<b-badge
                                 variant="info"
                                 id="copy_btn"
                                 class="badge-fixed"
-                                :data-clipboard-text="base_url + $parent.keyword"
+                                :data-clipboard-text="base_url + $parent.Key"
                                 @click="onCopy"
                                 href="#"
                         >
@@ -54,7 +54,7 @@
                 triggers="hover"
         >
             <div class="text-center">
-                <QRCode :value="this.base_url + this.$parent.keyword" :options="{ width: 168 }"></QRCode>
+                <QRCode :value="this.base_url + this.$parent.Key" :options="{ width: 168 }"></QRCode>
             </div>
         </b-popover>
     </b-row>
@@ -77,7 +77,7 @@
         methods: {
             goHome(event) {
                 event.preventDefault();
-                if (this.$route.params.keyword !== '') {
+                if (this.$route.params.Key !== '') {
                     this.$router.push('/');
                 } else {
                     this.$parent.view = 'home';
