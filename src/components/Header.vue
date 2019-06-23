@@ -7,7 +7,7 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-nav-form @submit="onSubmit">
                         <b-input-group v-bind:prepend="this.$store.state.config.base_url">
-                            <b-form-input :placeholder="$t('lang.nav.form.placeholder')" v-model="keyword" maxlength="8"
+                            <b-form-input :placeholder="$t('lang.nav.form.placeholder')" v-model="Key" maxlength="8"
                                     autocomplete="off" required id="nav_input"></b-form-input>
                             <b-input-group-append>
                                 <b-button type="submit" variant="primary"
@@ -79,14 +79,14 @@
         name: "Header",
         data() {
             return {
-                keyword: null,
+                Key: null,
             }
         },
         methods: {
             onSubmit(event) {
                 event.preventDefault();
-                this.$router.push(this.keyword);
-                this.keyword = null;
+                this.$router.push(this.Key);
+                this.Key = null;
             },
             setLang(lang) {
                 this.setI18n(lang);

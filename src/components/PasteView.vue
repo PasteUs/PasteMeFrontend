@@ -2,8 +2,8 @@
     <b-row>
         <b-col md="1"></b-col>
         <b-col md="10">
-            <pre id="font-md"><code v-bind:class="'language-' + this.$parent.type + ' line-numbers'"
-                       v-text="this.$parent.content"></code></pre>
+            <pre id="font-md"><code v-bind:class="'language-' + this.$parent.Lang + ' line-numbers'"
+                       v-text="this.$parent.Content"></code></pre>
         </b-col>
         <b-col md="1"></b-col>
     </b-row>

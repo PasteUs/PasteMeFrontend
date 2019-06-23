@@ -32,11 +32,11 @@
                 event.preventDefault();
                 this.api.get(this.$store.state.config.api, {
                     browser: '',
-                    token: this.$route.params.keyword + ',' + this.form.password,
+                    token: this.$route.params.Key + ',' + this.form.password,
                 }).then(response => {
                     if (response.status === 200) {
-                        this.$parent.content = response.content;
-                        this.$parent.type = response.type;
+                        this.$parent.Content = response.Content;
+                        this.$parent.Lang = response.Lang;
                         this.$parent.view = 'paste_view';
                     } else {
                         this.flag = false;

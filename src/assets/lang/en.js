@@ -28,7 +28,7 @@ export const lang = {
         h2: 'Success!',
         p: [
             {
-                text: 'How to access this Paste <strong>{keyword}</strong> :',
+                text: 'How to access this Paste <strong>{Key}</strong> :',
             },
             {
                 button: 'Return',
