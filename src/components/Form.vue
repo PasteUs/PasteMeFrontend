@@ -7,7 +7,7 @@
                     <b-col md="7" lg="5">
                         <b-form-group>
                             <b-input-group :prepend="$t('lang.form.input[0].prepend')">
-                                <b-form-select v-model="form.Lang">
+                                <b-form-select v-model="form.lang">
                                     <option value="plain">{{ this.$t('lang.form.select.plain') }}</option>
                                     <option value="cpp">C/C++</option>
                                     <option value="java">Java</option>
@@ -20,7 +20,7 @@
                         </b-form-group>
                         <b-form-group>
                             <b-input-group :prepend="$t('lang.form.input[1].prepend')">
-                                <b-form-input type="password" autocomplete="off" v-model="form.Password"
+                                <b-form-input type="password" autocomplete="off" v-model="form.password"
                                               :placeholder="$t('lang.form.input[1].placeholder')"></b-form-input>
                             </b-input-group>
                         </b-form-group>
@@ -29,7 +29,7 @@
                 <b-row>
                     <b-col md="12">
                         <b-form-group>
-                            <b-form-textarea v-model="form.Content" rows="10"
+                            <b-form-textarea v-model="form.content" rows="10"
                                              :placeholder="$t('lang.form.textarea.placeholder.' +
                                              ($store.state.read_once ? 'read_once' : 'write_something_here'))"
                                              required no-resize></b-form-textarea>
@@ -58,9 +58,9 @@
         data() {
             return {
                 form: {
-                    Lang: 'plain',
-                    Content: null,
-                    Password: null,
+                    lang: 'plain',
+                    content: null,
+                    password: null,
                 },
                 read_once: []
             }
@@ -68,16 +68,16 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault();
-                let Key = "";
-                if (this.$route.params.Key !== '') {
-                    Key = this.$route.params.Key;
+                let key = "";
+                if (this.$route.params.key !== '') {
+                    key = this.$route.params.key;
                 } else if (this.read_once.length > 0) {
-                    Key = "read_once"
+                    key = "read_once"
                 }
-                this.api.post(this.$store.state.config.api + Key, this.form).then(response => {
+                this.api.post(this.$store.state.config.api + key, this.form).then(response => {
                     if (response.status === 201) {
                         this.$parent.view = 'success';
-                        this.$parent.Key = response.Key;
+                        this.$parent.key = response.key;
                     }
                 });
             }
