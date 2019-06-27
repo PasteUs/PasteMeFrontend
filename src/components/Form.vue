@@ -7,7 +7,7 @@
                     <b-col md="7" lg="5">
                         <b-form-group>
                             <b-input-group :prepend="$t('lang.form.input[0].prepend')">
-                                <b-form-select v-model="form.type">
+                                <b-form-select v-model="form.lang">
                                     <option value="plain">{{ this.$t('lang.form.select.plain') }}</option>
                                     <option value="cpp">C/C++</option>
                                     <option value="java">Java</option>
@@ -39,7 +39,7 @@
                                 <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'" style="margin-right: .65em">
                                     {{ $t('lang.form.submit') }}
                                 </b-button>
-                                <b-form-checkbox v-model="form.read_once" v-show="!$store.state.read_once" switch>
+                                <b-form-checkbox v-model="read_once" v-show="!$store.state.read_once" switch>
                                     {{ $t('lang.form.checkbox') }}
                                 </b-form-checkbox>
                             </b-checkbox-group>
@@ -58,25 +58,37 @@
         data() {
             return {
                 form: {
-                    type: 'plain',
-                    password: null,
+                    lang: 'plain',
                     content: null,
-                    read_once: []
-                }
+                    password: null,
+                },
+                read_once: []
             }
         },
         methods: {
             onSubmit(event) {
                 event.preventDefault();
-                if (this.$route.params.keyword !== '') {
-                    this.form.keyword = this.$route.params.keyword;
+                let key = "";
+                if (this.$route.params.key !== '') {
+                    key = this.$route.params.key;
+                } else if (this.read_once.length > 0) {
+                    key = "once"
                 }
-                this.api.post(this.$store.state.config.api, this.form).then(response => {
-                    if (response.status === 201) {
-                        this.$parent.view = 'success';
-                        this.$parent.keyword = response.keyword;
-                    }
-                });
+                if (key === "" || key === "once") {
+                    this.api.post(this.$store.state.config.api + key, this.form).then(response => {
+                        if (response.status === 201) {
+                            this.$parent.view = 'success';
+                            this.$parent.key = response.key;
+                        }
+                    });
+                } else {
+                    this.api.put(this.$store.state.config.api + key, this.form).then(response => {
+                        if (response.status === 201) {
+                            this.$parent.view = 'success';
+                            this.$parent.key = response.key;
+                        }
+                    });
+                }
             }
         }
     }

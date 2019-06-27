@@ -8,7 +8,7 @@ export const lang = {
                 prepend: 'Format',
             },
             {
-                prepend: 'Password',
+                prepend: 'password',
                 placeholder: 'Blank to disable encryption',
             }
         ],
@@ -28,7 +28,7 @@ export const lang = {
         h2: 'Success!',
         p: [
             {
-                text: 'How to access this Paste <strong>{keyword}</strong> :',
+                text: 'How to access this Paste <strong>{key}</strong> :',
             },
             {
                 button: 'Return',

@@ -30,13 +30,13 @@
         methods: {
             onSubmit(event) {
                 event.preventDefault();
-                this.api.get(this.$store.state.config.api, {
-                    browser: '',
-                    token: this.$route.params.keyword + ',' + this.form.password,
+                let token = this.$route.params.key + ',' + this.form.password;
+                this.api.get(this.$store.state.config.api + token, {
+                    browser: 'true'
                 }).then(response => {
                     if (response.status === 200) {
                         this.$parent.content = response.content;
-                        this.$parent.type = response.type;
+                        this.$parent.lang = response.lang;
                         this.$parent.view = 'paste_view';
                     } else {
                         this.flag = false;

@@ -15,13 +15,13 @@
         data() {
             return {
                 view: 'loading',
-                type: null,
+                lang: null,
                 content: null,
                 placeholder: null,
             }
         },
         watch: {
-            '$route.params.keyword': function () {
+            '$route.params.key': function () {
                 this.init();
             }
         },
@@ -31,21 +31,20 @@
         methods: {
             init() {
                 this.$store.commit('init');
-                if (this.$route.params.keyword === '') {
+                if (this.$route.params.key === '') {
                     this.view = 'home';
                 } else {
                     this.view = 'loading';
-                    this.api.get(this.$store.state.config.api, {
-                        browser: '',
-                        token: this.$route.params.keyword
+                    this.api.get(this.$store.state.config.api + this.$route.params.key, {
+                        browser: true
                     }).then(response => {
                         if (response.status === 200) {
                             this.view = 'paste_view';
                             this.content = response.content;
-                            this.type = response.type;
+                            this.lang = response.lang;
                         } else if (response.status === 403) {
                             this.view = 'password_auth';
-                        } else if (response.status === 404 && this.$route.params.keyword.search('[a-zA-Z]{1}') !== -1) {
+                        } else if (response.status === 404 && this.$route.params.key.search('[a-zA-Z]{1}') !== -1) {
                             this.$store.commit('updateMode', {
                                 read_once: true,
                             });
