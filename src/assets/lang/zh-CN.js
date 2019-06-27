@@ -28,7 +28,7 @@ export const lang = {
         h2: '保存成功',
         p: [
             {
-                text: '欲访问 <strong>{Key}</strong> 所对应的 Paste',
+                text: '欲访问 <strong>{key}</strong> 所对应的 Paste',
             },
             {
                 button: '返回主页',
