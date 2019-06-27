@@ -72,14 +72,23 @@
                 if (this.$route.params.key !== '') {
                     key = this.$route.params.key;
                 } else if (this.read_once.length > 0) {
-                    key = "read_once"
+                    key = "once"
                 }
-                this.api.post(this.$store.state.config.api + key, this.form).then(response => {
-                    if (response.status === 201) {
-                        this.$parent.view = 'success';
-                        this.$parent.key = response.key;
-                    }
-                });
+                if (key === "" || key === "once") {
+                    this.api.post(this.$store.state.config.api + key, this.form).then(response => {
+                        if (response.status === 201) {
+                            this.$parent.view = 'success';
+                            this.$parent.key = response.key;
+                        }
+                    });
+                } else {
+                    this.api.put(this.$store.state.config.api + key, this.form).then(response => {
+                        if (response.status === 201) {
+                            this.$parent.view = 'success';
+                            this.$parent.key = response.key;
+                        }
+                    });
+                }
             }
         }
     }

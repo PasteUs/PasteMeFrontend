@@ -22,5 +22,15 @@ export default {
                 reject(error);
             });
         });
+    },
+    put: function(url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.put(url, params).then(response => {
+                resolve(response.data);
+            }).catch(error => {
+                alert(url + '\n' + JSON.stringify(error));
+                reject(error);
+            });
+        });
     }
 }
