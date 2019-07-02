@@ -36,13 +36,13 @@
                 } else {
                     this.view = 'loading';
                     this.api.get(this.$store.state.config.api + this.$route.params.key, {
-                        browser: true
+                        json: true
                     }).then(response => {
                         if (response.status === 200) {
                             this.view = 'paste_view';
                             this.content = response.content;
                             this.lang = response.lang;
-                        } else if (response.status === 403) {
+                        } else if (response.status === 401) {
                             this.view = 'password_auth';
                         } else if (response.status === 404 && this.$route.params.key.search('[a-zA-Z]{1}') !== -1) {
                             this.$store.commit('updateMode', {
