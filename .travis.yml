@@ -15,6 +15,7 @@ after_success:
   - cp -r tmpdir/.git pasteme
   - cp LICENSE DEPLOY.md pasteme
   - cd pasteme
+  - rm css/*.css js/*.js
   - mv DEPLOY.md README.md
   - git config user.name "${U_NAME}"
   - git config user.email "${U_EMAIL}"
