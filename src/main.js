@@ -32,7 +32,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 (async function () {
     await (function() {
         return new Promise ((resolve, reject) => {
-            api.get('./config.json').then(response => {
+            api.get('usr/config.json').then(response => {
                 store.state.config = response;
                 resolve();
             }).catch(error => {
