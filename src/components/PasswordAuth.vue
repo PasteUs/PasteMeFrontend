@@ -32,7 +32,7 @@
                 event.preventDefault();
                 let token = this.$route.params.key + ',' + this.form.password;
                 this.api.get(this.$store.state.config.api + token, {
-                    browser: 'true'
+                    json: 'true'
                 }).then(response => {
                     if (response.status === 200) {
                         this.$parent.content = response.content;
