@@ -13,7 +13,7 @@ after_success:
   - rm -rf .git
   - git clone https://${GH_REF} -b ${P_BRANCH} tmpdir
   - cp -r tmpdir/.git pasteme
-  - cp LICENSE DEPLOY.md pasteme
+  - cp nginx.conf LICENSE DEPLOY.md pasteme
   - cd pasteme
   - rm css/*.css js/*.js
   - mv DEPLOY.md README.md
