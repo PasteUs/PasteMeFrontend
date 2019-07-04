@@ -3,6 +3,9 @@ const CompressionPlugin = require('compression-webpack-plugin');
 let webPath = '/';
 
 module.exports = {
+    devServer: {
+        disableHostCheck: true
+    },
     publicPath: process.env.NODE_ENV === 'production' ? webPath : '/',
     outputDir: 'pasteme',
     productionSourceMap: false,
