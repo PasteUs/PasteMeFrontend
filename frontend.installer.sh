@@ -9,11 +9,12 @@ else
         git clone --depth=1 https://github.com/LucienShui/PasteMeFrontend.git -b build /usr/local/pasteme && \
         mkdir -p /etc/pasteme && \
         cd /usr/local/pasteme && \
-        mv usr nginx.conf /etc/pasteme && \
+        mv usr conf.d /etc/pasteme && \
         ln -s /etc/pasteme/usr ${PWD}
         if [[ ${?} == 0 ]]; then
             echo "Installation finished"
-            echo "Config file: /etc/pastemed/config.sh"
+            echo "Config file: /etc/pasteme/config.json"
+            echo "Nginx config file: /etc/pasteme/conf.d/default.conf"
         else
             echo "Installation failed"
         fi
