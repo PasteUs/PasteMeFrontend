@@ -1,6 +1,13 @@
 # Change Log
 
-## 2019-07-06
+## Version 3.0.1
+
+### 2019-07-07
+
+1. Add Markdown parser/raw switch
+2. Update version to `3.0.1`
+
+### 2019-07-06
 
 1. Add refresh on `one word`
 2. Split `API & Guidance` into `API` and `Guidance` at nav.dropdown

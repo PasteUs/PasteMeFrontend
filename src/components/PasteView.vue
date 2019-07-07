@@ -2,30 +2,42 @@
     <b-row>
         <b-col md="1"></b-col>
         <b-col md="10">
-            <div class="markdown-body" v-if="$parent.lang === 'markdown'">
-                <div v-html="markdown.render($parent.content)"></div>
-                <script type="text/x-mathjax-config">
-                MathJax.Hub.Config({
-                    showProcessingMessages: false,
-                    messageStyle: "none",
-                    extensions: ["tex2jax.js"],
-                    jax: ["input/TeX", "output/HTML-CSS"],
-                    tex2jax: {
-                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
-                        ignoreClass:"comment-content"
-                    },
-                    "HTML-CSS": {
-                        availableFonts: ["STIX","TeX"],
-                        showMathMenu: false
-                    }
-                });
-                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-                </script>
-                <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
+            <div v-if="$parent.lang === 'markdown'">
+                <b-card no-body>
+                    <b-tabs card>
+                        <b-tab title="Parser" active>
+                            <div class="markdown-body">
+                                <div v-html="markdown.render($parent.content)"></div>
+                                <script type="text/x-mathjax-config">
+                                MathJax.Hub.Config({
+                                    showProcessingMessages: false,
+                                    messageStyle: "none",
+                                    extensions: ["tex2jax.js"],
+                                    jax: ["input/TeX", "output/HTML-CSS"],
+                                    tex2jax: {
+                                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                                        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                                        ignoreClass:"comment-content"
+                                    },
+                                    "HTML-CSS": {
+                                        availableFonts: ["STIX","TeX"],
+                                        showMathMenu: false
+                                    }
+                                });
+                                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                                </script>
+                                <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
+                            </div>
+                        </b-tab>
+                        <b-tab title="Raw">
+                            <pre class="font-md"><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
+                                                           v-text="this.$parent.content"></code></pre>
+                        </b-tab>
+                    </b-tabs>
+                </b-card>
             </div>
-            <pre id="font-md" v-else><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
+            <pre class="font-md" v-else><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
                        v-text="this.$parent.content"></code></pre>
         </b-col>
         <b-col md="1"></b-col>
@@ -50,7 +62,7 @@
 </script>
 
 <style scoped>
-    #font-md {
+    .font-md {
         font-size: .88em;
     }
 
