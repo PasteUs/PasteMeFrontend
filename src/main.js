@@ -26,6 +26,21 @@ Vue.use(BootstrapVue);
 Vue.use(VueCookie);
 Vue.prototype.clipboard = clipboard;
 Vue.prototype.api = api;
+
+Vue.prototype.markdown = require('markdown-it')({
+    html: true,
+    langPrefix: 'line-numbers language-',
+    linkify: true,
+    typographer: true
+}).use(require('markdown-it-task-checkbox'), {
+    disabled: true,
+    divWrap: false,
+    divClass: 'checkbox',
+    idPrefix: 'cbx_',
+    ulClass: 'task-list',
+    liClass: 'task-list-item'
+});
+
 Vue.component('QRCode', VueQrcode);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

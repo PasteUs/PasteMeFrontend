@@ -15,11 +15,9 @@
                             @mouseleave="popover_show = false">?</b-badge>
                     </li>
                     <li>{{ $t('lang.success.ul.li[1].browser') }}
-                        <a
-                                v-b-tooltip.hover="$t('lang.success.ul.li[1].tooltip')"
-                                :href="base_url + $parent.key"
-                                target="_blank"
-                        >
+                        <a v-b-tooltip.hover="$t('lang.success.ul.li[1].tooltip')"
+                           :href="base_url + $parent.key"
+                           target="_blank">
                             {{ base_url + $parent.key }}
                         </a>&nbsp;<b-badge
                                 variant="info"
@@ -27,8 +25,7 @@
                                 class="badge-fixed"
                                 :data-clipboard-text="base_url + $parent.key"
                                 @click="onCopy"
-                                href="#"
-                        >
+                                href="#">
                             {{ $t('lang.success.badge.' +
                             (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
                         </b-badge>
@@ -46,13 +43,13 @@
         <b-popover
                 :show.sync="popover_show"
                 target="nav_input"
-                placement="bottomright"
-        ><a v-html="$t('lang.success.popover.text')"></a></b-popover>
+                placement="bottomright">
+            <a v-html="$t('lang.success.popover.text')"></a>
+        </b-popover>
         <b-popover
                 target="qr_code_link"
                 placement="auto"
-                triggers="hover"
-        >
+                triggers="hover">
             <div class="text-center">
                 <QRCode :value="this.base_url + this.$parent.key" :options="{ width: 168 }"></QRCode>
             </div>
