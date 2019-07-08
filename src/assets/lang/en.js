@@ -98,5 +98,9 @@ export const lang = {
     },
     footer: {
         tooltip: 'Click to change'
+    },
+    view: {
+        parsed: 'Parsed',
+        raw: 'Raw'
     }
 };

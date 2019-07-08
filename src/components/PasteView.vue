@@ -5,7 +5,7 @@
             <div v-if="$parent.lang === 'markdown'">
                 <b-card no-body>
                     <b-tabs card>
-                        <b-tab title="Parser" active>
+                        <b-tab :title="$t('lang.view.parsed')" active>
                             <div class="markdown-body">
                                 <div v-html="markdown.render($parent.content)"></div>
                                 <script type="text/x-mathjax-config">
@@ -30,7 +30,7 @@
                                 <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
                             </div>
                         </b-tab>
-                        <b-tab title="Raw">
+                        <b-tab :title="$t('lang.view.raw')">
                             <pre class="font-md"><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
                                                            v-text="this.$parent.content"></code></pre>
                         </b-tab>

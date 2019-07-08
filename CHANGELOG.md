@@ -6,6 +6,8 @@
 
 1. Markdown parse bug fixed
 2. English translation fixed
+3. Checkbox supported
+4. Markdown `i18n` supported
 
 ### 2019-07-07
 

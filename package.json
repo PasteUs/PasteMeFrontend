@@ -18,6 +18,7 @@
     "core-js": "^2.6.5",
     "github-markdown-css": "^3.0.1",
     "markdown-it": "^8.4.2",
+    "markdown-it-task-checkbox": "^1.0.6",
     "prismjs": "^1.16.0",
     "vue": "^2.6.10",
     "vue-cookie": "^1.1.4",

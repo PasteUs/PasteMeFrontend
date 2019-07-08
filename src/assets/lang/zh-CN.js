@@ -98,5 +98,9 @@ export const lang = {
     },
     footer: {
         tooltip: '点击以刷新'
+    },
+    view: {
+        parsed: '渲染',
+        raw: '源码'
     }
 };
