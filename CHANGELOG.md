@@ -8,6 +8,7 @@
 2. English translation fixed
 3. Checkbox supported
 4. Markdown `i18n` supported
+5. `mem` version fixed
 
 ### 2019-07-07
 
