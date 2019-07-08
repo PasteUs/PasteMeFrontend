@@ -28,18 +28,9 @@ Vue.prototype.clipboard = clipboard;
 Vue.prototype.api = api;
 Vue.prototype.markdown = require('markdown-it')({
     html: true,
-    xhtmlOut: true,
+    langPrefix: 'line-numbers language-',
     linkify: true,
-    highlight: function (str, lang) {
-        if (lang) {
-            try {
-                return '<pre style="font-size: .88em;"><code class="language-' + lang + ' line-numbers">' + str + '</code></pre>';
-            } catch (error) {
-                alert(JSON.stringify(error))
-            }
-        }
-        return '<pre style="font-size: .88em;"><code class="language-plain line-numbers">' + str + '</code></pre>';
-    }
+    typographer: true
 });
 Vue.component('QRCode', VueQrcode);
 Vue.component('font-awesome-icon', FontAwesomeIcon);

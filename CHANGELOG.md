@@ -2,6 +2,11 @@
 
 ## Version 3.0.1
 
+### 2019-07-08
+
+1. Markdown parse bug fixed
+2. English translation fixed
+
 ### 2019-07-07
 
 1. Add Markdown parser/raw switch

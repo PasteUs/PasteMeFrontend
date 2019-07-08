@@ -8,7 +8,7 @@ export const lang = {
                 prepend: 'Format'
             },
             {
-                prepend: 'password',
+                prepend: 'Password',
                 placeholder: 'Blank to disable encryption'
             }
         ],
