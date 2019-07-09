@@ -1,6 +1,6 @@
 # Deployment
 
-1. `wget https://github.com/LucienShui/PasteMe/releases/latest/download/PasteMe-build.zip && unzip PasteMe-build.zip `
+1. `wget https://github.com/LucienShui/PasteMe/releases/latest/download/PasteMe-build.zip && unzip PasteMe-build.zip`
 2. Put decompressed `PasteMe-build` into web root
 3. Edit `usr/config.json`
 4. Rewrite all requests to `index.html`
