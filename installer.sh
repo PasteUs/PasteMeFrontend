@@ -7,14 +7,13 @@ else
     if [[ ${1} == "install" ]]; then
         /usr/bin/env bash ${0} uninstall && \
         git clone --depth=1 https://github.com/LucienShui/PasteMeFrontend.git -b build /usr/local/pasteme && \
-        mkdir -p /etc/pasteme && \
         cd /usr/local/pasteme && \
-        mv usr conf.d /etc/pasteme && \
-        ln -s /etc/pasteme/usr ${PWD}
+        mkdir -p /etc/pasteme && \
+        ln -s ${PWD}/usr ${PWD}/conf.d /etc/pasteme
         if [[ ${?} == 0 ]]; then
             echo "Installation finished"
             echo "Config file: /etc/pasteme/config.json"
-            echo "Nginx config file: /etc/pasteme/conf.d/default.conf"
+            echo "Nginx config file: /etc/pasteme/conf.d/nginx.conf"
         else
             echo "Installation failed"
         fi
