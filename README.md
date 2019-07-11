@@ -38,7 +38,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Deployment
 
-[Deploy Document](.DEPLOY.md)
+[Deploy Document](./DEPLOY.md)
 
 ## Browsers support
 
