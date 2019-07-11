@@ -34,9 +34,11 @@ npm run lint
 
 ### Customize configuration
 
-`<web_root>/usr/config.json`
-
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Deployment
+
+[Deploy Document](.DEPLOY.md)
 
 ## Browsers support
 
