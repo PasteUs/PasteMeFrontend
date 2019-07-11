@@ -2,6 +2,10 @@
 
 ## Version 3.0.1
 
+### 2019-07-10
+
+1. Add [Dockerfile](./Dockerfile) for docker deployment
+
 ### 2019-07-08
 
 1. Markdown parse bug fixed
