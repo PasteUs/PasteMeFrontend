@@ -31,14 +31,16 @@
                             </div>
                         </b-tab>
                         <b-tab :title="$t('lang.view.raw')">
-                            <pre class="font-md"><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
+                            <pre><code v-bind:class="'line-numbers language-' + $parent.lang"
                                                            v-text="this.$parent.content"></code></pre>
                         </b-tab>
                     </b-tabs>
                 </b-card>
             </div>
-            <pre class="font-md" v-else><code v-bind:class="'language-' + $parent.lang + ' line-numbers'"
-                       v-text="this.$parent.content"></code></pre>
+            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container"><pre
+                    class="pasteme-plain-body"><code v-text="$parent.content"></code></pre></div>
+            <div v-else><pre><code v-bind:class="'line-numbers language-' + $parent.lang"
+                       v-text="this.$parent.content"></code></pre></div>
         </b-col>
         <b-col md="1"></b-col>
     </b-row>
@@ -62,8 +64,18 @@
 </script>
 
 <style scoped>
-    .font-md {
-        font-size: .88em;
+    .pasteme-plain-container {
+        margin-top: 1em;
+        background: #f0f0f0;
+    }
+
+    .pasteme-plain-body {
+        font-size: 1.1em;
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 15px;
     }
 
     .markdown-body {
