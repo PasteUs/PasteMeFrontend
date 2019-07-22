@@ -32,5 +32,15 @@ export default {
                 reject(error);
             });
         });
+    },
+    head: function(url, params = {}) {
+        return new Promise((resolve, reject) => {
+            axios.head(url, params).then(response => {
+                resolve(response.data);
+            }).catch(error => {
+                alert(url + '\n' + JSON.stringify(error));
+                reject(error);
+            });
+        });
     }
 }

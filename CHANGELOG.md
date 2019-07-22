@@ -1,4 +1,14 @@
-# Change Log
+# Change Lo
+
+### 2019-07-22
+
+1. Add API prefetch
+
+### 2019-07-18
+
+1. Remove syntax on plain
+2. Make font size bigger when view the code & text
+3. No copy when plain yetg
 
 ## Version 3.0.1
 
