@@ -37,8 +37,10 @@
                     </b-tabs>
                 </b-card>
             </div>
-            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container"><pre
-                    class="pasteme-plain-body"><code v-text="$parent.content"></code></pre></div>
+            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container">
+                <button class="pasteme-plain-button">Copy</button>
+                <pre class="pasteme-plain-body"><code v-text="$parent.content"></code></pre>
+            </div>
             <div v-else><pre><code v-bind:class="'line-numbers language-' + $parent.lang"
                        v-text="this.$parent.content"></code></pre></div>
         </b-col>
@@ -64,6 +66,23 @@
 </script>
 
 <style scoped>
+    .pasteme-plain-button {
+        float: right;
+        background: none;
+        border: 0;
+        color: inherit;
+        font: inherit;
+        line-height: normal;
+        overflow: visible;
+        -webkit-user-select: none; /* for button */
+        -moz-user-select: none;
+        -ms-user-select: none;
+        font-size: .8em;
+        padding: .1em .5em .1em .5em;
+        background: whitesmoke;
+        border-radius: .5em;
+    }
+
     .pasteme-plain-container {
         margin-top: 1em;
         background: #f0f0f0;
