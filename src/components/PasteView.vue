@@ -2,9 +2,10 @@
     <b-row>
         <b-col md="1"></b-col>
         <b-col md="10" v-hljs>
+            <!--
             <div v-if="$parent.lang === 'markdown'">
                 <b-card no-body>
-                    <b-tabs card>
+                    <b-tabs card style="padding-bottom: 0">
                         <b-tab :title="$t('lang.view.parsed')" active>
                             <div class="markdown-body">
                                 <div v-html="markdown.render($parent.content)"></div>
@@ -30,11 +31,32 @@
                                 <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
                             </div>
                         </b-tab>
-                        <b-tab :title="$t('lang.view.raw')">
-                            <pre><code v-bind:class="'line-numbers language-' + $parent.lang"
-                                                           v-text="this.$parent.content"></code></pre>
+                        <b-tab :title="$t('lang.view.raw')" style="padding-bottom: 0">
+                            <pre><code v-bind:class="$parent.lang" v-text="this.$parent.content"></code></pre>
                         </b-tab>
                     </b-tabs>
+                </b-card>
+            </div>
+            -->
+            <div v-if="$parent.lang === 'markdown'">
+                <b-card no-body>
+                    <b-card-header>
+                        <b-row>
+                            <b-col md="6">
+                                <div>
+                                    <a>{{ linesCount }} 行</a>
+                                    <a>&nbsp;|&nbsp;</a>
+                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
+                                </div>
+                            </b-col>
+                            <b-col md="6" style="text-align: right">
+                                <b-link href="#">复制</b-link>
+                            </b-col>
+                        </b-row>
+                    </b-card-header>
+                    <b-card-body style="padding-bottom: 0" ref="code-body">
+                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
+                    </b-card-body>
                 </b-card>
             </div>
             <div v-else>
@@ -54,7 +76,7 @@
                         </b-row>
                     </b-card-header>
                     <b-card-body style="padding-bottom: 0" ref="code-body">
-                        <pre><code v-bind:class="$parent.lang" v-text="this.$parent.content"></code></pre>
+                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
                     </b-card-body>
                 </b-card>
             </div>
