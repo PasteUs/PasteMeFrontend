@@ -41,7 +41,7 @@
                         if (response.status === 200) {
                             this.view = 'paste_view';
                             this.content = response.content;
-                            this.lang = response.lang;
+                            this.lang = response.lang === 'plain' ? 'plaintext' : response.lang;
                         } else if (response.status === 401) {
                             this.view = 'password_auth';
                         } else if (response.status === 404 && this.$route.params.key.search('[a-zA-Z]{1}') !== -1) {

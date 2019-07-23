@@ -1,4 +1,10 @@
-# Change Lo
+# Change Log
+
+### 2019-07-23
+
+1. Remove prismjs
+2. Add highlightjs
+3. Add line numbers to highlightjs
 
 ### 2019-07-22
 

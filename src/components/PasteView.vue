@@ -1,7 +1,7 @@
 <template>
     <b-row>
         <b-col md="1"></b-col>
-        <b-col md="10">
+        <b-col md="10" v-hljs>
             <div v-if="$parent.lang === 'markdown'">
                 <b-card no-body>
                     <b-tabs card>
@@ -37,11 +37,11 @@
                     </b-tabs>
                 </b-card>
             </div>
-            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container">
-                <button class="pasteme-plain-button">Copy</button>
-                <pre class="pasteme-plain-body"><code v-text="$parent.content"></code></pre>
-            </div>
-            <div v-else><pre><code v-bind:class="'line-numbers language-' + $parent.lang"
+<!--            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container">-->
+<!--                <button class="pasteme-plain-button">Copy</button>-->
+<!--                <pre class="pasteme-plain-body"><code v-text="$parent.content"></code></pre>-->
+<!--            </div>-->
+            <div v-else><pre><code v-bind:class="/* 'line-numbers language-' + */$parent.lang"
                        v-text="this.$parent.content"></code></pre></div>
         </b-col>
         <b-col md="1"></b-col>
@@ -53,7 +53,6 @@
     export default {
         name: "PasteView",
         mounted() {
-            this.prism.highlightAll();
         },
         components: {
             'remote-js': {
