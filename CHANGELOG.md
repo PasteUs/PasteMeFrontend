@@ -5,6 +5,7 @@
 1. Remove prismjs
 2. Add highlightjs
 3. Add line numbers to highlightjs
+4. Bug fix of duplicate syntax when language change
 
 ### 2019-07-22
 

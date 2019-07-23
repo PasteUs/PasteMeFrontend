@@ -17,11 +17,9 @@ hljs.registerLanguage('plaintext', plaintext);
 
 Vue.directive('hljs', el => {
     let blocks = el.querySelectorAll('pre code');
-    blocks.forEach(function (block) {
-        hljs.highlightBlock(block);
-    });
     if (document.querySelectorAll('.hljs-ln').length === 0) {
         blocks.forEach(function (block) {
+            hljs.highlightBlock(block);
             hljs.lineNumbersBlock(block, {
                 singleLine: true
             });
