@@ -19,11 +19,12 @@ Vue.directive('hljs', el => {
     let blocks = el.querySelectorAll('pre code');
     blocks.forEach(function (block) {
         hljs.highlightBlock(block);
-        hljs.lineNumbersBlock(block, {
-            singleLine: true
-        });
-        // document.querySelectorAll('.hljs-ln-code').forEach(function(each) {each.setAttribute('style', 'padding-left: 1em;')})
     });
-    // Array.prototype.forEach.call(blocks, hljs.highlightBlock);
-    // Array.prototype.forEach.call([{singleLine: true}], hljs.lineNumbersBlock);
+    if (document.querySelectorAll('.hljs-ln').length === 0) {
+        blocks.forEach(function (block) {
+            hljs.lineNumbersBlock(block, {
+                singleLine: true
+            });
+        });
+    }
 });

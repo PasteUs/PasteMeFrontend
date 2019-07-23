@@ -37,12 +37,27 @@
                     </b-tabs>
                 </b-card>
             </div>
-<!--            <div v-else-if="$parent.lang === 'plain'" class="pasteme-plain-container">-->
-<!--                <button class="pasteme-plain-button">Copy</button>-->
-<!--                <pre class="pasteme-plain-body"><code v-text="$parent.content"></code></pre>-->
-<!--            </div>-->
-            <div v-else><pre><code v-bind:class="/* 'line-numbers language-' + */$parent.lang"
-                       v-text="this.$parent.content"></code></pre></div>
+            <div v-else>
+                <b-card no-body>
+                    <b-card-header>
+                        <b-row>
+                            <b-col md="6">
+                                <div>
+                                    <a>{{ linesCount }} 行</a>
+                                    <a>&nbsp;|&nbsp;</a>
+                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
+                                </div>
+                            </b-col>
+                            <b-col md="6" style="text-align: right">
+                                <b-link href="#">复制</b-link>
+                            </b-col>
+                        </b-row>
+                    </b-card-header>
+                    <b-card-body style="padding-bottom: 0" ref="code-body">
+                        <pre><code v-bind:class="$parent.lang" v-text="this.$parent.content"></code></pre>
+                    </b-card-body>
+                </b-card>
+            </div>
         </b-col>
         <b-col md="1"></b-col>
     </b-row>
@@ -53,6 +68,12 @@
     export default {
         name: "PasteView",
         mounted() {
+        },
+        computed: {
+            linesCount: function() {
+                let BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
+                return (this.$parent.content.trim().match(BREAK_LINE_REGEXP) || []).length + 1;
+            }
         },
         components: {
             'remote-js': {
@@ -65,37 +86,6 @@
 </script>
 
 <style scoped>
-    .pasteme-plain-button {
-        float: right;
-        background: none;
-        border: 0;
-        color: inherit;
-        font: inherit;
-        line-height: normal;
-        overflow: visible;
-        -webkit-user-select: none; /* for button */
-        -moz-user-select: none;
-        -ms-user-select: none;
-        font-size: .8em;
-        padding: .1em .5em .1em .5em;
-        background: whitesmoke;
-        border-radius: .5em;
-    }
-
-    .pasteme-plain-container {
-        margin-top: 1em;
-        background: #f0f0f0;
-    }
-
-    .pasteme-plain-body {
-        font-size: 1.1em;
-        box-sizing: border-box;
-        min-width: 200px;
-        max-width: 980px;
-        margin: 0 auto;
-        padding: 15px;
-    }
-
     .markdown-body {
         box-sizing: border-box;
         min-width: 200px;

@@ -101,6 +101,12 @@ export const lang = {
     },
     view: {
         parsed: '渲染',
-        raw: '源码'
+        raw: '源码',
+        lines: '行',
+        lang: {
+            plaintext: '纯文本',
+            cpp: 'C/C++',
+            python: 'Python'
+        }
     }
 };
