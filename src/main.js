@@ -8,8 +8,8 @@ import router from './assets/js/router'
 import store from './assets/js/store'
 import i18n from './assets/js/i18n'
 import api from './assets/js/api'
-import hljs from './assets/js/hljs'
 
+import './assets/js/hljs'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/assets/css/global.css'
@@ -45,7 +45,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 (async function () {
     await (function() {
         return new Promise ((resolve, reject) => {
-            api.get('usr/config.json').then(response => {
+            api.get('/usr/config.json').then(response => {
                 store.state.config = response;
                 resolve();
             }).catch(error => {
@@ -53,6 +53,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
             })
         })
     })();
+    api.get(store.state.config.api, {method: "beat"}).then();
     new Vue({
         store,
         i18n,
