@@ -7,7 +7,7 @@ const i18n = new VueI18n({
     locale: 'zh-CN',
     fallbackLocale: 'zh-CN',
     messages: {
-        'zh-CN': require('./assets/lang/zh-CN')
+        'zh-CN': require('../lang/zh-CN')
     }
 });
 
@@ -23,7 +23,7 @@ Vue.prototype.setI18n = function (lang) {
     if (i18n.locale !== lang) {
         if (supportedLanguage.includes(lang)) {
             if (!loadedLanguages.includes(lang)) {
-                import(/* webpackChunkName: "lang-[request]" */ `./assets/lang/${lang}`).then(messages => {
+                import(/* webpackChunkName: "lang-[request]" */ `../lang/${lang}`).then(messages => {
                     i18n.setLocaleMessage(lang, messages);
                     loadedLanguages.push(lang);
                     setI18nLanguage(lang);

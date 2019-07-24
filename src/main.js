@@ -4,13 +4,12 @@ import clipboard from 'clipboard'
 import BootstrapVue from 'bootstrap-vue'
 
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import i18n from './i18n'
-import api from './api'
+import router from './assets/js/router'
+import store from './assets/js/store'
+import i18n from './assets/js/i18n'
+import api from './assets/js/api'
+import hljs from './assets/js/hljs'
 
-import '@/prism'
-import '@/assets/js/daovoice.object'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/assets/css/global.css'
@@ -29,7 +28,18 @@ Vue.prototype.api = api;
 
 Vue.prototype.markdown = require('markdown-it')({
     html: true,
-    langPrefix: 'line-numbers language-',
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return '<pre class="hljs"><code>' +
+                    hljs.highlight(lang, str, true).value +
+                    '</code></pre>';
+            } catch (error) {
+                alert(JSON.stringify(error));
+            }
+        }
+        return '<pre class="hljs"><code>' + this.utils.escapeHtml(str) + '</code></pre>';
+    },
     linkify: true,
     typographer: true
 }).use(require('markdown-it-task-checkbox'), {
@@ -55,6 +65,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
             })
         })
     })();
+    api.head(store.state.config.api);
     new Vue({
         store,
         i18n,

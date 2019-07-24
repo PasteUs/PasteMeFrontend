@@ -101,6 +101,21 @@ export const lang = {
     },
     view: {
         parsed: '渲染',
-        raw: '源码'
+        raw: '源码',
+        lines: '行',
+        lang: {
+            cpp: 'C/C++',
+            java: 'Java',
+            bash: 'Bash',
+            html: 'HTML',
+            python: 'Python',
+            markdown: 'Markdown',
+            plaintext: '纯文本'
+        },
+        copy: {
+            copy: '复制',
+            success: '成功',
+            fail: '失败'
+        }
     }
 };

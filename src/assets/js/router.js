@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from './views/Index'
+import Index from '../../views/Index'
 
 Vue.use(Router);
 
@@ -16,7 +16,7 @@ export default new Router({
         {
             path: '/What_are_you_nong_sha_lei?',
             name: 'NotFound',
-            component: () => import(/* webpackChunkName: "not_found" */ './views/NotFound.vue')
+            component: () => import(/* webpackChunkName: "not_found" */ '../../views/NotFound.vue')
         },
         {
             path: '*',
