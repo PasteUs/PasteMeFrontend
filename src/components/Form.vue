@@ -8,7 +8,7 @@
                         <b-form-group>
                             <b-input-group :prepend="$t('lang.form.input[0].prepend')">
                                 <b-form-select v-model="form.lang">
-                                    <option value="plain">{{ this.$t('lang.form.select.plain') }}</option>
+                                    <option value="plain">{{ $t('lang.form.select.plain') }}</option>
                                     <option value="cpp">C/C++</option>
                                     <option value="java">Java</option>
                                     <option value="python">Python</option>
