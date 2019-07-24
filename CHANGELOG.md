@@ -7,6 +7,8 @@
 3. Add copy btn
 4. Add markdown switch
 5. Update success page's clipboard include
+6. Version dump to `3.0.2`
+7. Remove `prismjs`
 
 ### 2019-07-23
 
