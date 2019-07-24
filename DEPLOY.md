@@ -10,8 +10,6 @@
 | Name | Value | Description | Example |
 | :---: | :---: | --- | --- |
 | api | URL | Backend's address | `https://api.pasteme.cn/` |
-| base_url | Address | Frontend's address without http protocol | `pasteme.cn/` |
-| protocol | `http` or `https` | Frontend's http protocol | `https` |
 | footer | JSON Array | Custom frontend footer's link | `[]` |
 | footer.url | URL | Link's URL | `http://blog.lucien.ink/go/csdn` |
 | footer.text | Text | Link's text | `CSDN` |
@@ -19,8 +17,6 @@
 ```json
 {
   "api": "<protocol>://<domain>/<path>/api/",
-  "base_url": "<domain>/<path>/",
-  "protocol": "<protocol>://",
   "footer": [
     {
       "url": "http(s)://<custom_address_0>",

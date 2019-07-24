@@ -11,6 +11,10 @@
 5. Update success page's clipboard include
 6. Version dump to `3.0.2`
 7. Remove `prismjs`
+8. Update `DEPLOY.md`
+9. Update not found page, remove time cut
+10. Update `api.js`
+11. Add github button
 
 ### 2019-07-23
 

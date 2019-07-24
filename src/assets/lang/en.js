@@ -86,7 +86,7 @@ export const lang = {
     not_found: {
         content: {
             title: '您访问的页面没有找到',
-            text: '秒后转至 PasteMe 主页'
+            go_home: '返回主页'
         },
         footer: {
             text: '如果您想了解更多信息，则可以稍后在线搜索此错误：Error 404 Girlfriend Not Found',

@@ -8,7 +8,7 @@ export default {
             }).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert(url + '\n' + JSON.stringify(error));
+                alert('GET: ' + url + '\n' + JSON.stringify(error));
                 reject(error);
             });
         });
@@ -18,7 +18,7 @@ export default {
             axios.post(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert(url + '\n' + JSON.stringify(error));
+                alert('POST: ' + url + '\n' + JSON.stringify(error));
                 reject(error);
             });
         });
@@ -28,17 +28,7 @@ export default {
             axios.put(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert(url + '\n' + JSON.stringify(error));
-                reject(error);
-            });
-        });
-    },
-    head: function(url, params = {}) {
-        return new Promise((resolve, reject) => {
-            axios.head(url, params).then(response => {
-                resolve(response.data);
-            }).catch(error => {
-                alert(url + '\n' + JSON.stringify(error));
+                alert('PUT: ' + url + '\n' + JSON.stringify(error));
                 reject(error);
             });
         });
