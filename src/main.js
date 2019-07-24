@@ -65,7 +65,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
             })
         })
     })();
-    api.head(store.state.config.api);
     new Vue({
         store,
         i18n,
