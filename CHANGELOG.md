@@ -1,5 +1,7 @@
 # Change Log
 
+## Version 3.0.2
+
 ### 2019-07-24
 
 1. Add copy back
