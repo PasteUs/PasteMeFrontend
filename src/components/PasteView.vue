@@ -1,15 +1,36 @@
 <template>
     <b-row>
         <b-col md="1"></b-col>
-        <b-col md="10" v-hljs>
-            <!--
+        <b-col md="10">
             <div v-if="$parent.lang === 'markdown'">
                 <b-card no-body>
-                    <b-tabs card style="padding-bottom: 0">
-                        <b-tab :title="$t('lang.view.parsed')" active>
-                            <div class="markdown-body">
-                                <div v-html="markdown.render($parent.content)"></div>
-                                <script type="text/x-mathjax-config">
+                    <b-card-header>
+                        <b-row>
+                            <b-col md="6">
+                                <div>
+                                    <a>{{ linesCount }} 行</a>
+                                    <a>&nbsp;|&nbsp;</a>
+                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
+                                </div>
+                            </b-col>
+                            <b-col md="6" style="text-align: right;">
+                                <b-check-group switches>
+                                    <b-checkbox v-model="raw">源码</b-checkbox>
+                                    <b-link class="clipboard-btn" data-clipboard-target=".hljs">
+                                        {{ $t('lang.view.copy.' +
+                                        (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
+                                    </b-link>
+                                </b-check-group>
+                            </b-col>
+                        </b-row>
+                    </b-card-header>
+                    <b-card-body style="padding-bottom: 0" v-hljs v-show="raw.length === 1">
+                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
+                    </b-card-body>
+                    <b-card-body style="padding-bottom: 0" v-hljs v-show="raw.length === 0">
+                        <div class="markdown-body">
+                            <div v-html="markdown.render($parent.content)"></div>
+                            <script type="text/x-mathjax-config">
                                 MathJax.Hub.Config({
                                     showProcessingMessages: false,
                                     messageStyle: "none",
@@ -28,34 +49,8 @@
                                 });
                                 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
                                 </script>
-                                <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
-                            </div>
-                        </b-tab>
-                        <b-tab :title="$t('lang.view.raw')" style="padding-bottom: 0">
-                            <pre><code v-bind:class="$parent.lang" v-text="this.$parent.content"></code></pre>
-                        </b-tab>
-                    </b-tabs>
-                </b-card>
-            </div>
-            -->
-            <div v-if="$parent.lang === 'markdown'">
-                <b-card no-body>
-                    <b-card-header>
-                        <b-row>
-                            <b-col md="6">
-                                <div>
-                                    <a>{{ linesCount }} 行</a>
-                                    <a>&nbsp;|&nbsp;</a>
-                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
-                                </div>
-                            </b-col>
-                            <b-col md="6" style="text-align: right">
-                                <b-link href="#">复制</b-link>
-                            </b-col>
-                        </b-row>
-                    </b-card-header>
-                    <b-card-body style="padding-bottom: 0" ref="code-body">
-                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
+                            <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
+                        </div>
                     </b-card-body>
                 </b-card>
             </div>
@@ -71,11 +66,14 @@
                                 </div>
                             </b-col>
                             <b-col md="6" style="text-align: right">
-                                <b-link href="#">复制</b-link>
+                                <b-link href="#" class="clipboard-btn" data-clipboard-target=".hljs">
+                                    {{ $t('lang.view.copy.' +
+                                    (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
+                                </b-link>
                             </b-col>
                         </b-row>
                     </b-card-header>
-                    <b-card-body style="padding-bottom: 0" ref="code-body">
+                    <b-card-body style="padding-bottom: 0" v-hljs>
                         <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
                     </b-card-body>
                 </b-card>
@@ -89,7 +87,28 @@
     import 'github-markdown-css/github-markdown.css'
     export default {
         name: "PasteView",
+        data() {
+            return {
+                copy_btn_status: 0,
+                raw: []
+            }
+        },
         mounted() {
+            let clipboard = new this.clipboard('.clipboard-btn');
+            let cur = this;
+            clipboard.on('success', function() {
+                cur.copy_btn_status = 1;
+                window.getSelection().removeAllRanges();
+                window.setTimeout(function () {
+                    cur.copy_btn_status = 0;
+                }, 2000);
+            });
+            clipboard.on('error', function() {
+                cur.copy_btn_status = -1;
+                window.setTimeout(function () {
+                    cur.copy_btn_status = 0;
+                }, 2000);
+            });
         },
         computed: {
             linesCount: function() {
@@ -114,6 +133,10 @@
         max-width: 980px;
         margin: 0 auto;
         padding: 45px;
+    }
+
+    .markdown-body pre {
+        padding-left: 1em;
     }
 
     @media (max-width: 767px) {

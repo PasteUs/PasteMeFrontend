@@ -21,10 +21,8 @@
                             {{ base_url + $parent.key }}
                         </a>&nbsp;<b-badge
                                 variant="info"
-                                id="copy_btn"
                                 class="badge-fixed"
                                 :data-clipboard-text="base_url + $parent.key"
-                                @click="onCopy"
                                 href="#">
                             {{ $t('lang.success.badge.' +
                             (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
@@ -63,13 +61,25 @@
         data() {
             return {
                 base_url: location.origin + '/',
-                clipboard_object: null,
                 copy_btn_status: 0,
                 popover_show: false,
             }
         },
         mounted() {
-            this.clipboard_object = new this.clipboard('#copy_btn');
+            let clipboard = new this.clipboard('.badge-fixed');
+            let cur = this;
+            clipboard.on('success', function() {
+                cur.copy_btn_status = 1;
+                window.setTimeout(function () {
+                    cur.copy_btn_status = 0;
+                }, 2000);
+            });
+            clipboard.on('error', function() {
+                cur.copy_btn_status = -1;
+                window.setTimeout(function () {
+                    cur.copy_btn_status = 0;
+                }, 2000);
+            });
         },
         methods: {
             goHome(event) {
@@ -79,22 +89,6 @@
                 } else {
                     this.$parent.view = 'home';
                 }
-            },
-            onCopy() {
-                let clipboard = this.clipboard_object;
-                let cur = this;
-                clipboard.on('success', function() {
-                    cur.copy_btn_status = 1;
-                    window.setTimeout(function () {
-                        cur.copy_btn_status = 0;
-                    }, 2000);
-                });
-                clipboard.on('error', function() {
-                    cur.copy_btn_status = -1;
-                    window.setTimeout(function () {
-                        cur.copy_btn_status = 0;
-                    }, 2000);
-                });
             }
         }
     }

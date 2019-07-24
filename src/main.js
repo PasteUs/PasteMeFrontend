@@ -10,7 +10,6 @@ import i18n from './assets/js/i18n'
 import api from './assets/js/api'
 import hljs from './assets/js/hljs'
 
-import './assets/js/daovoice.object'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/assets/css/global.css'

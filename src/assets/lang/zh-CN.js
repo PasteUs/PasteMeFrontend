@@ -104,9 +104,18 @@ export const lang = {
         raw: '源码',
         lines: '行',
         lang: {
-            plaintext: '纯文本',
             cpp: 'C/C++',
-            python: 'Python'
+            java: 'Java',
+            bash: 'Bash',
+            html: 'HTML',
+            python: 'Python',
+            markdown: 'Markdown',
+            plaintext: '纯文本'
+        },
+        copy: {
+            copy: '复制',
+            success: '成功',
+            fail: '失败'
         }
     }
 };
