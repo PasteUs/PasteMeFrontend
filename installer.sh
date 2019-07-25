@@ -11,14 +11,14 @@ else
         mkdir -p /etc/pasteme && \
         ln -s ${PWD}/usr ${PWD}/conf.d /etc/pasteme
         if [[ ${?} == 0 ]]; then
-            echo "Installation finished"
+            echo -e "\033[32mInstallation finished\033[0m"
             echo "Config file: /etc/pasteme/config.json"
             echo "Nginx config file: /etc/pasteme/conf.d/nginx.conf"
         else
-            echo "Installation failed"
+            echo -e "\033[31mInstallation failed\033[0m"
         fi
     elif [[ ${1} == "uninstall" ]]; then
-        rm -rf /usr/local/pasteme && \
+        rm -rf /usr/local/pasteme
         rm -rf /etc/pasteme
         echo "uninstall finished"
     elif [[ ${1} == "upgrade" ]]; then
