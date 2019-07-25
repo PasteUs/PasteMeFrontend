@@ -9,7 +9,7 @@
 
 | Name | Value | Description | Example |
 | :---: | :---: | --- | --- |
-| api | URL | Backend's address | `https://api.pasteme.cn/` |
+| api | URL | Backend's address | `/api/` |
 | footer | JSON Array | Custom frontend footer's link | `[]` |
 | footer.url | URL | Link's URL | `http://blog.lucien.ink/go/csdn` |
 | footer.text | Text | Link's text | `CSDN` |
