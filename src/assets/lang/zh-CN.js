@@ -112,8 +112,9 @@ export const lang = {
             markdown: 'Markdown',
             plaintext: '纯文本'
         },
-        copy: {
-            copy: '复制',
+        copy: '复制',
+        tooltip: {
+            click: '点按以复制',
             success: '成功',
             fail: '失败'
         }

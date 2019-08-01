@@ -2,7 +2,7 @@
     <b-row>
         <b-col md="1"></b-col>
         <b-col md="10">
-            <div v-if="$parent.lang === 'markdown'">
+            <div>
                 <b-card no-body>
                     <b-card-header>
                         <b-row>
@@ -15,19 +15,22 @@
                             </b-col>
                             <b-col md="6" style="text-align: right;">
                                 <b-check-group switches>
-                                    <b-checkbox v-model="raw">源码</b-checkbox>
-                                    <b-link class="clipboard-btn" :data-clipboard-text="$parent.content">
-                                        {{ $t('lang.view.copy.' +
-                                        (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
+                                    <b-checkbox v-model="raw" v-show="$parent.lang === 'markdown'">源码</b-checkbox>
+                                    <b-link id="clipboard-btn" :data-clipboard-text="$parent.content">
+                                        {{ $t('lang.view.copy') }}
                                     </b-link>
+                                    <b-tooltip show target="clipboard-btn" placement="bottomleft">
+                                        {{ $t('lang.view.tooltip.' + (copy_btn_status > 0 ? 'success' :
+                                            (copy_btn_status === 0 ?  'click' : 'fail'))) }}
+                                    </b-tooltip>
                                 </b-check-group>
                             </b-col>
                         </b-row>
                     </b-card-header>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-show="raw.length === 1">
+                    <b-card-body style="padding-bottom: 0" v-hljs v-if="$parent.lang !== 'markdown' || raw.length === 1">
                         <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
                     </b-card-body>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-show="raw.length === 0">
+                    <b-card-body style="padding-bottom: 0" v-hljs v-else>
                         <div class="markdown-body">
                             <div v-html="markdown.render($parent.content)"></div>
                             <script type="text/x-mathjax-config">
@@ -54,30 +57,6 @@
                     </b-card-body>
                 </b-card>
             </div>
-            <div v-else>
-                <b-card no-body>
-                    <b-card-header>
-                        <b-row>
-                            <b-col md="6">
-                                <div>
-                                    <a>{{ linesCount }} 行</a>
-                                    <a>&nbsp;|&nbsp;</a>
-                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
-                                </div>
-                            </b-col>
-                            <b-col md="6" style="text-align: right">
-                                <b-link href="#" class="clipboard-btn" data-clipboard-target=".hljs">
-                                    {{ $t('lang.view.copy.' +
-                                    (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
-                                </b-link>
-                            </b-col>
-                        </b-row>
-                    </b-card-header>
-                    <b-card-body style="padding-bottom: 0" v-hljs>
-                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
-                    </b-card-body>
-                </b-card>
-            </div>
         </b-col>
         <b-col md="1"></b-col>
     </b-row>
@@ -94,7 +73,7 @@
             }
         },
         mounted() {
-            let clipboard = new this.clipboard('.clipboard-btn');
+            let clipboard = new this.clipboard('#clipboard-btn');
             let cur = this;
             clipboard.on('success', function() {
                 cur.copy_btn_status = 1;
