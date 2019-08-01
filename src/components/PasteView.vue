@@ -16,7 +16,7 @@
                             <b-col md="6" style="text-align: right;">
                                 <b-check-group switches>
                                     <b-checkbox v-model="raw">源码</b-checkbox>
-                                    <b-link class="clipboard-btn" data-clipboard-target=".hljs">
+                                    <b-link class="clipboard-btn" :data-clipboard-text="$parent.content">
                                         {{ $t('lang.view.copy.' +
                                         (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
                                     </b-link>
