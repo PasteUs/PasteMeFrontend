@@ -113,6 +113,8 @@ export const lang = {
             html: 'HTML',
             python: 'Python',
             markdown: 'Markdown',
+            go: 'Go',
+            json: 'JSON',
             plaintext: '纯文本'
         },
         copy: '复制',

@@ -7,7 +7,7 @@ import '../css/highlightjs-line-numbers.css'
 
 register(hljs, window, document);
 
-let langList = ['cpp', 'java', 'bash', 'http', 'python', 'markdown', 'plaintext'];
+let langList = ['cpp', 'java', 'bash', 'json', 'python', 'markdown', 'plaintext', 'go'];
 
 langList.forEach(function (lang) {
     hljs.registerLanguage(lang, require('highlight.js/lib/languages/' + lang));
@@ -26,5 +26,3 @@ Vue.directive('hljs', el => {
         });
     }
 });
-
-export default hljs;

@@ -14,7 +14,8 @@
                                     <option value="python">Python</option>
                                     <option value="bash">Bash</option>
                                     <option value="markdown">Markdown</option>
-                                    <option value="html">HTML</option>
+                                    <option value="json">JSON</option>
+                                    <option value="go">Go</option>
                                 </b-form-select>
                             </b-input-group>
                         </b-form-group>
