@@ -97,7 +97,10 @@ export const lang = {
         }
     },
     footer: {
-        tooltip: '点击以刷新'
+        tooltip: {
+            refresh: '点按以刷新',
+            wait: '{sec} 秒后可以再次刷新'
+        }
     },
     view: {
         parsed: '渲染',
@@ -110,10 +113,13 @@ export const lang = {
             html: 'HTML',
             python: 'Python',
             markdown: 'Markdown',
+            go: 'Go',
+            json: 'JSON',
             plaintext: '纯文本'
         },
-        copy: {
-            copy: '复制',
+        copy: '复制',
+        tooltip: {
+            click: '点按以复制',
             success: '成功',
             fail: '失败'
         }

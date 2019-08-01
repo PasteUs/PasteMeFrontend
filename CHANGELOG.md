@@ -2,6 +2,18 @@
 
 ## Version 3.0.2
 
+### 2019-08-02
+
+1. Add `Go`, `JSON` highlight support
+2. Remove `HTML` highlight support
+
+### 2019-08-01
+
+1. Fix [#22](https://github.com/LucienShui/PasteMeFrontend/issues/22) copy nothing in markdown parsed page
+2. Add tooltip on copy link in success page [#24](https://github.com/LucienShui/PasteMeFrontend/issues/24)
+3. Simplify PasteView page
+4. Add limit on footer refresh [#23](https://github.com/LucienShui/PasteMeFrontend/issues/23)
+
 ### 2019-07-24
 
 1. Add copy back
