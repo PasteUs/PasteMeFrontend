@@ -97,7 +97,10 @@ export const lang = {
         }
     },
     footer: {
-        tooltip: '点击以刷新'
+        tooltip: {
+            refresh: '点按以刷新',
+            wait: '{sec} 秒后可以再次刷新'
+        }
     },
     view: {
         parsed: '渲染',

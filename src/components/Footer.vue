@@ -3,6 +3,7 @@
         <div class="col-md-12">
             <div class="footer">
                 <p><a id="one-word" style="cursor: pointer;" @click="refresh">{{ oneWord }}</a></p>
+                <b-tooltip target="one-word">{{ cut_down_time === 0 ? $t('lang.footer.tooltip.refresh') : $t('lang.footer.tooltip.wait', { sec: cut_down_time }) }}</b-tooltip>
                 <p>
                     <a href='http://blog.lucien.ink' target='_blank'>Lucien's Blog</a>
                     <a v-for="footer in $store.state.config.footer" v-bind:key="footer.id">&nbsp;&nbsp;|&nbsp;&nbsp;<a :href="footer.url" target="_blank">{{ footer.text }}</a></a>
@@ -14,7 +15,6 @@
                 </p>
             </div>
         </div>
-        <b-tooltip target="one-word" placement="topright">{{ $t('lang.footer.tooltip') }}</b-tooltip>
     </div>
 </template>
 
@@ -25,10 +25,13 @@
             return {
                 oneWord: 'Loading...',
                 year: new Date().getFullYear(),
+                cut_down_time: 0,
             }
         },
         mounted() {
-            this.refresh();
+            this.getOne().then(result => {
+                this.oneWord = result;
+            })
         },
         methods: {
             async getOne() {
@@ -43,9 +46,19 @@
                 return one;
             },
             refresh() {
-                this.getOne().then(result => {
-                    this.oneWord = result;
-                });
+                if (this.cut_down_time === 0) {
+                    this.oneWord = 'Loading...';
+                    this.getOne().then(result => {
+                        this.oneWord = result;
+                        this.cut_down_time = 5;
+                        let clock = window.setInterval(() => {
+                            this.cut_down_time--;
+                            if (this.cut_down_time === 0) {
+                                window.clearInterval(clock);
+                            }
+                        }, 1000);
+                    });
+                }
             }
         }
     }
