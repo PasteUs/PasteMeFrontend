@@ -2,8 +2,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="footer">
-                <p><a id="one-word" style="cursor: pointer;" @click="refresh">{{ oneWord }}</a></p>
-                <b-tooltip target="one-word">{{ cut_down_time === 0 ? $t('lang.footer.tooltip.refresh') : $t('lang.footer.tooltip.wait', { sec: cut_down_time }) }}</b-tooltip>
+                <p><a id="one-word" @click="refresh">{{ oneWord }}</a></p>
+                <b-popover
+                        target="one-word"
+                        triggers="hover"
+                        placement="top">
+                    <a id="one-popover">{{ cut_down_time === 0 ? $t('lang.footer.tooltip.refresh') : $t('lang.footer.tooltip.wait', { sec: cut_down_time }) }}</a>
+                </b-popover>
                 <p>
                     <a href='http://blog.lucien.ink' target='_blank'>Lucien's Blog</a>
                     <a v-for="footer in $store.state.config.footer" v-bind:key="footer.id">&nbsp;&nbsp;|&nbsp;&nbsp;<a :href="footer.url" target="_blank">{{ footer.text }}</a></a>
@@ -34,23 +39,21 @@
             })
         },
         methods: {
-            async getOne() {
-                let one = null;
-                do {
-                    await this.api.get('https://v1.hitokoto.cn', {
+            getOne() {
+                return new Promise((resolve) => {
+                    this.api.get('https://v1.hitokoto.cn', {
                         encode: 'text'
                     }).then(response => {
-                        one = response;
-                    });
-                } while (one.replace(/[\u4e00-\u9fa5]/ig, '**').length > 100);
-                return one;
+                        resolve(response)
+                    })
+                });
             },
             refresh() {
                 if (this.cut_down_time === 0) {
+                    this.cut_down_time = 5;
                     this.oneWord = 'Loading...';
                     this.getOne().then(result => {
                         this.oneWord = result;
-                        this.cut_down_time = 5;
                         let clock = window.setInterval(() => {
                             this.cut_down_time--;
                             if (this.cut_down_time === 0) {
@@ -59,6 +62,13 @@
                         }, 1000);
                     });
                 }
+            },
+            makeToast(title, message, append = false) {
+                this.$bvToast.toast(message, {
+                    title: title,
+                    autoHideDelay: 500,
+                    appendToast: append
+                })
             }
         }
     }
@@ -81,5 +91,10 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        cursor: pointer;
+    }
+
+    #one-popover {
+        font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
     }
 </style>

@@ -2,6 +2,10 @@
 
 ## Version 3.0.2
 
+### 2019-08-04
+
+1. Change footer's tooltip to popover
+
 ### 2019-08-02
 
 1. Add `Go`, `JSON` highlight support
