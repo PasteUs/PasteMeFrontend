@@ -23,8 +23,8 @@ export default new Router({
             redirect: '/What_are_you_nong_sha_lei?'
         },
         {
-            path: 'admin',
-            name: 'admin',
+            path: 'pasteme-admin',
+            name: 'pasteme-admin',
             // TODO
         },
     ]

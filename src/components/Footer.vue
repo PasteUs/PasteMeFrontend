@@ -7,11 +7,14 @@
                         target="one-word"
                         triggers="hover"
                         placement="top">
-                    <a id="one-popover">{{ cut_down_time === 0 ? $t('lang.footer.tooltip.refresh') : $t('lang.footer.tooltip.wait', { sec: cut_down_time }) }}</a>
+                    <a id="one-popover">{{ 0 >= cut_down_time ? $t('lang.footer.tooltip.refresh') :
+                        $t('lang.footer.tooltip.wait', { sec: cut_down_time }) }}</a>
                 </b-popover>
                 <p>
                     <a href='http://blog.lucien.ink' target='_blank'>Lucien's Blog</a>
-                    <a v-for="footer in $store.state.config.footer" v-bind:key="footer.id">&nbsp;&nbsp;|&nbsp;&nbsp;<a :href="footer.url" target="_blank">{{ footer.text }}</a></a>
+                    <a v-for="footer in $store.state.config.footer"
+                       v-bind:key="footer.id">&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                            :href="footer.url" target="_blank">{{ footer.text }}</a></a>
                 </p>
                 <p>
                     <a>&copy; 2018 - {{ year }} </a>
@@ -50,10 +53,11 @@
             },
             refresh() {
                 if (this.cut_down_time === 0) {
-                    this.cut_down_time = 5;
+                    this.cut_down_time = -1;
                     this.oneWord = 'Loading...';
                     this.getOne().then(result => {
                         this.oneWord = result;
+                        this.cut_down_time = 5;
                         let clock = window.setInterval(() => {
                             this.cut_down_time--;
                             if (this.cut_down_time === 0) {

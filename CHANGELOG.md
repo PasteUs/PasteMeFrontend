@@ -2,6 +2,9 @@
 
 ## Version 3.0.2
 
+1. Footer refresh bug fix
+2. Add manual delete show page, no admin yet
+
 ### 2019-08-04
 
 1. Change footer's tooltip to popover
