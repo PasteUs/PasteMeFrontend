@@ -5,24 +5,18 @@
 </template>
 
 <script>
-    import Form from '../components/Form'
-    import Success from '../components/Success'
-    import PasswordAuth from '../components/PasswordAuth'
-    import PasteView from '../components/PasteView'
-    import Loading from '../components/Loading'
-    import ManualDeleted from "../components/ManualDeleted";
     export default {
         name: "Index",
         data() {
             return {
-                view: 'loading',
+                view: "loading",
                 lang: null,
                 content: null,
                 placeholder: null,
             }
         },
         watch: {
-            '$route.params.key': function () {
+            "$route.params.key": function () {
                 this.init();
             }
         },
@@ -31,42 +25,41 @@
         },
         methods: {
             init() {
-                this.$store.commit('init');
-                if (this.$route.params.key === '') {
-                    this.view = 'home';
+                this.$store.commit("init");
+                if (this.$route.params.key === "") {
+                    this.view = "home";
                 } else {
-                    this.view = 'loading';
+                    this.view = "loading";
                     this.api.get(this.$store.state.config.api + this.$route.params.key, {
                         json: true
                     }).then(response => {
-                        response.status = 403;
                         if (response.status === 200) {
-                            this.view = 'paste_view';
+                            this.view = "paste_view";
                             this.content = response.content;
-                            this.lang = response.lang === 'plain' ? 'plaintext' : response.lang;
+                            this.lang = response.lang === "plain" ? "plaintext" : response.lang;
                         } else if (response.status === 401) {
-                            this.view = 'password_auth';
+                            this.view = "password_auth";
                         } else if (response.status === 403) {
-                            this.view = 'manual_deleted';
-                        } else if (response.status === 404 && this.$route.params.key.search('[a-zA-Z]{1}') !== -1) {
-                            this.$store.commit('updateMode', {
+                            this.view = "manual_deleted";
+                        } else if (response.status === 404 && this.$route.params.key.search("[a-zA-Z]{1}") !== -1) {
+                            this.$store.commit("updateMode", {
                                 read_once: true,
                             });
-                            this.view = 'home';
+                            this.view = "home";
                         } else {
-                            this.$router.push('What_are_you_nong_sha_lei?');
+                            this.$router.push("What_are_you_nong_sha_lei?");
                         }
                     });
                 }
             },
         },
         components: {
-            'home': Form,
-            'success': Success,
-            'password_auth': PasswordAuth,
-            'paste_view': PasteView,
-            'loading': Loading,
-            'manual_deleted': ManualDeleted
+            "home": () => import(/* webpackChunkName: "home" */ "../components/Form"),
+            "success": () => import(/* webpackChunkName: "success" */ "../components/Success"),
+            "password_auth": () => import(/* webpackChunkName: "password_auth" */ "../components/PasswordAuth"),
+            "paste_view": () => import(/* webpackChunkName: "paste_view" */ "../components/PasteView"),
+            "loading": () => import(/* webpackChunkName: "loading" */ "../components/Loading"),
+            "manual_deleted": () => import(/* webpackChunkName: "manual_deleted" */ "../components/ManualDeleted")
         }
     }
 </script>
