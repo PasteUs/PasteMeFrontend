@@ -9,7 +9,6 @@ import store from './assets/js/store'
 import i18n from './assets/js/i18n'
 import api from './assets/js/api'
 
-import './assets/js/hljs'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/assets/css/global.css'

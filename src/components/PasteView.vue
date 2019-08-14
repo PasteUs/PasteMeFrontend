@@ -27,34 +27,36 @@
                             </b-col>
                         </b-row>
                     </b-card-header>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-if="$parent.lang !== 'markdown' || raw.length === 1">
-                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
-                    </b-card-body>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-else>
-                        <div class="markdown-body">
-                            <div v-html="markdown.render($parent.content)"></div>
-                            <script type="text/x-mathjax-config">
-                                MathJax.Hub.Config({
-                                    showProcessingMessages: false,
-                                    messageStyle: "none",
-                                    extensions: ["tex2jax.js"],
-                                    jax: ["input/TeX", "output/HTML-CSS"],
-                                    tex2jax: {
-                                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                                        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
-                                        ignoreClass:"comment-content"
-                                    },
-                                    "HTML-CSS": {
-                                        availableFonts: ["STIX","TeX"],
-                                        showMathMenu: false
-                                    }
-                                });
-                                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                    <div v-hljs>
+                        <b-card-body style="padding-bottom: 0" v-if="$parent.lang !== 'markdown' || raw.length === 1">
+                            <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
+                        </b-card-body>
+                        <b-card-body style="padding-bottom: 0" v-else>
+                            <div class="markdown-body">
+                                <div v-html="markdown.render($parent.content)"></div>
+                                <script type="text/x-mathjax-config">
+                                    MathJax.Hub.Config({
+                                        showProcessingMessages: false,
+                                        messageStyle: "none",
+                                        extensions: ["tex2jax.js"],
+                                        jax: ["input/TeX", "output/HTML-CSS"],
+                                        tex2jax: {
+                                            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                                            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                                            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+                                            ignoreClass:"comment-content"
+                                        },
+                                        "HTML-CSS": {
+                                            availableFonts: ["STIX","TeX"],
+                                            showMathMenu: false
+                                        }
+                                    });
+                                    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
                                 </script>
-                            <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
-                        </div>
-                    </b-card-body>
+                                <remote-js src="https://cdn.staticfile.org/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
+                            </div>
+                        </b-card-body>
+                    </div>
                 </b-card>
             </div>
         </b-col>
@@ -63,7 +65,9 @@
 </template>
 
 <script>
-    import 'github-markdown-css/github-markdown.css'
+    import lineNumbersBlock from '../assets/js/highlightjs-line-numbers'
+    import '../assets/css/github-gist.css'
+    import '../assets/css/highlightjs-line-numbers.css'
     export default {
         name: "PasteView",
         data() {
@@ -101,6 +105,21 @@
                     return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
                 },
             }
+        },
+        directives: {
+            hljs: function (el) {
+                    let blocks = el.querySelectorAll('pre code');
+                    if (document.querySelectorAll('.hljs').length === 0) {
+                        blocks.forEach(function (block) {
+                            window.hljs.highlightBlock(block);
+                            if (block.getAttribute('class').split(' ').indexOf('line-numbers') > -1) {
+                                lineNumbersBlock(block, {
+                                    singleLine: true
+                                });
+                            }
+                        });
+                    }
+                }
         }
     }
 </script>

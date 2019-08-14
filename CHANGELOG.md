@@ -1,5 +1,21 @@
 # Change Log
 
+## Version 3.0.3
+
+### 2019-08-15
+
+1. Remove inner `github-markdown-css` and `highlight.js`
+2. Add Analyze
+3. Remove `hljs.js`
+4. `favicon.ico` resized
+
+### 2019-08-13
+
+1. Dump version to 3.0.3
+2. `npm update --save`
+3. `npm update --save-dev`
+4. Component lazy load
+
 ## Version 3.0.2
 
 1. Footer refresh bug fix

@@ -1,4 +1,5 @@
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let webPath = '/';
 
@@ -20,8 +21,9 @@ module.exports = {
                     new CompressionPlugin({
                         test: /\.js$|\.css/,
                         threshold: 0,
-                        deleteOriginalAssets: false
-                })],
+                        deleteOriginalAssets: false}),
+                    new BundleAnalyzerPlugin()
+                ],
                 output
             }
         } else {
