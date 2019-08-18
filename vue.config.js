@@ -78,7 +78,7 @@ module.exports = {
             "bootstrap-vue": "BootstrapVue",
             "markdown-it": "markdownit",
             "unorm": "unorm",
-            "@chenfengyuan/vue-qrcode": "VueQr",
+            "@chenfengyuan/vue-qrcode": "VueQrcode",
             "vue-i18n": "VueI18n"
         };
         if (process.env.NODE_ENV === 'production') {
