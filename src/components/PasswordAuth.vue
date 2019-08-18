@@ -17,8 +17,10 @@
 </template>
 
 <script>
+    import stateMixin from "../assets/js/mixins/stateMixin";
     export default {
         name: "PasswordAuth",
+        mixins: [stateMixin],
         data() {
             return {
                 flag: true,
@@ -29,14 +31,14 @@
         },
         methods: {
             onSubmit() {
-                let token = this.$route.params.key + ',' + this.form.password;
-                this.api.get(this.$store.state.config.api + token, {
+                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.from.password}`;
+                this.api.get(sendUrl, {
                     json: 'true'
-                }).then(response => {
-                    if (response.status === 200) {
-                        this.$parent.content = response.content;
-                        this.$parent.lang = response.lang;
-                        this.$parent.view = 'paste_view';
+                }).then(({status, content, lang}) => {
+                    if (status === 200) {
+                        this.updateContent(content);
+                        this.updateLang(lang);
+                        this.updateView("paste_view");
                     } else {
                         this.flag = false;
                         this.form.password = null;

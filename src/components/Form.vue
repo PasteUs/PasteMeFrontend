@@ -55,8 +55,10 @@
 </template>
 
 <script>
+    import stateMixins from "../assets/js/mixins/stateMixin";
     export default {
         name: "Form",
+        mixins: [stateMixins],
         data() {
             return {
                 form: {
@@ -79,8 +81,8 @@
                 const sendFunc = key === "" || key === "once" ? this.api.post : this.api.put;
                 sendFunc(...sendArgs).then(response => {
                     if (response.status === 201) {
-                        this.$parent.view = 'success';
-                        this.$parent.key = response.key;
+                        this.updateView("success");
+                        this.updateKey(response.key);
                     }
                 });
             }

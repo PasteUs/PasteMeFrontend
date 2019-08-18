@@ -5,15 +5,20 @@
 </template>
 
 <script>
+    import stateMixins from "../assets/js/mixins/stateMixin";
+    import {mapGetters} from "vuex"
     export default {
         name: "Index",
+        mixins: [stateMixins],
         data() {
-            return {
-                view: "loading",
-                lang: null,
-                content: null,
-                placeholder: null,
-            }
+            return {}
+        },
+        computed: {
+            ...mapGetters([
+                "view",
+                "lang",
+                "content"
+            ])
         },
         watch: {
             "$route.params.key": function () {
@@ -27,25 +32,25 @@
             init() {
                 this.$store.commit("init");
                 if (this.$route.params.key === "") {
-                    this.view = "home";
+                    this.updateView("home");
                 } else {
-                    this.view = "loading";
-                    this.api.get(this.$store.state.config.api + this.$route.params.key, {
+                    this.updateView("loading");
+                    this.api.get(this.$store.getters.config.api + this.$route.params.key, {
                         json: true
                     }).then(response => {
                         if (response.status === 200) {
-                            this.view = "paste_view";
-                            this.content = response.content;
-                            this.lang = response.lang === "plain" ? "plaintext" : response.lang;
+                            this.updateView("paste_view");
+                            this.updateContent(response.content);
+                            this.updateLang(response.lang === "plain" ? "plaintext" : response.lang);
                         } else if (response.status === 401) {
-                            this.view = "password_auth";
+                            this.updateView("password_auth");
                         } else if (response.status === 403) {
-                            this.view = "manual_deleted";
+                            this.updateView("manual_deleted");
                         } else if (response.status === 404 && this.$route.params.key.search("[a-zA-Z]{1}") !== -1) {
                             this.$store.commit("updateMode", {
                                 read_once: true,
                             });
-                            this.view = "home";
+                            this.updateView("home");
                         } else {
                             this.$router.push("What_are_you_nong_sha_lei?");
                         }

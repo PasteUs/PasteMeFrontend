@@ -6,7 +6,7 @@
                 <h2>
                     {{ $t('lang.success.h2') }}
                 </h2>
-                <p v-html="$t('lang.success.p[0].text', { key: $parent.key })"></p>
+                <p v-html="$t('lang.success.p[0].text', { key: key })"></p>
                 <ul>
                     <li><a v-html="$t('lang.success.ul.li[0].text')"></a>&nbsp;<b-badge
                             pill class="badge-fixed"
@@ -16,13 +16,13 @@
                     </li>
                     <li>{{ $t('lang.success.ul.li[1].browser') }}
                         <a v-b-tooltip.hover="$t('lang.success.ul.li[1].tooltip')"
-                           :href="base_url + $parent.key"
+                           :href="base_url + key"
                            target="_blank">
-                            {{ base_url + $parent.key }}
+                            {{ base_url + key }}
                         </a>&nbsp;<b-badge
                                 variant="info"
                                 class="badge-fixed"
-                                :data-clipboard-text="base_url + $parent.key"
+                                :data-clipboard-text="base_url + key"
                                 href="#">
                             {{ $t('lang.success.badge.' +
                             (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
@@ -49,21 +49,29 @@
                 placement="auto"
                 triggers="hover">
             <div class="text-center">
-                <QRCode :value="this.base_url + this.$parent.key" :options="{ width: 168 }"></QRCode>
+                <QRCode :value="this.base_url + this.key" :options="{ width: 168 }"></QRCode>
             </div>
         </b-popover>
     </b-row>
 </template>
 
 <script>
+    import { mapGetters } from "vuex";
+    import stateMixin from "../assets/js/mixins/stateMixin";
     export default {
         name: "Success",
+        mixins: [stateMixin],
         data() {
             return {
                 base_url: location.origin + '/',
                 copy_btn_status: 0,
                 popover_show: false,
             }
+        },
+        computed: {
+            ...mapGetters([
+                "key"
+            ])
         },
         mounted() {
             let clipboard = new this.clipboard('.badge-fixed');
@@ -86,7 +94,7 @@
                 if (this.$route.params.key !== '') {
                     this.$router.push('/');
                 } else {
-                    this.$parent.view = 'home';
+                    this.updateView("home");
                 }
             }
         }
