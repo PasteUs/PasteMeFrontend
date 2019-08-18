@@ -1,6 +1,6 @@
 <template>
     <transition name="component-fade" mode="out-in">
-        <component :is="view"></component>
+        <component :is="view" v-bind="$data"></component>
     </transition>
 </template>
 
