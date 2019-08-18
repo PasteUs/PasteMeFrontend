@@ -59,7 +59,7 @@
                         this.oneWord = result;
                         this.cut_down_time = 5;
                         let clock = window.setInterval(() => {
-                            this.cut_down_time--;
+                            --this.cut_down_time;
                             if (this.cut_down_time === 0) {
                                 window.clearInterval(clock);
                             }
