@@ -33,7 +33,7 @@
                     </li>
                 </ul>
                 <p>
-                    <b-button @click="goHome" variant="primary">{{ $t('lang.success.p[1].button') }}</b-button>
+                    <b-button @click.prevent="goHome" variant="primary">{{ $t('lang.success.p[1].button') }}</b-button>
                 </p>
             </div>
         </b-col>
@@ -82,8 +82,7 @@
             });
         },
         methods: {
-            goHome(event) {
-                event.preventDefault();
+            goHome() {
                 if (this.$route.params.key !== '') {
                     this.$router.push('/');
                 } else {

@@ -2,7 +2,7 @@
     <b-row>
         <b-col md="4"></b-col>
         <b-col md="4">
-            <b-form @submit="onSubmit">
+            <b-form @submit.prevent="onSubmit">
                 <b-form-group :label="$t('lang.auth.form.label')">
                     <b-form-input
                     type="password"
@@ -28,8 +28,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
+            onSubmit() {
                 let token = this.$route.params.key + ',' + this.form.password;
                 this.api.get(this.$store.state.config.api + token, {
                     json: 'true'
