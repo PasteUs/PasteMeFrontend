@@ -15,7 +15,6 @@ function Instance(key = "", problem_id = "") {
     })
     const mh = require("markdown-it-highlightjs")
     const mk = require("@ryanlee2014/markdown-it-katex")
-    const mc = require("./markdown-it-table-contents").default
     const ma = require("markdown-it-anchor").default
     md.use(mk)
     md.use(mh)
@@ -30,7 +29,6 @@ function Instance(key = "", problem_id = "") {
         ulClass: 'task-list',
         liClass: 'task-list-item'
     })
-    md.use(mc, {includeLevel: [1, 2], listType: "div class='ui bulleted link list'"})
     md.use(require("./markdown-it-links"))
     md.use(require("./markdown-it-mermaid").default.default)
 
