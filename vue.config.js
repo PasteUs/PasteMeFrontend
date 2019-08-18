@@ -76,7 +76,9 @@ module.exports = {
                         test: /\.js$|\.css/,
                         threshold: 0,
                         deleteOriginalAssets: false}),
-                    new BundleAnalyzerPlugin()
+                    new BundleAnalyzerPlugin({
+                        analyzerMode: "static"
+                    })
                 ],
                 output,
                 externals
