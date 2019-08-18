@@ -43,12 +43,8 @@
         },
         methods: {
             getOne() {
-                return new Promise((resolve) => {
-                    this.api.get('https://v1.hitokoto.cn', {
-                        encode: 'text'
-                    }).then(response => {
-                        resolve(response)
-                    })
+                return this.api.get('https://v1.hitokoto.cn', {
+                    encode: 'text'
                 });
             },
             refresh() {
@@ -88,6 +84,7 @@
     .footer a:link, .footer a:visited {
         color: #38488f;
     }
+
     #one-word {
         -webkit-touch-callout: none;
         -webkit-user-select: none;

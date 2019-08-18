@@ -8,7 +8,11 @@ export default new Vuex.Store({
     state: {
         read_once: false,
         not_found: false,
-        config: null
+        config: null,
+        view: "loading",
+        key: "",
+        content: "",
+        lang: ""
     },
     mutations: {
         updateMode(state, payload) {
@@ -20,6 +24,9 @@ export default new Vuex.Store({
         init(state) {
             state.not_found = state.read_once = false;
         },
+        updateState(state, payload) {
+            Object.assign(state, payload);
+        }
     },
     getters
 });

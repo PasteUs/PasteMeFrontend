@@ -34,26 +34,6 @@
                         <b-card-body style="padding-bottom: 0" v-else>
                             <div class="markdown-body">
                                 <div v-html="markdown.render(content)"></div>
-                                <!--<script type="text/x-mathjax-config">
-                                    MathJax.Hub.Config({
-                                        showProcessingMessages: false,
-                                        messageStyle: "none",
-                                        extensions: ["tex2jax.js"],
-                                        jax: ["input/TeX", "output/HTML-CSS"],
-                                        tex2jax: {
-                                            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                                            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                                            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
-                                            ignoreClass:"comment-content"
-                                        },
-                                        "HTML-CSS": {
-                                            availableFonts: ["STIX","TeX"],
-                                            showMathMenu: false
-                                        }
-                                    });
-                                    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-                                </script>-->
-                                <!--<remote-js src="https://cdn.staticfile.org/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>-->
                             </div>
                         </b-card-body>
                     </div>
@@ -68,19 +48,9 @@
     import lineNumbersBlock from '../assets/js/highlightjs-line-numbers'
     import '../assets/css/github-gist.css'
     import '../assets/css/highlightjs-line-numbers.css'
-
+    import { mapGetters } from "vuex"
     export default {
         name: "PasteView",
-        props: {
-            lang: {
-                type: String,
-                default: "plaintext"
-            },
-            content: {
-                type: String,
-                default: ""
-            }
-        },
         data() {
             return {
                 copy_btn_status: 0,
@@ -111,14 +81,11 @@
             linesCount: function () {
                 let BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
                 return (this.content.trim().match(BREAK_LINE_REGEXP) || []).length + 1;
-            }
-        },
-        components: {
-            /* 'remote-js': {
-                render(createElement) {
-                    return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
-                },
-            }*/
+            },
+            ...mapGetters([
+                "lang",
+                "content"
+            ])
         },
         methods: {
             renderHljs: function (el) {
