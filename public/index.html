@@ -13,9 +13,13 @@
     <link rel="apple-touch-icon" sizes="120x120" href="../src/assets/img/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="../src/assets/img/touch-icon-ipad-retina.png">
     <link href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/KaTeX/0.10.2/katex.min.css" rel="stylesheet">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script async src="<%= BASE_URL %>usr/usr.js"></script>
-    <script src="https://cdn.staticfile.org/highlight.js/9.15.9/highlight.min.js"></script>
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
 </head>
 <body class="max-height">
     <noscript>
