@@ -12,8 +12,10 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../src/assets/img/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../src/assets/img/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="../src/assets/img/touch-icon-ipad-retina.png">
-    <link href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/KaTeX/0.10.2/katex.min.css" rel="stylesheet">
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>">
+    <% } %>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script async src="<%= BASE_URL %>usr/usr.js"></script>
     <% for (var i in

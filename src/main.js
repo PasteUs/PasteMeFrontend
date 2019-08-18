@@ -10,8 +10,6 @@ import i18n from './assets/js/i18n'
 import api from './assets/js/api'
 import markdownIt from './assets/js/external/markdownIt'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import '@/assets/css/global.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faGlobeAsia } from '@fortawesome/free-solid-svg-icons'

@@ -166,7 +166,11 @@
         }
     }
 </script>
-
+<style>
+    .markdown-body code {
+        color: black!important
+    }
+</style>
 <style scoped>
     .markdown-body {
         box-sizing: border-box;
