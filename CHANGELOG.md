@@ -2,6 +2,19 @@
 
 ## Version 3.0.3
 
+### 2019-08-16
+
+1. Use event.prevent instead preventDefault method
+2. Add store getters
+3. Use cdn
+4. Replace MarkdownIt dependency
+5. Add mermaid plugin support
+6. Fix lineNumber disappear
+7. Add mermaid support
+8. Fix analyze mode
+9. Remove unnecessary code
+10. Use vuex to format data flow
+
 ### 2019-08-15
 
 1. Remove inner `github-markdown-css` and `highlight.js`
