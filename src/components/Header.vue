@@ -5,7 +5,7 @@
                 <router-link class="navbar-brand" to="/" :title="$t('lang.nav.router_link')">PasteMe</router-link>
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
                 <b-collapse id="nav-collapse" is-nav>
-                    <b-nav-form @submit="onSubmit">
+                    <b-nav-form @submit.prevent="onSubmit">
                         <b-input-group v-bind:prepend="location.host + '/'">
                             <b-form-input :placeholder="$t('lang.nav.form.placeholder')" v-model="key" maxlength="8"
                                     autocomplete="off" required id="nav_input"></b-form-input>
@@ -87,8 +87,7 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
+            onSubmit() {
                 this.$router.push(this.key);
                 this.key = null;
             },

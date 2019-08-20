@@ -10,51 +10,33 @@
                                 <div>
                                     <a>{{ linesCount }} 行</a>
                                     <a>&nbsp;|&nbsp;</a>
-                                    <a>{{ $t('lang.view.lang.' + $parent.lang) }}</a>
+                                    <a>{{ $t('lang.view.lang.' + lang) }}</a>
                                 </div>
                             </b-col>
                             <b-col md="6" style="text-align: right;">
                                 <b-check-group switches>
-                                    <b-checkbox v-model="raw" v-show="$parent.lang === 'markdown'">源码</b-checkbox>
-                                    <b-link id="clipboard-btn" :data-clipboard-text="$parent.content">
+                                    <b-checkbox v-model="raw" v-if="lang === 'markdown'">源码</b-checkbox>
+                                    <b-link id="clipboard-btn" :data-clipboard-text="content">
                                         {{ $t('lang.view.copy') }}
                                     </b-link>
                                     <b-tooltip show target="clipboard-btn" placement="bottomleft">
                                         {{ $t('lang.view.tooltip.' + (copy_btn_status > 0 ? 'success' :
-                                            (copy_btn_status === 0 ?  'click' : 'fail'))) }}
+                                        (copy_btn_status === 0 ? 'click' : 'fail'))) }}
                                     </b-tooltip>
                                 </b-check-group>
                             </b-col>
                         </b-row>
                     </b-card-header>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-if="$parent.lang !== 'markdown' || raw.length === 1">
-                        <pre><code v-bind:class="'line-numbers ' + $parent.lang" v-text="this.$parent.content"></code></pre>
-                    </b-card-body>
-                    <b-card-body style="padding-bottom: 0" v-hljs v-else>
-                        <div class="markdown-body">
-                            <div v-html="markdown.render($parent.content)"></div>
-                            <script type="text/x-mathjax-config">
-                                MathJax.Hub.Config({
-                                    showProcessingMessages: false,
-                                    messageStyle: "none",
-                                    extensions: ["tex2jax.js"],
-                                    jax: ["input/TeX", "output/HTML-CSS"],
-                                    tex2jax: {
-                                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                                        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
-                                        ignoreClass:"comment-content"
-                                    },
-                                    "HTML-CSS": {
-                                        availableFonts: ["STIX","TeX"],
-                                        showMathMenu: false
-                                    }
-                                });
-                                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-                                </script>
-                            <remote-js src="https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></remote-js>
-                        </div>
-                    </b-card-body>
+                    <div ref="hljs">
+                        <b-card-body style="padding-bottom: 0" v-if="lang !== 'markdown' || raw.length === 1">
+                            <pre><code v-bind:class="'line-numbers ' + lang" v-text="this.content"></code></pre>
+                        </b-card-body>
+                        <b-card-body style="padding-bottom: 0" v-else>
+                            <div class="markdown-body">
+                                <div v-html="markdown.render(content)"></div>
+                            </div>
+                        </b-card-body>
+                    </div>
                 </b-card>
             </div>
         </b-col>
@@ -63,7 +45,10 @@
 </template>
 
 <script>
-    import 'github-markdown-css/github-markdown.css'
+    import lineNumbersBlock from '../assets/js/highlightjs-line-numbers'
+    import '../assets/css/github-gist.css'
+    import '../assets/css/highlightjs-line-numbers.css'
+    import { mapGetters } from "vuex"
     export default {
         name: "PasteView",
         data() {
@@ -75,36 +60,84 @@
         mounted() {
             let clipboard = new this.clipboard('#clipboard-btn');
             let cur = this;
-            clipboard.on('success', function() {
+            clipboard.on('success', function () {
                 cur.copy_btn_status = 1;
                 window.getSelection().removeAllRanges();
                 window.setTimeout(function () {
                     cur.copy_btn_status = 0;
                 }, 2000);
             });
-            clipboard.on('error', function() {
+            clipboard.on('error', function () {
                 cur.copy_btn_status = -1;
                 window.setTimeout(function () {
                     cur.copy_btn_status = 0;
                 }, 2000);
             });
+            this.initMermaid();
+            this.renderHljs(this.$refs.hljs);
+            this.markdownBindHook();
         },
         computed: {
-            linesCount: function() {
+            linesCount: function () {
                 let BREAK_LINE_REGEXP = /\r\n|\r|\n/g;
-                return (this.$parent.content.trim().match(BREAK_LINE_REGEXP) || []).length + 1;
+                return (this.content.trim().match(BREAK_LINE_REGEXP) || []).length + 1;
+            },
+            ...mapGetters([
+                "lang",
+                "content"
+            ])
+        },
+        methods: {
+            renderHljs: function (el) {
+                this.$nextTick(() => {
+                    let blocks = el.querySelectorAll('pre code');
+                    if (document.querySelectorAll('.hljs').length === 0) {
+                        blocks.forEach(function (block) {
+                            window.hljs.highlightBlock(block);
+                            if (block.getAttribute('class').split(' ').indexOf('line-numbers') > -1) {
+                                lineNumbersBlock(block, {
+                                    singleLine: true
+                                });
+                            }
+                        });
+                    }
+                })
+            },
+            initMermaid: function () {
+                this.$nextTick(() => {
+                    if (this.lang === "markdown") {
+                        import("mermaid").then(mermaid => {
+                            document.querySelectorAll(".mermaid").forEach(v => {
+                                mermaid.init(undefined, v);
+                            });
+                        })
+                    }
+                })
+            },
+            markdownBindHook: function () {
+                const _render = this.markdown.render;
+                const that = this;
+                this.markdown.render = function () {
+                    that.initMermaid();
+                    return _render.apply(this, arguments);
+                }
             }
         },
-        components: {
-            'remote-js': {
-                render(createElement) {
-                    return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
-                },
+        watch: {
+            raw: function () {
+                this.renderHljs(document);
+            },
+            content: function () {
+                this.initMermaid();
             }
         }
     }
 </script>
-
+<style>
+    .markdown-body code {
+        color: black!important
+    }
+</style>
 <style scoped>
     .markdown-body {
         box-sizing: border-box;

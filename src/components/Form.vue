@@ -2,7 +2,7 @@
     <b-row>
         <b-col md="1" lg="2"></b-col>
         <b-col md="10" lg="8">
-            <b-form @submit="onSubmit">
+            <b-form @submit.prevent="onSubmit">
                 <b-row>
                     <b-col md="7" lg="5">
                         <b-form-group>
@@ -37,7 +37,8 @@
                         </b-form-group>
                         <b-form-group>
                             <b-checkbox-group switches>
-                                <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'" style="margin-right: .65em">
+                                <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'"
+                                          style="margin-right: .65em">
                                     {{ $t('lang.form.submit') }}
                                 </b-button>
                                 <b-form-checkbox v-model="read_once" v-show="!$store.state.read_once" switch>
@@ -54,8 +55,10 @@
 </template>
 
 <script>
+    import stateMixins from "../assets/js/mixins/stateMixin";
     export default {
         name: "Form",
+        mixins: [stateMixins],
         data() {
             return {
                 form: {
@@ -67,29 +70,21 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
+            onSubmit() {
                 let key = "";
                 if (this.$route.params.key !== '') {
                     key = this.$route.params.key;
                 } else if (this.read_once.length > 0) {
                     key = "once"
                 }
-                if (key === "" || key === "once") {
-                    this.api.post(this.$store.state.config.api + key, this.form).then(response => {
-                        if (response.status === 201) {
-                            this.$parent.view = 'success';
-                            this.$parent.key = response.key;
-                        }
-                    });
-                } else {
-                    this.api.put(this.$store.state.config.api + key, this.form).then(response => {
-                        if (response.status === 201) {
-                            this.$parent.view = 'success';
-                            this.$parent.key = response.key;
-                        }
-                    });
-                }
+                const sendArgs = [`${this.$store.getters.config.api}${key}`, this.form];
+                const sendFunc = key === "" || key === "once" ? this.api.post : this.api.put;
+                sendFunc(...sendArgs).then(response => {
+                    if (response.status === 201) {
+                        this.updateView("success");
+                        this.updateKey(response.key);
+                    }
+                });
             }
         }
     }

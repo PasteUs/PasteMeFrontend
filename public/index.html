@@ -12,8 +12,16 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../src/assets/img/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="../src/assets/img/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="../src/assets/img/touch-icon-ipad-retina.png">
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>">
+    <% } %>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <script async src="<%= BASE_URL %>usr/usr.js"></script>
+    <% for (var i in
+    htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
 </head>
 <body class="max-height">
     <noscript>

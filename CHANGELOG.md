@@ -1,6 +1,42 @@
 # Change Log
 
+## Version 3.0.3
+
+### 2019-08-16
+
+1. Use event.prevent instead preventDefault method
+2. Add store getters
+3. Use cdn
+4. Replace MarkdownIt dependency
+5. Add mermaid plugin support
+6. Fix lineNumber disappear
+7. Add mermaid support
+8. Fix analyze mode
+9. Remove unnecessary code
+10. Use vuex to format data flow
+
+### 2019-08-15
+
+1. Remove inner `github-markdown-css` and `highlight.js`
+2. Add Analyze
+3. Remove `hljs.js`
+4. `favicon.ico` resized
+
+### 2019-08-13
+
+1. Dump version to 3.0.3
+2. `npm update --save`
+3. `npm update --save-dev`
+4. Component lazy load
+
 ## Version 3.0.2
+
+1. Footer refresh bug fix
+2. Add manual delete show page, no admin yet
+
+### 2019-08-04
+
+1. Change footer's tooltip to popover
 
 ### 2019-08-02
 

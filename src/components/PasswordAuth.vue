@@ -2,7 +2,7 @@
     <b-row>
         <b-col md="4"></b-col>
         <b-col md="4">
-            <b-form @submit="onSubmit">
+            <b-form @submit.prevent="onSubmit">
                 <b-form-group :label="$t('lang.auth.form.label')">
                     <b-form-input
                     type="password"
@@ -17,8 +17,10 @@
 </template>
 
 <script>
+    import stateMixin from "../assets/js/mixins/stateMixin";
     export default {
         name: "PasswordAuth",
+        mixins: [stateMixin],
         data() {
             return {
                 flag: true,
@@ -28,16 +30,15 @@
             }
         },
         methods: {
-            onSubmit(event) {
-                event.preventDefault();
-                let token = this.$route.params.key + ',' + this.form.password;
-                this.api.get(this.$store.state.config.api + token, {
+            onSubmit() {
+                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.from.password}`;
+                this.api.get(sendUrl, {
                     json: 'true'
-                }).then(response => {
-                    if (response.status === 200) {
-                        this.$parent.content = response.content;
-                        this.$parent.lang = response.lang;
-                        this.$parent.view = 'paste_view';
+                }).then(({status, content, lang}) => {
+                    if (status === 200) {
+                        this.updateContent(content);
+                        this.updateLang(lang);
+                        this.updateView("paste_view");
                     } else {
                         this.flag = false;
                         this.form.password = null;
