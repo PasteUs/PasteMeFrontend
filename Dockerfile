@@ -3,7 +3,7 @@ COPY ./ /source
 RUN cd /source && \
 npm install --registry=https://registry.npm.taobao.org && \
 npm run build && \
-rm -rf pasteme/conf.d
+rm -rf pasteme/conf.d pasteme/report.html
 
 FROM nginx:latest
 LABEL maintainer="Lucien Shui" \
