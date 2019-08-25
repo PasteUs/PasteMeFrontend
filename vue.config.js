@@ -1,4 +1,3 @@
-const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = ['js', 'css'];
@@ -62,48 +61,37 @@ module.exports = {
     outputDir: 'pasteme',
     productionSourceMap: false,
     configureWebpack: config => { // eslint-disable-line
-        let output = {
-            libraryExport: 'default',
-            jsonpFunction: 'jsonpFunction'
-        };
-        let externals = {
-            vue: "Vue",
-            vuex: "Vuex",
-            "vue-router": "VueRouter",
-            katex: "katex",
-            axios: "axios",
-            mermaid: "mermaid",
-            "highlight.js": "hljs",
-            "d3": "d3",
-            "bootstrap-vue": "BootstrapVue",
-            "markdown-it": "markdownit",
-            "unorm": "unorm",
-            "@chenfengyuan/vue-qrcode": "VueQrcode",
-            "vue-i18n": "VueI18n"
-        };
         if (process.env.NODE_ENV === 'production') {
             config.plugins.push(new CompressionWebpackPlugin({
                 algorithm: 'gzip',
                 test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-                threshold: 10240,
-                minRatio: 0.8
+                threshold: 8192,
+                minRatio: 0.8,
+                deleteOriginalAssets: true
             }));
-            return {
-                plugins: [
-                    new CompressionPlugin({
-                        test: /\.js$|\.css/,
-                        threshold: 0,
-                        deleteOriginalAssets: false}),
-                    new BundleAnalyzerPlugin({
-                        analyzerMode: "static"
-                    })
-                ],
-                output,
-                externals
-            }
-        } else {
-            return {
-                output
+            config.plugins.push(new BundleAnalyzerPlugin({
+                analyzerMode: "static"
+            }));
+            config.externals = {
+                "vue": "Vue",
+                "vuex": "Vuex",
+                "vue-router": "VueRouter",
+                "katex": "katex",
+                "axios": "axios",
+                "mermaid": "mermaid",
+                "highlight.js": "hljs",
+                "d3": "d3",
+                "bootstrap-vue": "BootstrapVue",
+                "markdown-it": "markdownit",
+                "unorm": "unorm",
+                "@chenfengyuan/vue-qrcode": "VueQrcode",
+                "vue-i18n": "VueI18n"
+            };
+        }
+        return {
+            output: {
+                libraryExport: 'default',
+                jsonpFunction: 'jsonpFunction'
             }
         }
     },

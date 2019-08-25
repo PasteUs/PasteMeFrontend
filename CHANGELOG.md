@@ -2,6 +2,11 @@
 
 ## Version 3.0.3
 
+### 2019-08-25
+
+1. Fix bug in vue.config.js
+2. Update .travis.yml
+
 ### 2019-08-16
 
 1. Use event.prevent instead preventDefault method
