@@ -40,6 +40,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 [Deploy Document](./DEPLOY.md)
 
+## Non-unit testing
+
+1. Create & access permanent paste
+2. Create & access temporary paste
+3. Create temporary with custom paste key
+4. Create & access permanent paste with password
+
 ## Browsers support
 
 Modern browsers and Internet Explorer 10+.

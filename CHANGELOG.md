@@ -1,6 +1,62 @@
 # Change Log
 
+## Version 3.0.3
+
+### 2019-08-25
+
+1. Fix bug in vue.config.js
+2. Update .travis.yml
+3. Fix typo in password_view
+4. Fix lang transfer in password_view
+5. Add non-unit testing in README.md
+
+### 2019-08-16
+
+1. Use event.prevent instead preventDefault method
+2. Add store getters
+3. Use cdn
+4. Replace MarkdownIt dependency
+5. Add mermaid plugin support
+6. Fix lineNumber disappear
+7. Add mermaid support
+8. Fix analyze mode
+9. Remove unnecessary code
+10. Use vuex to format data flow
+
+### 2019-08-15
+
+1. Remove inner `github-markdown-css` and `highlight.js`
+2. Add Analyze
+3. Remove `hljs.js`
+4. `favicon.ico` resized
+
+### 2019-08-13
+
+1. Dump version to 3.0.3
+2. `npm update --save`
+3. `npm update --save-dev`
+4. Component lazy load
+
 ## Version 3.0.2
+
+1. Footer refresh bug fix
+2. Add manual delete show page, no admin yet
+
+### 2019-08-04
+
+1. Change footer's tooltip to popover
+
+### 2019-08-02
+
+1. Add `Go`, `JSON` highlight support
+2. Remove `HTML` highlight support
+
+### 2019-08-01
+
+1. Fix [#22](https://github.com/LucienShui/PasteMeFrontend/issues/22) copy nothing in markdown parsed page
+2. Add tooltip on copy link in success page [#24](https://github.com/LucienShui/PasteMeFrontend/issues/24)
+3. Simplify PasteView page
+4. Add limit on footer refresh [#23](https://github.com/LucienShui/PasteMeFrontend/issues/23)
 
 ### 2019-07-24
 
