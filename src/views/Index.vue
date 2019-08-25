@@ -38,6 +38,7 @@
                     this.api.get(this.$store.getters.config.api + this.$route.params.key, {
                         json: true
                     }).then(response => {
+                        alert(JSON.stringify(response));
                         if (response.status === 200) {
                             this.updateView("paste_view");
                             this.updateContent(response.content);
