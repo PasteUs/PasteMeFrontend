@@ -6,6 +6,9 @@
 
 1. Fix bug in vue.config.js
 2. Update .travis.yml
+3. Fix typo in password_view
+4. Fix lang transfer in password_view
+5. Add non-unit testing in README.md
 
 ### 2019-08-16
 
