@@ -31,13 +31,13 @@
         },
         methods: {
             onSubmit() {
-                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.from.password}`;
+                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.form.password}`;
                 this.api.get(sendUrl, {
                     json: 'true'
                 }).then(({status, content, lang}) => {
                     if (status === 200) {
                         this.updateContent(content);
-                        this.updateLang(lang);
+                        this.updateLang(lang === "plain" ? "plaintext" : lang);
                         this.updateView("paste_view");
                     } else {
                         this.flag = false;
