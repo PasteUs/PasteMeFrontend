@@ -7,6 +7,7 @@ npm run build
 rm -rf .git
 git clone https://github.com/PasteUs/CDN.git -b master tmpdir
 rm -rf tmpdir/pasteme
+find pasteme -name "*.gz" | xargs -I {} gzip -d {}
 cp -r pasteme tmpdir
 cd tmpdir
 git config user.name "Lucien Shui"
