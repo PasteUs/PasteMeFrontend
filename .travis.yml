@@ -3,18 +3,13 @@ language: node_js
 node_js:
   - "11"
 
-install:
-  - npm install
-
 script:
-  - npm run build
-
-after_success:
   - bash shell/${BRANCH}.sh
 
 branches:
   only:
     - master
+    - dev
 
 notifications:
   email:
@@ -30,3 +25,4 @@ env:
 addons:
   hosts:
     - ${WEBHOOK}
+    - raw.githubusercontent.com

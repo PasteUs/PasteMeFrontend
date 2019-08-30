@@ -1,7 +1,7 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = ['js', 'css'];
-let webPath = '/';
+let webPath = 'PASTEME_WEB_PATH';
 
 const cdn = {
     // 开发环境
