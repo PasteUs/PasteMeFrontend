@@ -71,7 +71,7 @@
                 </div>
             </b-popover>
             <b-modal id="modal-donate" hide-footer lazy>
-                <img src="../assets/img/donate.png" alt="donate.png">
+                <img src="https://cdn.jsdelivr.net/gh/PasteUs/CDN@0.0.6/pasteme/img/sponsor.png" alt="donate.png">
             </b-modal>
         </b-col>
     </b-row>
