@@ -4,7 +4,9 @@ rm -rf .git && \
 git clone https://github.com/LucienShui/PasteMeFrontend.git -b dev frontend && \
 mv frontend/.git ./ && \
 rm -rf frontend && \
-echo \{\"version\": \"$(curl -Ls https://raw.githubusercontent.com/PasteUs/CDN/master/version.txt)\"\} > cdn.version.json && \
+git clone https://github.com/PasteUs/CDN.git -b master --depth=1 pasteme_cdn
+echo \{\"version\": \"$(cat pasteme_cdn/version.txt)\"\} > cdn.version.json && \
+rm -rf pasteme_cdn
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \
 git add --all && \
