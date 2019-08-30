@@ -2,13 +2,13 @@
 set -x && \
 rm -rf .git && \
 git clone https://github.com/LucienShui/PasteMeFrontend.git -b dev frontend && \
-mv frontend/.git ./ && \
-rm -rf frontend && \
+cd frontend || exit 1 && \
+git config user.name "Lucien Shui" && \
+git config user.email "lucien@lucien.ink" && \
+git merge daily && \
 git clone https://github.com/PasteUs/CDN.git -b master --depth=1 pasteme_cdn
 echo \{\"version\": \"$(cat pasteme_cdn/version.txt)\"\} > cdn.version.json && \
 rm -rf pasteme_cdn
-git config user.name "Lucien Shui" && \
-git config user.email "lucien@lucien.ink" && \
 git add --all && \
 git commit -m "build from travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
