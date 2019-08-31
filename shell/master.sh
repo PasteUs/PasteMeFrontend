@@ -4,6 +4,8 @@ rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
 sed -e "s/href=\//href=https:\/\/cdn.jsdelivr.net\/gh\/PasteUs\/CDN@$(cat pasteme_cdn/version.txt)\/pasteme\//g" pasteme/index.html > buffer.html && \
 mv buffer.html pasteme/index.html && \
+sed -e "s/src=\/js/src=https:\/\/cdn.jsdelivr.net\/gh\/PasteUs\/CDN@$(cat pasteme_cdn/version.txt)\/pasteme\/js/g" pasteme/index.html > buffer.html && \
+mv buffer.html pasteme/index.html && \
 rm -rf pasteme_cdn/pasteme && \
 cp -r pasteme pasteme_cdn && \
 cd pasteme_cdn && \
