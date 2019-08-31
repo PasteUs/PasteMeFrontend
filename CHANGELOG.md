@@ -2,6 +2,10 @@
 
 ## Version 3.1.0
 
+### 2019-09-01
+
+1. Add Aliyun, Bt Panel logo
+
 ### 2019-08-31
 
 1. Fix router duplicate error
