@@ -1,8 +1,7 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = ['js', 'css'];
-let cdnVersion = require("./cdn.version").version;
-let webPath = "https://cdn.jsdelivr.net/gh/PasteUs/CDN@" + cdnVersion + "/pasteme/";
+let webPath = '/';
 
 const cdn = {
     // 开发环境

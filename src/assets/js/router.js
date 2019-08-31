@@ -1,14 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// eslint-disable-next-line no-unused-vars
-const emptyFunc = (arg) => {};
-// warn if in developing env
-const warn = process.env.NODE_ENV !== "production" ? (console && console.warn || emptyFunc) : emptyFunc;
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location, onResolve, onReject) {
-    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject);
-    return originalPush.call(this, location).catch(warn);
-};
 
 Vue.use(Router);
 

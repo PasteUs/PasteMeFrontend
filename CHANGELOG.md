@@ -1,10 +1,5 @@
 # Change Log
 
-### 2019-08-31
-
-1. Update travis
-2. Add cdn support
-
 ## Version 3.0.3
 
 ### 2019-08-25
