@@ -4,14 +4,11 @@ node_js:
   - "11"
 
 install:
-  - npm install && echo "{\"ci\": true}" > build.config.json
+  - npm install
 
 script:
-  - npm run build
-
-after_success:
   - bash shell/${BRANCH}.sh
-
+  
 branches:
   only:
     - master
