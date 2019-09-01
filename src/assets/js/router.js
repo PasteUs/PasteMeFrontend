@@ -20,7 +20,7 @@ export default new Router({
         {
             path: '/:key(0{0}|[a-zA-Z0-9]{3,8})',
             name: 'index',
-            component: Index,
+            component: Index
         },
         {
             path: '/What_are_you_nong_sha_lei?',
@@ -33,7 +33,7 @@ export default new Router({
         },
         {
             path: 'pasteme-admin',
-            name: 'pasteme-admin',
+            name: 'pasteme-admin'
             // TODO
         },
     ]
