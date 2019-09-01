@@ -1,5 +1,7 @@
 #!/usr/local/env bash
 set -x && \
+echo '{"ci": true}' > build.config.json && \
+npm run build && \
 rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
 sed -e "s/href=\//href=https:\/\/cdn.jsdelivr.net\/gh\/PasteUs\/CDN@$(cat pasteme_cdn/version.txt)\/pasteme\//g" pasteme/index.html > buffer.html && \
