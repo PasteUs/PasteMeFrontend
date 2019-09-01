@@ -1,8 +1,9 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-/*
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = ['js', 'css'];
- */
+
+const ci = require("./build.config").ci;
+
 let webPath = '/';
 
 const cdn = {
@@ -64,15 +65,15 @@ module.exports = {
     productionSourceMap: false,
     configureWebpack: config => { // eslint-disable-line
         if (process.env.NODE_ENV === 'production') {
-            /*
-            config.plugins.push(new CompressionWebpackPlugin({
-                algorithm: 'gzip',
-                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-                threshold: 8192,
-                minRatio: 0.8,
-                deleteOriginalAssets: true
-            }));
-             */
+            if (!ci) { // 如果是持续集成环境，就不使用 gzip
+                config.plugins.push(new CompressionWebpackPlugin({
+                    algorithm: 'gzip',
+                    test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                    threshold: 8192,
+                    minRatio: 0.8,
+                    deleteOriginalAssets: true
+                }));
+            }
             config.plugins.push(new BundleAnalyzerPlugin({
                 analyzerMode: "static"
             }));
