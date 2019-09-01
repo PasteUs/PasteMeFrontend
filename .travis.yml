@@ -5,9 +5,9 @@ node_js:
 
 install:
   - npm install
-  - echo '{"ci": true}' > build.config.json
 
 script:
+  - echo '{"ci": true}' > build.config.json
   - npm run build
 
 after_success:
