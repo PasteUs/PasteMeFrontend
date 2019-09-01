@@ -7,6 +7,12 @@
 <script>
     import stateMixins from "../assets/js/mixins/stateMixin";
     import {mapGetters} from "vuex"
+    import Form from "../components/Form"
+    import Success from "../components/Success"
+    import PasswordAuth from "../components/PasswordAuth"
+    import PasteView from "../components/PasteView";
+    import Loading from "../components/Loading";
+    import ManualDeleted from "../components/ManualDeleted";
     export default {
         name: "Index",
         mixins: [stateMixins],
@@ -59,12 +65,12 @@
             },
         },
         components: {
-            "home": () => import(/* webpackChunkName: "home" */ "../components/Form"),
-            "success": () => import(/* webpackChunkName: "success" */ "../components/Success"),
-            "password_auth": () => import(/* webpackChunkName: "password_auth" */ "../components/PasswordAuth"),
-            "paste_view": () => import(/* webpackChunkName: "paste_view" */ "../components/PasteView"),
-            "loading": () => import(/* webpackChunkName: "loading" */ "../components/Loading"),
-            "manual_deleted": () => import(/* webpackChunkName: "manual_deleted" */ "../components/ManualDeleted")
+            "home": Form,
+            "success": Success,
+            "password_auth": PasswordAuth,
+            "paste_view": PasteView,
+            "loading": Loading,
+            "manual_deleted": ManualDeleted
         }
     }
 </script>

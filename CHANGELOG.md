@@ -5,6 +5,8 @@
 ### 2019-09-01
 
 1. Add Aliyun, Bt Panel logo
+2. Merge chunks into one
+3. Add ci env judge
 
 ### 2019-08-31
 
