@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from "../../views/Index";
 // eslint-disable-next-line no-unused-vars
 const emptyFunc = (arg) => {};
 // warn if in developing env
@@ -19,7 +20,7 @@ export default new Router({
         {
             path: '/:key(0{0}|[a-zA-Z0-9]{3,8})',
             name: 'index',
-            component: () => import(/* webpackChunkName: "index" */ '../../views/Index')
+            component: Index,
         },
         {
             path: '/What_are_you_nong_sha_lei?',
