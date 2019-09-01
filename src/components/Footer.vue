@@ -17,9 +17,18 @@
                             :href="footer.url" target="_blank">{{ footer.text }}</a></a>
                 </p>
                 <p>
-                    <a>&copy; 2018 - {{ year }} </a>
-                    <a href='mailto:lucien@lucien.ink'>Lucien Shui</a>
-                    <a> All rights reserved</a>
+                    <a>Copyright&nbsp;&copy;&nbsp;2018&nbsp;-&nbsp;{{ year }}&nbsp;</a>
+                    <a href='mailto:lucien@lucien.ink'>Lucien&nbsp;Shui</a>
+                </p>
+                <p title="赞助商">
+                    <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=30tfqka6"
+                       title="阿里云限量红包，上云就上阿里云，享数字化转型，市场占有率超过第 2-5 名总和" class="logo" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/PasteUs/CDN@0.0.11/pasteme/img/aliyun.svg" alt="Aliyun">
+                    </a>
+                    <a href="https://www.bt.cn/?invite_code=MV9ibGZqbWs="
+                       title="宝塔服务器面板，一键全能部署及管理，送你3188元礼包，点我领取" target="_blank" class="logo">
+                        <img src="https://www.bt.cn/Public/images/bt_logo.png" alt="BT">
+                    </a>
                 </p>
             </div>
         </div>
@@ -78,7 +87,10 @@
     .footer {
         font-size: .8em;
         text-align: center;
-        margin-top: .8em;
+    }
+
+    .footer p {
+        margin: 1em;
     }
 
     .footer a:link, .footer a:visited {
@@ -97,5 +109,15 @@
 
     #one-popover {
         font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+    }
+
+    .logo img {
+        height: 2em;
+    }
+    .logo svg {
+        height: 2em;
+    }
+    .logo {
+        margin: .5em;
     }
 </style>

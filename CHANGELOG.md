@@ -1,5 +1,16 @@
 # Change Log
 
+## Version 3.1.0
+
+### 2019-09-01
+
+1. Add Aliyun, Bt Panel logo
+
+### 2019-08-31
+
+1. Fix router duplicate error
+2. Add CDN support
+
 ## Version 3.0.3
 
 ### 2019-08-25
