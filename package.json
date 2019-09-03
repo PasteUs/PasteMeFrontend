@@ -20,7 +20,7 @@
     "markdown-it": "^8.4.2",
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-task-checkbox": "^1.0.6",
-    "mermaid": "^8.2.5",
+    "mermaid": "^8.2.6",
     "vue": "^2.6.10",
     "vue-cookie": "^1.1.4",
     "vue-github-button": "^1.0.8",
