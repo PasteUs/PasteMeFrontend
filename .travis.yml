@@ -8,7 +8,7 @@ install:
 
 script:
   - bash shell/${BRANCH}.sh
-  
+
 branches:
   only:
     - master
