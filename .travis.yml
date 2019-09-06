@@ -7,22 +7,16 @@ install:
   - npm install
 
 script:
-  - bash shell/${BRANCH}.sh
+  - bash shell/master.sh
 
 branches:
   only:
     - master
+    - dev
 
 notifications:
   email:
     - lucien@lucien.ink
-  on_failure: always
-
-env:
-  global:
-    - GH_REF: github.com/LucienShui/PasteMeFrontend.git
-    - GH_PASTEME: github.com/LucienShui/PasteMe.git
-    - P_BRANCH: build
 
 addons:
   hosts:
