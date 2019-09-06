@@ -18,7 +18,7 @@ cd .. && \
 git clone https://github.com/LucienShui/PasteMeFrontend.git -b dist/"${TRAVIS_BRANCH}" tmpdir && \
 cp -r tmpdir/.git pasteme && \
 cp LICENSE DEPLOY.md Dockerfile pasteme && \
-if [[ ${TRAVIS_BRANCH} == "master" ]]; then cp dev.Dockerfile pasteme/Dockerfile; fi && \
+if [[ ${TRAVIS_BRANCH} == "dev" ]]; then cp dev.Dockerfile pasteme/Dockerfile; fi && \
 cd pasteme && \
 rm report.html && \
 mv DEPLOY.md README.md && \
