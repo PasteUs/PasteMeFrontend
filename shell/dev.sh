@@ -20,7 +20,7 @@ cp -r tmpdir/.git pasteme && \
 cp LICENSE DEPLOY.md dev.Dockerfile pasteme && \
 cd pasteme && \
 mv dev.Dockerfile Dockerfile && \
-rm report.html && \
+rm -rf report.html js img css && \
 mv DEPLOY.md README.md && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \

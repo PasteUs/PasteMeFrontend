@@ -19,7 +19,7 @@ git clone https://github.com/LucienShui/PasteMeFrontend.git -b dist/"${TRAVIS_BR
 cp -r tmpdir/.git pasteme && \
 cp LICENSE DEPLOY.md Dockerfile pasteme && \
 cd pasteme && \
-rm report.html && \
+rm -rf report.html js img css && \
 mv DEPLOY.md README.md && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \
