@@ -1,7 +1,7 @@
 FROM byrnedo/alpine-curl:0.1 as builder
 ENV DOMAIN="raw.githubusercontent.com" \
     REPO="LucienShui/PasteMeFrontend" \
-    BRANCH="dist/master"
+    BRANCH="dist/dev"
 RUN curl -Ls "https://${DOMAIN}/${REPO}/${BRANCH}/index.html" > /index.html && \
     curl -Ls "https://${DOMAIN}/${REPO}/${BRANCH}/conf.d/docker/nginx.conf" > /default.conf
 

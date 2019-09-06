@@ -15,9 +15,10 @@ set +x && \
 git push https://"${GH_TOKEN}"@github.com/PasteUs/CDN.git master && \
 set -x && \
 cd .. && \
-git clone https://github.com/LucienShui/PasteMeFrontend.git -b dist/"${BRANCH}" tmpdir && \
+git clone https://github.com/LucienShui/PasteMeFrontend.git -b dist/"${TRAVIS_BRANCH}" tmpdir && \
 cp -r tmpdir/.git pasteme && \
 cp LICENSE DEPLOY.md Dockerfile pasteme && \
+if [[ ${TRAVIS_BRANCH} == "master" ]]; then cp dev.Dockerfile pasteme/Dockerfile; fi && \
 cd pasteme && \
 rm report.html && \
 mv DEPLOY.md README.md && \
@@ -26,9 +27,9 @@ git config user.email "lucien@lucien.ink" && \
 git add --all && \
 git commit -m "travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
-git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git dist/"${BRANCH}"
+git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git dist/"${TRAVIS_BRANCH}"
 if [[ ${?} ]]; then
-  if [[ ${BRANCH} == 'master' ]]; then
+  if [[ ${TRAVIS_BRANCH} == 'master' ]]; then
     curl -X POST "${WEBHOOK}""${WEBHOOK_PATH}"
     bash shell/pasteme.dev.update.sh
     exit ${?}
