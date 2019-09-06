@@ -26,7 +26,7 @@ git config user.email "lucien@lucien.ink" && \
 git add --all && \
 git commit -m "travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
-git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git build
+git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git dist/"${BRANCH}"
 if [[ ${?} ]]; then
   if [[ ${BRANCH} == 'master' ]]; then
     curl -X POST "${WEBHOOK}""${WEBHOOK_PATH}"
