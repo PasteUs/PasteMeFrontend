@@ -17,7 +17,7 @@ set -x && \
 cd .. && \
 git clone https://github.com/LucienShui/PasteMeFrontend.git -b dist/"${BRANCH}" tmpdir && \
 cp -r tmpdir/.git pasteme && \
-cp LICENSE DEPLOY.md pasteme && \
+cp LICENSE DEPLOY.md Dockerfile pasteme && \
 cd pasteme && \
 rm report.html && \
 mv DEPLOY.md README.md && \
