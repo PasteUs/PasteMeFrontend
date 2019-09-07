@@ -11,11 +11,6 @@ import api from './assets/js/api'
 import markdownIt from './assets/js/external/markdownIt'
 
 import '@/assets/css/global.css'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGlobeAsia } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faGlobeAsia);
 
 let VueCookie = require('vue-cookie');
 Vue.config.productionTip = false;
@@ -27,7 +22,6 @@ Vue.prototype.api = api;
 Vue.prototype.markdown = markdownIt;
 
 Vue.component('QRCode', VueQrcode);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 api.get('/usr/config.json').then(response => {
     store.state.config = response;

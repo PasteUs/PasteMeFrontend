@@ -31,10 +31,11 @@ export default new Router({
             path: '*',
             redirect: '/What_are_you_nong_sha_lei?'
         },
+        /* TODO
         {
             path: 'pasteme-admin',
             name: 'pasteme-admin'
-            // TODO
         },
+         */
     ]
 })
