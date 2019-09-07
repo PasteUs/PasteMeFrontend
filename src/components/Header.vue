@@ -17,8 +17,8 @@
                     </b-nav-form>
                     <b-navbar-nav class="ml-auto">
                         <b-nav-item-dropdown right>
-                            <template slot="button-content">
-                                <font-awesome-icon icon="globe-asia" />
+                            <template v-slot:button-content>
+                                <global-asia/>
                             </template>
                             <b-dropdown-item href="#" @click="setLang('zh-CN')">
                                 {{ $t('lang.nav.lang.zh_CN') }}
@@ -28,7 +28,7 @@
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
                         <b-nav-item-dropdown right>
-                            <template slot="button-content">
+                            <template v-slot:button-content>
                                 {{ $t('lang.nav.something.text') }}
                             </template>
                             <b-dropdown-item href="https://blog.lucien.ink/pasteme_log.html" target="_blank">
@@ -78,8 +78,10 @@
 </template>
 
 <script>
+    import GlobalAsia from "./icons/GlobalAsia";
     export default {
         name: "Header",
+        components: {GlobalAsia},
         data() {
             return {
                 key: null,
