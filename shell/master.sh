@@ -28,4 +28,4 @@ git commit -m "travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
 git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git dist/"${TRAVIS_BRANCH}" && \
 curl -X POST "${WEBHOOK}""${WEBHOOK_PATH}" && \
-bash shell/pasteme.dev.update.sh && \
+bash shell/pasteme.dev.update.sh
