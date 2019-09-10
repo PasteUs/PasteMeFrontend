@@ -2,6 +2,8 @@
 
 Using Vue and Bootstrap.
 
+[![CodeFactor](https://www.codefactor.io/repository/github/lucienshui/pastemefrontend/badge/master)](https://www.codefactor.io/repository/github/lucienshui/pastemefrontend/overview/master)
+
 ## Project setup
 
 ```

@@ -1,6 +1,6 @@
 FROM alpine/git:1.0.7 as builder
 ENV REPO="github.com/LucienShui/PasteMeFrontend.git" \
-    BRANCH="dist/master"
+    BRANCH="dist/dev"
 RUN rm -rf /dist && \
     git clone "https://${REPO}" -b ${BRANCH} --depth=1 /dist
 
