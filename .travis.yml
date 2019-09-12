@@ -16,7 +16,7 @@ branches:
 
 notifications:
   email:
-    - ${NOTIFY_EMAIL}
+    - ${USER_EMAIL}
 
 addons:
   hosts:
