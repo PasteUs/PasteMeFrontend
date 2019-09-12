@@ -16,7 +16,7 @@ branches:
 
 notifications:
   email:
-    - lucien@lucien.ink
+    - ${NOTIFY_EMAIL}
 
 addons:
   hosts:
