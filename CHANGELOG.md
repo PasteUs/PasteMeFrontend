@@ -1,5 +1,11 @@
 # Change Log
 
+### 2019-09-13
+
+1. Solve #79
+2. Fix travis
+3. Transfer repo to PasteUs
+
 ## Version 3.1.0
 
 ### 2019-09-01
