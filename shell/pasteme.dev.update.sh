@@ -9,4 +9,4 @@ git config user.email "${USER_EMAIL}" && \
 git add --all && \
 git commit -m "push from travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
-git push https://$((GH_TOKEN))@github.com/LucienShui/PasteMe.git dev
+git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMe.git dev
