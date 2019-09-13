@@ -28,11 +28,6 @@ export default new Router({
             component: () => import(/* webpackChunkName: "not_found" */ "../../views/NotFound")
         },
         {
-            path: "/redirect2",
-            name: "Redirect",
-            component: () => import(/* webpackChunkName: "redirect" */ "../../views/Redirect")
-        },
-        {
             path: "*",
             redirect: "/What_are_you_nong_sha_lei?"
         },
