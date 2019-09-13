@@ -8,8 +8,8 @@ export const lang = {
                 prepend: '高亮'
             },
             {
-                prepend: '加密',
-                placeholder: '无需加密请留空'
+                prepend: '密码',
+                placeholder: '无需设置密码请留空'
             }
         ],
         textarea: {

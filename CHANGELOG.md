@@ -1,5 +1,15 @@
 # Change Log
 
+### 2019-09-12
+
+1. Change index password's word
+2. Fix travis
+3. Transfer repo to PasteUs
+
+### 2019-09-12
+
+1. Solve #79
+
 ## Version 3.1.0
 
 ### 2019-09-01

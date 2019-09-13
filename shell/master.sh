@@ -7,8 +7,8 @@ npm run build && \
 rm -rf pasteme_cdn/pasteme && \
 cp -r pasteme pasteme_cdn && \
 cd pasteme_cdn && \
-git config user.name "Lucien Shui" && \
-git config user.email "lucien@lucien.ink" && \
+git config user.name "${USER_NAME}" && \
+git config user.email "${USER_EMAIL}" && \
 git add --all && \
 git commit -m "travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
@@ -21,11 +21,12 @@ cp LICENSE DEPLOY.md Dockerfile pasteme && \
 cd pasteme && \
 rm -rf report.html js img css && \
 mv DEPLOY.md README.md && \
-git config user.name "Lucien Shui" && \
-git config user.email "lucien@lucien.ink" && \
+git config user.name "${USER_NAME}" && \
+git config user.email "${USER_EMAIL}" && \
 git add --all && \
 git commit -m "travis-ci $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" && \
 set +x && \
 git push https://"${GH_TOKEN}"@github.com/LucienShui/PasteMeFrontend.git dist/"${TRAVIS_BRANCH}" && \
 curl -X POST "${WEBHOOK}""${WEBHOOK_PATH}" && \
-bash shell/pasteme.dev.update.sh && \
+cd .. && \
+bash shell/pasteme.dev.update.sh
