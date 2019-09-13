@@ -1,9 +1,8 @@
 # Deployment
 
-1. `wget https://github.com/LucienShui/PasteMe/releases/latest/download/PasteMe-build.zip && unzip PasteMe-build.zip`
-2. Put decompressed `PasteMe-build` into web root
-3. Edit `usr/config.json`
-4. Rewrite all requests to `index.html`
+1. Clone [PasteUs/PasteMeFrontend@dist/master](https://github.com/PasteUs/PasteMeFrontend/tree/dist/master) into local
+2. Edit `usr/config.json`
+3. Rewrite all requests to `index.html`
 
 ## usr/config.json
 
@@ -37,8 +36,5 @@
 ```
 location / {
     try_files $uri $uri/ /index.html;
-    location ~ .*\.(js|css)?$ {
-        gzip_static on;
-    }
 }
 ```
