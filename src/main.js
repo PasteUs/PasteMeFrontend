@@ -8,11 +8,13 @@ import router from './assets/js/router'
 import store from './assets/js/store'
 import i18n from './assets/js/i18n'
 import api from './assets/js/api'
-import markdownIt from './assets/js/external/markdownIt'
+import markdownIt from './assets/js/external/markdown-it'
+import DirectiveRegister from './assets/js/event/directive-register'
 
 import '@/assets/css/global.css'
 
 let VueCookie = require('vue-cookie');
+DirectiveRegister(Vue);
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 Vue.use(VueCookie);

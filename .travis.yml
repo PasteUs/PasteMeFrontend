@@ -13,10 +13,11 @@ branches:
   only:
     - master
     - dev
+    - dist/master
 
 notifications:
   email:
-    - lucien@lucien.ink
+    - ${USER_EMAIL}
 
 addons:
   hosts:

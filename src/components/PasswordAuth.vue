@@ -7,6 +7,7 @@
                     <b-form-input
                     type="password"
                     v-model="form.password"
+                    v-focus
                     :placeholder="flag ? '' : this.$t('lang.auth.form.placeholder')">
                 </b-form-input>
                 </b-form-group>
