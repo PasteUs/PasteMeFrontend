@@ -1,8 +1,4 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-/*
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
-const productionGzipExtensions = ['js', 'css'];
- */
 
 const version = require("./build.config").version;
 
@@ -67,15 +63,6 @@ module.exports = {
     productionSourceMap: false,
     configureWebpack: config => { // eslint-disable-line
         if (process.env.NODE_ENV === 'production') {
-            /*
-            config.plugins.push(new CompressionWebpackPlugin({
-                algorithm: 'gzip',
-                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
-                threshold: 8192,
-                minRatio: 0.8,
-                deleteOriginalAssets: true
-            }));
-             */
             config.plugins.push(new BundleAnalyzerPlugin({
                 analyzerMode: "static"
             }));
