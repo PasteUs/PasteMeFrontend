@@ -37,7 +37,7 @@
                             <b-dropdown-item href="https://github.com/LucienShui/PasteMeBackend/blob/master/API.md" target="_blank">
                                 API
                             </b-dropdown-item>
-                            <b-dropdown-item href="https://github.com/LucienShui/PasteMe/blob/master/DOCUMENT.md" target="_blank">
+                            <b-dropdown-item href="https://github.com/LucienShui/PasteMe/blob/master/doc/DOCUMENT.md" target="_blank">
                                 {{ $t('lang.nav.something.help') }}
                             </b-dropdown-item>
                             <b-dropdown-item href="https://github.com/LucienShui/PasteMe/issues" target="_blank">
