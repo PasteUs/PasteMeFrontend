@@ -13,7 +13,7 @@
     "axios": "^0.19.0",
     "bootstrap-vue": "^2.0.2",
     "clipboard": "^2.0.4",
-    "core-js": "^2.6.9",
+    "core-js": "^3.3.2",
     "markdown-it": "^10.0.0",
     "markdown-it-highlightjs": "^3.0.0",
     "markdown-it-task-checkbox": "^1.0.6",
