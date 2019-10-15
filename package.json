@@ -42,7 +42,7 @@
     "uslug": "^1.0.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "^1.4.0",
     "vue-template-compiler": "^2.5.21",
-    "webpack": "^4.41.0",
+    "webpack": "^4.41.2",
     "webpack-bundle-analyzer": "^3.5.2"
   }
 }
