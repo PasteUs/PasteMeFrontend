@@ -4,6 +4,7 @@ import Index from "../../views/Index";
 // eslint-disable-next-line no-unused-vars
 const emptyFunc = (arg) => {};
 // warn if in developing env
+// eslint-disable-next-line no-console
 const warn = process.env.NODE_ENV !== "production" ? (console && console.warn || emptyFunc) : emptyFunc;
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
