@@ -1,0 +1,59 @@
+name: Publish latest to docker
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  release:
+    if: github.repository == 'PasteUs/PasteMeFrontend'
+    name: Build with node ${{ matrix.node_version }} on ${{ matrix.os }} and upload
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node_version: [12.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node_version: ${{ matrix.node_version }}
+
+      - name: pull PasteUS/CDN and set build.config.json
+        run: |
+          rm -rf .git
+          git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn
+          echo {"version":"$(cat pasteme_cdn/version.txt)"} > build.config.json
+
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm run build --if-present
+        env:
+          CI: true
+
+      - name: push to PasteUS/CDN
+        run: |
+          rm -rf pasteme_cdn/pasteme
+          cp -r pasteme pasteme_cdn
+          cd pasteme_cdn
+          git config user.name "Lucien Shui"
+          git config user.email "lucien@lucien.ink"
+          git add --all
+          git commit -m "Pushed by github actions $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')"
+          git push https://"${{ secrets.GITHUB_PASSWORD }}"@github.com/PasteUs/CDN.git master
+          cd ..
+
+      - name: Publish Docker
+        uses: LucienShui/Publish-Docker-Github-Action@2.7.1
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/pasteus/pasteme-frontend:latest
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          dockerfile: Dockerfile
