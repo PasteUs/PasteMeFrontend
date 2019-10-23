@@ -28,7 +28,7 @@ jobs:
         run: |
           rm -rf .git
           git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn
-          echo {"version":"$(cat pasteme_cdn/version.txt)"} > build.config.json
+          echo {\"version\":\"$(cat pasteme_cdn/version.txt)\"} > build.config.json
 
       - name: npm install, build, and test
         run: |
