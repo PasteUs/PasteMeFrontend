@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build:
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node_version: [12.x]
+        node_version: [8.x, 10.x, 12.x]
         action: [test, run lint]
 
     steps:

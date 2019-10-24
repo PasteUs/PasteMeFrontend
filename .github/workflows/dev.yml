@@ -8,7 +8,7 @@ on:
 jobs:
 
   release:
-    # if: github.repository == 'PasteUs/PasteMeFrontend'
+    if: github.repository == 'PasteUs/PasteMeFrontend'
     name: Build with node ${{ matrix.node_version }} on ${{ matrix.os }} and upload
     runs-on: ${{ matrix.os }}
 
