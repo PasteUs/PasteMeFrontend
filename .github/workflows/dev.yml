@@ -26,7 +26,7 @@ jobs:
 
       - name: build and update cdn
         run: |
-          GH_TOKEN=${{ secrets.GITHUB_PASSWORD }} bash shell/build_and_update_cdn.sh
+          GH_TOKEN=${{ secrets.GITHUB_TOKEN }} bash .github/shell/build_and_update_cdn.sh
 
       - name: publish docker
         uses: LucienShui/Publish-Docker-Github-Action@2.7.1
