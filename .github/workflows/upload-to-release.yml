@@ -26,8 +26,6 @@ jobs:
       - name: build and update cdn
         run: |
           GH_TOKEN=${{ secrets.GITHUB_PASSWORD }} bash shell/build_and_update_cdn.sh
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_PASSWORD }}
 
       - name: gzip
         run: |
