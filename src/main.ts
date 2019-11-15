@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// @ts-ignore
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import clipboard from 'clipboard'
 import BootstrapVue from 'bootstrap-vue'
