@@ -17,35 +17,33 @@
     </b-row>
 </template>
 
-<script>
+<script lang="ts">
     import stateMixin from "../assets/js/mixins/stateMixin";
-    export default {
-        name: "PasswordAuth",
-        mixins: [stateMixin],
-        data() {
-            return {
-                flag: true,
-                form: {
-                    password: null,
+    import {Mixins, Component} from "vue-property-decorator";
+
+    @Component
+    export default class PasswordAuth extends Mixins(stateMixin) {
+        flag = true;
+        form = {
+            password: null
+        };
+        api: any;
+
+        onSubmit() {
+            const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.form.password}`;
+            this.api.get(sendUrl, {
+                json: 'true'
+            }).then((payload: any) => {
+                const {status, content, lang} = payload;
+                if (status === 200) {
+                    this.updateContent(content);
+                    this.updateLang(lang === "plain" ? "plaintext" : lang);
+                    this.updateView("paste_view");
+                } else {
+                    this.flag = false;
+                    this.form.password = null;
                 }
-            }
-        },
-        methods: {
-            onSubmit() {
-                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.form.password}`;
-                this.api.get(sendUrl, {
-                    json: 'true'
-                }).then(({status, content, lang}) => {
-                    if (status === 200) {
-                        this.updateContent(content);
-                        this.updateLang(lang === "plain" ? "plaintext" : lang);
-                        this.updateView("paste_view");
-                    } else {
-                        this.flag = false;
-                        this.form.password = null;
-                    }
-                });
-            }
+            });
         }
     }
 </script>
