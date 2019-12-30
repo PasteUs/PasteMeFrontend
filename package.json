@@ -28,7 +28,7 @@
   "devDependencies": {
     "@ryanlee2014/markdown-it-katex": "^1.0.4",
     "@vue/cli-plugin-babel": "^4.0.5",
-    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.1.2",
     "@vue/cli-service": "^4.0.5",
     "acorn": "^7.1.0",
     "babel-eslint": "^10.0.3",
