@@ -29,6 +29,57 @@
                         </b-nav-item-dropdown>
                         <b-nav-item-dropdown right>
                             <template v-slot:button-content>
+                                <Bell/>
+                            </template>
+                            <b-dropdown-item v-for=" item in pageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
+                                <span class="mr-3 align-middle text-truncate d-inline-block" style="max-width:100px">{{item.title}}</span>
+                                <b-badge pill variant="primary" v-if="getRead(item.time) || storageData[`content${item.time}`]" >已读</b-badge>
+                                <b-modal :id="'modal'+item.id" hide-footer scrollable :title="item.title">
+                                    <b-card>
+                                        {{item.content}}
+                                        <div><a :href="item.link">{{item.link}}</a></div>
+                                        <p class="text-muted text-right mb-0" style="font-size: 14px">
+                                            <span class="text-primary">{{item.type}}</span>
+                                            {{item.time}}
+                                        </p>
+                                    </b-card>
+                                </b-modal>
+                            </b-dropdown-item>
+                            <b-dropdown-item v-b-modal.modal-1>
+                                {{ $t('lang.nav.more') }}
+                            </b-dropdown-item>
+                            <b-modal id="modal-1" hide-footer scrollable>
+                                <b-list-group>
+                                    <b-list-group-item button v-b-toggle="'collapse'+item.id" @click="setRead(item.time)"
+                                                       v-for="item in pageData" :key="item.id" class="clearfix">
+                                        <span class="mr-3 align-middle d-inline-block">{{item.title}}</span>
+                                        <div>
+                                            <b-badge pill variant="primary" class="align-middle"
+                                                     v-if="getRead(item.time) || storageData[`content${item.time}`]">已读
+                                            </b-badge>
+                                            <span class="float-right text-muted mt-2" style="font-size: 14px">{{item.time}}</span>
+                                            <span class="float-right mt-2 mr-2 text-primary" style="font-size: 14px">{{item.type}}</span>
+                                        </div>
+                                        <b-collapse :id="'collapse'+item.id" class="mt-2">
+                                            {{item.content}}
+                                            <div><a :href="item.link">{{item.link}}</a></div>
+                                        </b-collapse>
+                                    </b-list-group-item>
+                                </b-list-group>
+                                <div class="mt-3">
+                                    <b-pagination v-model="currentPage"
+                                                  :per-page="perPage"
+                                                  align="center"
+                                                  :total-rows="rows"
+                                                  size="sm"
+                                                  limit="4"
+                                                  class="mb-0"
+                                    />
+                                </div>
+                            </b-modal>
+                        </b-nav-item-dropdown>
+                        <b-nav-item-dropdown right>
+                            <template v-slot:button-content>
                                 {{ $t('lang.nav.something.text') }}
                             </template>
                             <b-dropdown-item href="https://blog.lucien.ink/pasteme_log.html" target="_blank">
@@ -79,13 +130,19 @@
 
 <script>
     import GlobalAsia from "./icons/GlobalAsia";
+    import Bell from "./icons/Bell";
     export default {
         name: "Header",
-        components: {GlobalAsia},
+        components: {GlobalAsia, Bell},
         data() {
             return {
                 key: null,
                 location: location,
+                storageData: {},
+                currentPage: 1,
+                allPage: 1,
+                perPage: 4,
+                pageData: []
             }
         },
         methods: {
@@ -96,7 +153,58 @@
             setLang(lang) {
                 this.setI18n(lang);
                 this.$cookie.set('pasteme_lang', lang, 7);
+            },
+            setRead(item) {
+                window.localStorage.setItem(`content${item}`,'true');
+                let storage = window.localStorage.getItem(`content${item}`);
+                this.$set(this.storageData,`content${item}`, storage);
+            },
+            getRead(item) {
+                return window.localStorage.getItem(`content${item}`)
+            },
+            getFirstPage() {
+                const Url = `${this.$store.getters.config.api}announcement`;
+                this.api.get(Url, {
+                    page: 1,
+                    pageSize: 3
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.pageData = res.data
+                    }
+                });
+            },
+            getPage() {
+                const Url = `${this.$store.getters.config.api}announcement/page`;
+                this.api.get(Url, {
+                    pageSize: 4
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.allPage = res.data
+                    }
+                });
             }
+        },
+        computed: {
+            rows:function () {
+                return this.allPage * this.perPage
+            }
+        },
+        watch: {
+            currentPage(val) {
+                const Url = `${this.$store.getters.config.api}announcement`;
+                this.api.get(Url, {
+                    page: val,
+                    pageSize: 4
+                }).then(res => {
+                    if (res.status === 200) {
+                        this.pageData = res.data
+                    }
+                });
+            }
+        },
+        mounted() {
+            this.getFirstPage();
+            this.getPage()
         }
     }
 </script>

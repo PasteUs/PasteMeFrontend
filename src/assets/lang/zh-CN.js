@@ -81,6 +81,7 @@ export const lang = {
             feedback: '我要吐槽'
         },
         donate: '捐助',
+        more: '更多',
         beg: '给个 Star 好不啦'
     },
     not_found: {
