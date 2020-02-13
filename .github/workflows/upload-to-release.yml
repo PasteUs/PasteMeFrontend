@@ -1,0 +1,49 @@
+name: Upload to release and publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  release:
+    if: github.repository == 'PasteUs/PasteMeFrontend'
+    name: Build with node ${{ matrix.node_version }} on ${{ matrix.os }} and upload
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node_version: [12.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node_version: ${{ matrix.node_version }}
+
+      - name: build and update cdn
+        run: |
+          GH_TOKEN=${{ secrets.GITHUB_PASSWORD }} bash .github/shell/build_and_update_cdn.sh
+
+      - name: gzip
+        run: |
+          tar -czvf pasteme.tar.gz pasteme
+
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: pasteme.tar.gz application/octet-stream
+        env:
+          GITHUB_PASSWORD: ${{ secrets.GITHUB_PASSWORD }}
+
+      - name: publish docker
+        uses: LucienShui/Publish-Docker-Github-Action@2.7.1
+        with:
+          name: registry.cn-hangzhou.aliyuncs.com/pasteus/pasteme-frontend
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          dockerfile: Dockerfile
+          tag_names: true
