@@ -77,7 +77,7 @@
                 } else if (this.read_once.length > 0) {
                     key = "once"
                 }
-                const sendArgs = [`${this.$store.getters.config.api}${key}`, this.form];
+                const sendArgs = [`${this.$store.getters.config.backendApi}${key}`, this.form];
                 const sendFunc = key === "" || key === "once" ? this.api.post : this.api.put;
                 sendFunc(...sendArgs).then(response => {
                     if (response.status === 201) {
