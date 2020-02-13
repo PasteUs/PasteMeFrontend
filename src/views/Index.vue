@@ -41,7 +41,7 @@
                     this.updateView("home");
                 } else {
                     this.updateView("loading");
-                    this.api.get(this.$store.getters.config.api + this.$route.params.key, {
+                    this.api.get(this.$store.getters.config.backendApi + this.$route.params.key, {
                         json: true
                     }).then(response => {
                         if (response.status === 200) {

@@ -164,7 +164,7 @@
                 return window.localStorage.getItem(`content${item}`)
             },
             getFirstPage() {
-                const Url = `${this.$store.getters.config.api}announcement`;
+                const Url = `${this.$store.getters.config.backendApi}announcement`;
                 this.api.get(Url, {
                     page: 1,
                     pageSize: 3
@@ -176,7 +176,7 @@
                 });
             },
             getPage() {
-                const Url = `${this.$store.getters.config.api}announcement/page`;
+                const Url = `${this.$store.getters.config.backendApi}announcement/page`;
                 this.api.get(Url, {
                     pageSize: 3
                 }).then(res => {
@@ -193,7 +193,7 @@
         },
         watch: {
             currentPage(val) {
-                const Url = `${this.$store.getters.config.api}announcement`;
+                const Url = `${this.$store.getters.config.backendApi}announcement`;
                 this.api.get(Url, {
                     page: val,
                     pageSize: 3
