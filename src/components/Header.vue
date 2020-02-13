@@ -27,7 +27,7 @@
                                 {{ $t('lang.nav.lang.en') }}
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
-                        <b-nav-item-dropdown right>
+                        <b-nav-item-dropdown right v-if="this.$store.getters.config.adminApi">
                             <template v-slot:button-content>
                                 <Bell/>
                             </template>
@@ -164,7 +164,7 @@
                 return window.localStorage.getItem(`content${item}`)
             },
             getFirstPage() {
-                const Url = `${this.$store.getters.config.backendApi}announcement`;
+                const Url = `${this.$store.getters.config.adminApi}announcement`;
                 this.api.get(Url, {
                     page: 1,
                     pageSize: 3
@@ -176,7 +176,7 @@
                 });
             },
             getPage() {
-                const Url = `${this.$store.getters.config.backendApi}announcement/page`;
+                const Url = `${this.$store.getters.config.adminApi}announcement/page`;
                 this.api.get(Url, {
                     pageSize: 3
                 }).then(res => {
@@ -193,20 +193,22 @@
         },
         watch: {
             currentPage(val) {
-                const Url = `${this.$store.getters.config.backendApi}announcement`;
+                const Url = `${this.$store.getters.config.adminApi}announcement`;
                 this.api.get(Url, {
                     page: val,
                     pageSize: 3
                 }).then(res => {
                     if (res.success) {
-                        // this.pageData = res
+                        this.pageData = res.data
                     }
                 });
             }
         },
         mounted() {
-            this.getFirstPage();
-            this.getPage()
+            if (this.$store.getters.config.adminApi) {
+                this.getFirstPage();
+                this.getPage()
+            }
         }
     }
 </script>
