@@ -1,5 +1,5 @@
 {
-  "api": "/api/",
+  "api": "/_api/backend/",
   "footer": [
     {
       "url": "http://blog.lucien.ink/go/csdn",
