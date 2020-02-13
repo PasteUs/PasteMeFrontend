@@ -31,7 +31,7 @@
                             <template v-slot:button-content>
                                 <Bell/>
                             </template>
-                            <b-dropdown-item v-for=" item in pageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
+                            <b-dropdown-item v-for=" item in firstPageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
                                 <span class="mr-3 align-middle text-truncate d-inline-block" style="max-width:100px">{{item.title}}</span>
                                 <b-badge pill variant="primary" v-if="getRead(item.time) || storageData[`content${item.time}`]" >已读</b-badge>
                                 <b-modal :id="'modal'+item.id" hide-footer scrollable :title="item.title">
@@ -141,8 +141,9 @@
                 storageData: {},
                 currentPage: 1,
                 allPage: 1,
-                perPage: 4,
-                pageData: []
+                perPage: 3,
+                pageData: [],
+                firstPageData: [],
             }
         },
         methods: {
@@ -168,7 +169,8 @@
                     page: 1,
                     pageSize: 3
                 }).then(res => {
-                    if (res.status === 200) {
+                    if (res.success) {
+                        this.firstPageData = res.data;
                         this.pageData = res.data
                     }
                 });
@@ -176,9 +178,9 @@
             getPage() {
                 const Url = `${this.$store.getters.config.api}announcement/page`;
                 this.api.get(Url, {
-                    pageSize: 4
+                    pageSize: 3
                 }).then(res => {
-                    if (res.status === 200) {
+                    if (res.success) {
                         this.allPage = res.data
                     }
                 });
@@ -194,10 +196,10 @@
                 const Url = `${this.$store.getters.config.api}announcement`;
                 this.api.get(Url, {
                     page: val,
-                    pageSize: 4
+                    pageSize: 3
                 }).then(res => {
-                    if (res.status === 200) {
-                        this.pageData = res.data
+                    if (res.success) {
+                        // this.pageData = res
                     }
                 });
             }
