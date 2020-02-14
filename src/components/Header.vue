@@ -31,7 +31,7 @@
                             <template v-slot:button-content>
                                 <Bell/>
                             </template>
-                            <b-dropdown-item v-for=" item in firstPageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time) ">
+                            <b-dropdown-item v-for=" item in firstPageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
                                 <span class=" align-middle text-truncate d-inline-block notRead mr-3 " style="width: 80px" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" >{{item.title}}</span>
                                 <b-badge pill variant="light" class="align-middle"
                                          v-if="item.type === 'DAILY_ANNOUNCEMENT'">通知
@@ -185,9 +185,6 @@
             getRead(item) {
                 return window.localStorage.getItem(`content${item}`)
             },
-            // hideTitle(item) {
-            //
-            // },
             getFirstPage() {
                 const Url = `${this.$store.getters.config.adminApi}announcement`;
                 this.api.get(Url, {
