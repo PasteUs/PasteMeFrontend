@@ -42,15 +42,13 @@
                                 <b-badge pill variant="info" class="align-middle"
                                          v-if="item.type === 'UPDATE_LOG'">更新
                                 </b-badge>
-                                <b-modal :id="'modal'+item.id" hide-footer scrollable>
-                                    <b-card>
+                                <b-modal :id="'modal'+item.id" hide-footer scrollable size="lg">
                                         <p class="text-center text-body">{{item.title}}</p>
                                         <p style="color: #495057">{{item.content}}</p>
                                         <p><a :href="item.link">{{item.link}}</a></p>
-                                        <p class="text-muted text-right mb-0" style="font-size: 14px">
+                                        <p class="text-muted text-right" style="font-size: 14px">
                                             {{item.time.substring(0,16)}}
                                         </p>
-                                    </b-card>
                                 </b-modal>
                             </b-dropdown-item>
                             <b-dropdown-item v-b-modal.modal-1 @click="getFirst">
@@ -58,7 +56,7 @@
                             </b-dropdown-item>
                             <b-modal id="modal-1" hide-footer scrollable size="lg">
                                 <b-list-group>
-                                    <b-list-group-item button v-b-toggle="'collapse'+item.id" @click="setRead(item.time)"
+                                    <b-list-group-item button @click="setRead(item.time)" v-b-modal="'modal'+item.time"
                                                        v-for="item in pageData" :key="item.id" >
                                         <div class="clearfix">
                                             <span class=" align-middle text-truncate d-inline-block float-left width notRead" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" v-if="!hide[`title${item.time}`]">{{item.title}}</span>
@@ -72,12 +70,15 @@
                                                 <b-badge pill variant="info" class="align-middle mt-1 float-right"
                                                          v-if="item.type === 'UPDATE_LOG'">更新
                                                 </b-badge>
+                                            <b-modal :id="'modal'+item.time" hide-footer scrollable size="lg">
+                                                    <p class="text-cente text-body">{{item.title}}</p>
+                                                    <p style="color: #495057" >{{item.content}}</p>
+                                                    <p><a :href="item.link" >{{item.link}}</a></p>
+                                                    <p class="text-muted text-right" style="font-size: 14px">
+                                                        {{item.time.substring(0,16)}}
+                                                    </p>
+                                            </b-modal>
                                         </div>
-                                        <b-collapse :id="'collapse'+item.id" class="mt-2">
-                                            <p class="text-center text-body" style="word-wrap:break-word">{{item.title}}</p>
-                                            <p class="word-wrap:break-word" style="word-wrap:break-word">{{item.content}}</p>
-                                            <p><a :href="item.link">{{item.link}}</a></p>
-                                        </b-collapse>
                                     </b-list-group-item>
                                 </b-list-group>
                                 <div class="mt-3">
@@ -174,13 +175,6 @@
                 window.localStorage.setItem(`content${item}`,'true');
                 let storage = window.localStorage.getItem(`content${item}`);
                 this.$set(this.storageData,`content${item}`, storage);
-
-                if (!this.hide[`title${item}`]) {
-                    this.$set(this.hide,`title${item}`, true);
-                }
-                else if (this.hide[`title${item}`]) {
-                    this.$set(this.hide,`title${item}`, false);
-                }
             },
             getRead(item) {
                 return window.localStorage.getItem(`content${item}`)
