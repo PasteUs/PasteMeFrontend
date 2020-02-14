@@ -32,7 +32,7 @@
                                 <Bell/>
                             </template>
                             <b-dropdown-item v-for=" item in firstPageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
-                                <span class=" align-middle text-truncate d-inline-block notRead mr-3 " style="width: 80px" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}">{{item.title}}</span>
+                                <span class=" align-middle text-truncate d-inline-block notRead mr-3 " style="width: 80px" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" >{{item.title}}</span>
                                 <b-badge pill variant="light" class="align-middle"
                                          v-if="item.type === 'DAILY_ANNOUNCEMENT'">通知
                                 </b-badge>
@@ -46,7 +46,7 @@
                                     <b-card>
                                         <p class="text-center text-body">{{item.title}}</p>
                                         <p style="color: #495057">{{item.content}}</p>
-                                        <div><a :href="item.link">{{item.link}}</a></div>
+                                        <p><a :href="item.link">{{item.link}}</a></p>
                                         <p class="text-muted text-right mb-0" style="font-size: 14px">
                                             {{item.time.substring(0,16)}}
                                         </p>
@@ -61,21 +61,21 @@
                                     <b-list-group-item button v-b-toggle="'collapse'+item.id" @click="setRead(item.time)"
                                                        v-for="item in pageData" :key="item.id" >
                                         <div class="clearfix">
-                                            <span class=" align-middle text-truncate d-inline-block float-left width notRead" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}">{{item.title}}</span>
-                                            <span class="text-muted ml-4 mt-1 float-right " style="font-size: 14px; width: 127px">{{item.time.substring(0,16)}}</span>
-                                                <b-badge pill variant="light" class="align-middle ml-2 mt-1 float-right"
+                                            <span class=" align-middle text-truncate d-inline-block float-left width notRead" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" v-if="!hide[`title${item.time}`]">{{item.title}}</span>
+                                            <span class="text-muted ml-4 mt-1 float-right " style="font-size: 14px; width: 130px">{{item.time.substring(0,16)}}</span>
+                                                <b-badge pill variant="light" class="align-middle mt-1 float-right"
                                                          v-if="item.type === 'DAILY_ANNOUNCEMENT'">通知
                                                 </b-badge>
-                                                <b-badge pill variant="danger" class="align-middle ml-2 mt-1 float-right"
+                                                <b-badge pill variant="danger" class="align-middle mt-1 float-right"
                                                          v-if="item.type === 'EMERGENCY'">紧急
                                                 </b-badge>
-                                                <b-badge pill variant="info" class="align-middle ml-2 mt-1 float-right"
+                                                <b-badge pill variant="info" class="align-middle mt-1 float-right"
                                                          v-if="item.type === 'UPDATE_LOG'">更新
                                                 </b-badge>
                                         </div>
                                         <b-collapse :id="'collapse'+item.id" class="mt-2">
-                                            <p class="text-center text-body">{{item.title}}</p>
-                                            <p>{{item.content}}</p>
+                                            <p class="text-center text-body" style="word-wrap:break-word">{{item.title}}</p>
+                                            <p class="word-wrap:break-word" style="word-wrap:break-word">{{item.content}}</p>
                                             <p><a :href="item.link">{{item.link}}</a></p>
                                         </b-collapse>
                                     </b-list-group-item>
@@ -153,6 +153,7 @@
                 key: null,
                 location: location,
                 storageData: {},
+                hide: {},
                 currentPage: 1,
                 allPage: 1,
                 perPage: 3,
@@ -173,6 +174,13 @@
                 window.localStorage.setItem(`content${item}`,'true');
                 let storage = window.localStorage.getItem(`content${item}`);
                 this.$set(this.storageData,`content${item}`, storage);
+
+                if (!this.hide[`title${item}`]) {
+                    this.$set(this.hide,`title${item}`, true);
+                }
+                else if (this.hide[`title${item}`]) {
+                    this.$set(this.hide,`title${item}`, false);
+                }
             },
             getRead(item) {
                 return window.localStorage.getItem(`content${item}`)
