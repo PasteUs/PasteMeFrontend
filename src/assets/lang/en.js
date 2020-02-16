@@ -80,7 +80,7 @@ export const lang = {
             help: 'Guidance',
             feedback: 'Feedback'
         },
-        more: 'more',
+        more: 'More',
         donate: 'Donation',
         beg: '给个 Star 好不啦'
     },

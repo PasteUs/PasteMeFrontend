@@ -1,6 +1,6 @@
 {
   "backendApi": "/_api/backend/",
-  "adminApi": "/_api/admin/api/",
+  "adminApi": "",
   "footer": [
     {
       "url": "http://blog.lucien.ink/go/csdn",
