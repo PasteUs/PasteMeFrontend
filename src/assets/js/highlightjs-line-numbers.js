@@ -204,6 +204,7 @@ function addLineNumbersBlockFor (inputHtml, firstLineIndex) {
 function duplicateMultilineNodes (element) {
     let nodes = element.childNodes;
     for (let node in nodes) {
+        // eslint-disable-next-line no-prototype-builtins
         if (nodes.hasOwnProperty(node)) {
             let child = nodes[node];
             if (getLinesCount(child.textContent) > 0) {

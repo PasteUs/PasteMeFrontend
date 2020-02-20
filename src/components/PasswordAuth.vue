@@ -32,7 +32,7 @@
         },
         methods: {
             onSubmit() {
-                const sendUrl = `${this.$store.getters.config.api}${this.$route.params.key},${this.form.password}`;
+                const sendUrl = `${this.$store.getters.config.backendApi}${this.$route.params.key},${this.form.password}`;
                 this.api.get(sendUrl, {
                     json: 'true'
                 }).then(({status, content, lang}) => {

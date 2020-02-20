@@ -27,6 +27,72 @@
                                 {{ $t('lang.nav.lang.en') }}
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
+                        <b-nav-item-dropdown right v-if="this.$store.getters.config.adminApi">
+                            <template v-slot:button-content>
+                                <Bell/>
+                            </template>
+                            <b-dropdown-item v-for=" item in firstPageData" :key="item.id" v-b-modal="'modal'+item.id" @click="setRead(item.time)">
+                                <span class=" align-middle text-truncate d-inline-block notRead mr-3 " style="width: 80px" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" >{{item.title}}</span>
+                                <b-badge pill variant="light" class="align-middle"
+                                         v-if="item.type === 'DAILY_ANNOUNCEMENT'">通知
+                                </b-badge>
+                                <b-badge pill variant="danger" class="align-middle"
+                                         v-if="item.type === 'EMERGENCY'">紧急
+                                </b-badge>
+                                <b-badge pill variant="info" class="align-middle"
+                                         v-if="item.type === 'UPDATE_LOG'">更新
+                                </b-badge>
+                                <b-modal :id="'modal'+item.id" hide-footer scrollable size="lg">
+                                        <p class="text-center text-body">{{item.title}}</p>
+                                        <p style="color: #495057">{{item.content}}</p>
+                                        <p><a :href="item.link">{{item.link}}</a></p>
+                                        <p class="text-muted text-right" style="font-size: 14px">
+                                            {{item.time.substring(0,16)}}
+                                        </p>
+                                </b-modal>
+                            </b-dropdown-item>
+                            <b-dropdown-item v-b-modal.modal-1 @click="getFirst">
+                                {{ $t('lang.nav.more') }}
+                            </b-dropdown-item>
+                            <b-modal id="modal-1" hide-footer scrollable size="lg">
+                                <b-list-group>
+                                    <b-list-group-item button @click="setRead(item.time)" v-b-modal="'modal'+item.time"
+                                                       v-for="item in pageData" :key="item.id" >
+                                        <div class="clearfix">
+                                            <span class=" align-middle text-truncate d-inline-block float-left width notRead" :class="{'isRead' : storageData[`content${item.time}`] || getRead(item.time)}" v-if="!hide[`title${item.time}`]">{{item.title}}</span>
+                                            <span class="text-muted ml-4 mt-1 float-right " style="font-size: 14px; width: 130px">{{item.time.substring(0,16)}}</span>
+                                                <b-badge pill variant="light" class="align-middle mt-1 float-right"
+                                                         v-if="item.type === 'DAILY_ANNOUNCEMENT'">通知
+                                                </b-badge>
+                                                <b-badge pill variant="danger" class="align-middle mt-1 float-right"
+                                                         v-if="item.type === 'EMERGENCY'">紧急
+                                                </b-badge>
+                                                <b-badge pill variant="info" class="align-middle mt-1 float-right"
+                                                         v-if="item.type === 'UPDATE_LOG'">更新
+                                                </b-badge>
+                                            <b-modal :id="'modal'+item.time" hide-footer scrollable size="lg">
+                                                    <p class="text-cente text-body">{{item.title}}</p>
+                                                    <p style="color: #495057" >{{item.content}}</p>
+                                                    <p><a :href="item.link" >{{item.link}}</a></p>
+                                                    <p class="text-muted text-right" style="font-size: 14px">
+                                                        {{item.time.substring(0,16)}}
+                                                    </p>
+                                            </b-modal>
+                                        </div>
+                                    </b-list-group-item>
+                                </b-list-group>
+                                <div class="mt-3">
+                                    <b-pagination v-model="currentPage"
+                                                  :per-page="perPage"
+                                                  align="center"
+                                                  :total-rows="rows"
+                                                  size="sm"
+                                                  limit="4"
+                                                  class="mb-0"
+                                    />
+                                </div>
+                            </b-modal>
+                        </b-nav-item-dropdown>
                         <b-nav-item-dropdown right>
                             <template v-slot:button-content>
                                 {{ $t('lang.nav.something.text') }}
@@ -34,10 +100,10 @@
                             <b-dropdown-item href="https://blog.lucien.ink/pasteme_log.html" target="_blank">
                                 {{ $t('lang.nav.something.log') }}
                             </b-dropdown-item>
-                            <b-dropdown-item href="https://github.com/LucienShui/PasteMeBackend/blob/master/API.md" target="_blank">
+                            <b-dropdown-item href="https://github.com/PasteUs/PasteMeGoBackend/blob/master/doc/API.md" target="_blank">
                                 API
                             </b-dropdown-item>
-                            <b-dropdown-item href="https://github.com/LucienShui/PasteMe/blob/master/DOCUMENT.md" target="_blank">
+                            <b-dropdown-item href="https://github.com/LucienShui/PasteMe/blob/master/doc/DOCUMENT.md" target="_blank">
                                 {{ $t('lang.nav.something.help') }}
                             </b-dropdown-item>
                             <b-dropdown-item href="https://github.com/LucienShui/PasteMe/issues" target="_blank">
@@ -79,13 +145,21 @@
 
 <script>
     import GlobalAsia from "./icons/GlobalAsia";
+    import Bell from "./icons/Bell";
     export default {
         name: "Header",
-        components: {GlobalAsia},
+        components: {GlobalAsia, Bell},
         data() {
             return {
                 key: null,
                 location: location,
+                storageData: {},
+                hide: {},
+                currentPage: 1,
+                allPage: 1,
+                perPage: 3,
+                pageData: [],
+                firstPageData: [],
             }
         },
         methods: {
@@ -96,12 +170,88 @@
             setLang(lang) {
                 this.setI18n(lang);
                 this.$cookie.set('pasteme_lang', lang, 7);
+            },
+            setRead(item) {
+                window.localStorage.setItem(`content${item}`,'true');
+                let storage = window.localStorage.getItem(`content${item}`);
+                this.$set(this.storageData,`content${item}`, storage);
+            },
+            getRead(item) {
+                return window.localStorage.getItem(`content${item}`)
+            },
+            getFirstPage() {
+                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                this.api.get(Url, {
+                    page: 1,
+                    pageSize: 3
+                }).then(res => {
+                    if (res.success) {
+                        this.firstPageData = res.data;
+                    }
+                });
+            },
+            getPage() {
+                const Url = `${this.$store.getters.config.adminApi}announcement/page`;
+                this.api.get(Url, {
+                    pageSize: 5
+                }).then(res => {
+                    if (res.success) {
+                        this.allPage = res.data
+                    }
+                });
+            },
+            getFirst() {
+                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                this.api.get(Url, {
+                    page: 1,
+                    pageSize: 5
+                }).then(res => {
+                    if (res.success) {
+                        this.pageData = res.data
+                    }
+                });
+            }
+        },
+        computed: {
+            rows:function () {
+                return this.allPage * this.perPage
+            }
+        },
+        watch: {
+            currentPage(val) {
+                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                this.api.get(Url, {
+                    page: val,
+                    pageSize: 5
+                }).then(res => {
+                    if (res.success) {
+                        this.pageData = res.data
+                    }
+                });
+            }
+        },
+        mounted() {
+            if (this.$store.getters.config.adminApi) {
+                this.getFirstPage();
+                this.getPage()
             }
         }
     }
 </script>
 
 <style scoped>
+    .width {
+        max-width: 300px;
+    }
+
+    .notRead {
+        font-weight: bold;
+    }
+
+    .isRead {
+        font-weight: normal;
+    }
+
     #modal-donate img {
         width: 100%;
     }
@@ -109,6 +259,27 @@
     @media screen and (max-width: 767px) {
         .ml-show {
             display: none;
+        }
+
+    }
+
+    @media screen and (max-width: 375px) {
+        .ml-show {
+            display: none;
+        }
+
+        .width {
+            max-width: 70px;
+        }
+    }
+
+    @media screen and (max-width: 414px) {
+        .ml-show {
+            display: none;
+        }
+
+        .width {
+            max-width: 70px;
         }
     }
 </style>

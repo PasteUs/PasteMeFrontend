@@ -1,0 +1,28 @@
+name: Node CI
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node_version: [8.x, 10.x, 12.x]
+        action: [test, run lint]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: use Node.js ${{ matrix.node_version }} ${{ matrix.action }}
+      uses: actions/setup-node@v1
+      with:
+        node_version: ${{ matrix.node_version }}
+
+    - name: npm install, build, and test
+      run: |
+        npm ci
+        npm run build --if-present
+        npm ${{ matrix.action }}
+      env:
+        CI: true
