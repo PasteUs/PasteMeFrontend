@@ -36,7 +36,7 @@ jobs:
         with:
           args: pasteme.tar.gz application/octet-stream
         env:
-          GITHUB_PASSWORD: ${{ secrets.GITHUB_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PASSWORD }}
 
       - name: publish docker
         uses: LucienShui/Publish-Docker-Github-Action@2.7.1
