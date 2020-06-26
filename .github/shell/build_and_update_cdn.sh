@@ -1,9 +1,9 @@
-#!/usr/local/env bash
+#!/usr/bin/env bash
 rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
 npm ci && \
 npm run build --if-present && \
-for each in css js img; do; eval "cp pasteme/$each/* pasteme_cdn/pasteme/$each/"; done && \
+bash -x .github/shell/copy.sh && \
 cd pasteme_cdn && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \

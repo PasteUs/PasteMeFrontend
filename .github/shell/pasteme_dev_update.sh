@@ -1,4 +1,4 @@
-#!/usr/local/env bash
+#!/usr/bin/env bash
 set -x && \
 echo 'Start updating PasteMe dev' && \
 git clone https://github.com/LucienShui/PasteMe.git -b dev PasteMeDev --recursive && \
