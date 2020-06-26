@@ -3,7 +3,7 @@ rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
 npm ci && \
 npm run build --if-present && \
-bash .github/shell/copy.sh && \
+bash -x .github/shell/copy.sh && \
 cd pasteme_cdn && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \
