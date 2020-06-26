@@ -1,11 +1,9 @@
 #!/usr/local/env bash
 rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
-echo \{\"version\": \""$(cat pasteme_cdn/version.txt)"\"\} > build.config.json && \
 npm ci && \
 npm run build --if-present && \
-rm -rf pasteme_cdn/pasteme && \
-cp -r pasteme pasteme_cdn && \
+cp -r pasteme/* pasteme_cdn/pasteme/* && \
 cd pasteme_cdn && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \
