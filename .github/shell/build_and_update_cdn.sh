@@ -3,7 +3,7 @@ rm -rf .git && \
 git clone https://github.com/PasteUs/CDN.git -b master pasteme_cdn && \
 npm ci && \
 npm run build --if-present && \
-cp -r pasteme/* pasteme_cdn/pasteme/* && \
+for each in css js img; do; eval "cp pasteme/$each/* pasteme_cdn/pasteme/$each/"; done && \
 cd pasteme_cdn && \
 git config user.name "Lucien Shui" && \
 git config user.email "lucien@lucien.ink" && \
