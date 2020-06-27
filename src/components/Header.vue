@@ -27,7 +27,7 @@
                                 {{ $t('lang.nav.lang.en') }}
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
-                        <b-nav-item-dropdown right v-if="this.$store.getters.config.adminApi">
+                        <b-nav-item-dropdown right v-if="this.$store.getters.config.api.admin">
                             <template v-slot:button-content>
                                 <Bell/>
                             </template>
@@ -180,7 +180,7 @@
                 return window.localStorage.getItem(`content${item}`)
             },
             getFirstPage() {
-                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                const Url = `${this.$store.getters.config.api.admin}announcement`;
                 this.api.get(Url, {
                     page: 1,
                     pageSize: 3
@@ -191,7 +191,7 @@
                 });
             },
             getPage() {
-                const Url = `${this.$store.getters.config.adminApi}announcement/page`;
+                const Url = `${this.$store.getters.config.api.admin}announcement/page`;
                 this.api.get(Url, {
                     pageSize: 5
                 }).then(res => {
@@ -201,7 +201,7 @@
                 });
             },
             getFirst() {
-                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                const Url = `${this.$store.getters.config.api.admin}announcement`;
                 this.api.get(Url, {
                     page: 1,
                     pageSize: 5
@@ -219,7 +219,7 @@
         },
         watch: {
             currentPage(val) {
-                const Url = `${this.$store.getters.config.adminApi}announcement`;
+                const Url = `${this.$store.getters.config.api.admin}announcement`;
                 this.api.get(Url, {
                     page: val,
                     pageSize: 5
@@ -231,7 +231,7 @@
             }
         },
         mounted() {
-            if (this.$store.getters.config.adminApi) {
+            if (this.$store.getters.config.api.admin) {
                 this.getFirstPage();
                 this.getPage()
             }

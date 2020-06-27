@@ -1,8 +1,11 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const version = require("./build.config").version;
+// 取消用 tag 来区分版本
+// const version = require("./build.config").version;
 
-let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
+// let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
+
+let webPath = '/';
 
 const cdn = {
     // 开发环境
@@ -48,7 +51,7 @@ module.exports = {
         proxy: {
             "/_api": {
                 secure: false,
-                target: "http://dev.pasteme.lucien.ink",
+                target: "http://dev.pasteme.lucien.ink/_api",
                 changeOrigin: true
             }
         }
