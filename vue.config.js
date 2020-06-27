@@ -2,10 +2,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 // 取消用 tag 来区分版本
 // const version = require("./build.config").version;
+const version = 'master';
 
-// let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
-
-let webPath = '/';
+let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
 
 const cdn = {
     // 开发环境
