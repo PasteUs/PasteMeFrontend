@@ -2,7 +2,7 @@
 
 Using Vue and Bootstrap.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/pasteus/pastemefrontend/badge)](https://www.codefactor.io/repository/github/pasteus/pastemefrontend) [![Build Status](https://travis-ci.com/PasteUs/PasteMeFrontend.svg?branch=master)](https://travis-ci.com/PasteUs/PasteMeFrontend)
+[![CodeFactor](https://www.codefactor.io/repository/github/pasteus/pastemefrontend/badge)](https://www.codefactor.io/repository/github/pasteus/pastemefrontend)
 
 ## Project setup
 
