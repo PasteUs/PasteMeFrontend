@@ -1,6 +1,11 @@
 FROM nginx:1.17
 LABEL maintainer="Lucien Shui" \
       email="lucien@lucien.ink"
+COPY init.sh /temp
+RUN cat /docker-entrypoint.sh >> /temp && \
+    mv /temp /docker-entrypoint.sh && \
+    chmod +x /docker-entrypoint.sh
+
 COPY public/conf.d/docker/nginx.conf pasteme/index.html pasteme/usr pasteme/favicon.ico /pasteme_tmp/
 RUN mv /pasteme_tmp/nginx.conf /etc/nginx/conf.d/default.conf && \
     mkdir -p /www/pasteme/usr && \
