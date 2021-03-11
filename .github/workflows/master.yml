@@ -40,7 +40,3 @@ jobs:
       - name: trigger webhook
         run: |
           curl -X POST ${{ secrets.MASTER_WEBHOOK }}
-
-      - name: update LucienShui/PasteMe@dev
-        run: |
-          GH_TOKEN=${{ secrets.GITHUB_PASSWORD }} bash .github/shell/pasteme_dev_update.sh
