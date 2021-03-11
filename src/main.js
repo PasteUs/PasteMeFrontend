@@ -27,7 +27,7 @@ Vue.component('QRCode', VueQrcode);
 
 api.get('/usr/config.json').then(response => {
     store.state.config = response;
-    return  api.get(store.state.config.api.backend, {method: "beat"});
+    return api.get(store.state.config.api.backend, {method: "beat"});
 }).then(() => {
     return new Vue({
         store,
