@@ -8,7 +8,7 @@ RUN cat /docker-entrypoint.sh >> /temp && \
     chmod +x /docker-entrypoint.sh
 
 COPY public/conf.d/docker.conf pasteme/index.html pasteme/usr pasteme/favicon.ico /pasteme_tmp/
-RUN mv /pasteme_tmp/nginx.conf /etc/nginx/conf.d/default.conf && \
+RUN mv /pasteme_tmp/docker.conf /etc/nginx/conf.d/default.conf && \
     mkdir -p /www/pasteme/usr && \
     mv /pasteme_tmp/index.html /pasteme_tmp/favicon.ico /www/pasteme/ && \
     mv /pasteme_tmp/config.example.json /config.example.json && \
