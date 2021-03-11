@@ -7,6 +7,7 @@ on:
 
 jobs:
   draft_release:
+    if: github.repository == 'PasteUs/PasteMeFrontend'
     name: Draft release
     runs-on: ubuntu-latest
     steps:
