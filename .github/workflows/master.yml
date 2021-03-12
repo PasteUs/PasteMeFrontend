@@ -66,6 +66,6 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-      - name: trigger webhook
+      - name: Trigger Webhook
         run: |
-          curl -X POST ${{ secrets.MASTER_WEBHOOK }}
+          curl -X POST ${{ secrets.BETA_WEBHOOK }}frontend
