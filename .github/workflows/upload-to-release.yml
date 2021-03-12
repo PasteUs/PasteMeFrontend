@@ -85,4 +85,4 @@ jobs:
 
       - name: Trigger Webhook
         run: |
-          curl -X POST ${{ secrets.RELEASE_WEBHOOK }}frontend
+          curl -X POST "${{ secrets.RELEASE_WEBHOOK }}frontend"
