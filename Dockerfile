@@ -2,6 +2,7 @@ FROM nginx:1.18-alpine
 LABEL maintainer="Lucien Shui" \
       email="lucien@lucien.ink"
 
+ENV TZ=Asia/Shanghai
 COPY init.sh /temp
 RUN cat /docker-entrypoint.sh >> /temp && \
     mv /temp /docker-entrypoint.sh && \
