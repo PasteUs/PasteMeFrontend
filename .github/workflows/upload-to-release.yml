@@ -27,21 +27,21 @@ jobs:
         run: |
           GH_TOKEN=${{ secrets.PRIVATE_TOKEN }} bash .github/shell/build_and_update_cdn.sh
 
-      - name: gzip
-        run: |
-          tar -czvf pasteme.tar.gz pasteme
-
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: pasteme.tar.gz application/octet-stream
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Release Version
         id: release_version
         run: |
           echo ::set-output name=tag::$(echo "${GITHUB_REF}" | sed -e "s/refs\/tags\///g" | sed -E "s/release-v?([0-9]+)\.([0-9]+)\.([0-9]+)(-[a-zA-Z]+(\.[0-9]+)?)?/\1.\2.\3\4/g")
+
+      - name: gzip
+        run: |
+          tar -czvf pasteme-${{ steps.release_version.outputs.tag }}-frontend.tar.gz pasteme
+
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: pasteme-${{ steps.release_version.outputs.tag }}-frontend.tar.gz application/octet-stream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
