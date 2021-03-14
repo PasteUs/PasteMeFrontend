@@ -54,7 +54,7 @@
             getOne() {
                 return this.api.get('https://v1.hitokoto.cn', {
                     encode: 'text'
-                });
+                }, false);
             },
             refresh() {
                 if (this.cut_down_time === 0) {
