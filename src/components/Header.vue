@@ -97,13 +97,10 @@
                             <template v-slot:button-content>
                                 {{ $t('lang.nav.something.text') }}
                             </template>
-                            <b-dropdown-item href="https://blog.lucien.ink/pasteme_log.html" target="_blank">
-                                {{ $t('lang.nav.something.log') }}
-                            </b-dropdown-item>
-                            <b-dropdown-item href="https://github.com/PasteUs/PasteMeGoBackend/blob/master/doc/API.md" target="_blank">
+                            <b-dropdown-item href="https://docs.pasteme.cn/#/developer/api" target="_blank">
                                 API
                             </b-dropdown-item>
-                            <b-dropdown-item href="https://github.com/LucienShui/PasteMe/blob/master/doc/DOCUMENT.md" target="_blank">
+                            <b-dropdown-item href="https://docs.pasteme.cn/#/documentation" target="_blank">
                                 {{ $t('lang.nav.something.help') }}
                             </b-dropdown-item>
                             <b-dropdown-item href="https://github.com/LucienShui/PasteMe/issues" target="_blank">

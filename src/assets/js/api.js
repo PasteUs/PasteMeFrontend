@@ -1,14 +1,16 @@
 import axios from 'axios'
 
 export default {
-    get: function(url, params = {}) {
+    get: function(url, params = {}, alert_error = true) {
         return new Promise((resolve, reject) => {
             axios.get(url, {
                 params: params
             }).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert('GET: ' + url + '\n' + JSON.stringify(error));
+                if (alert_error) {
+                    alert('GET: ' + url + '\n' + JSON.stringify(error));
+                }
                 reject(error);
             });
         });
