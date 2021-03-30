@@ -23,7 +23,7 @@
     "vue-github-button": "^1.3.0",
     "vue-i18n": "^8.18.2",
     "vue-router": "^3.1.3",
-    "vuex": "^3.4.0"
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@ryanlee2014/markdown-it-katex": "^1.0.4",
