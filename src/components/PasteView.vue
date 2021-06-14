@@ -28,10 +28,10 @@
                         </b-row>
                     </b-card-header>
                     <div ref="hljs">
-                        <b-card-body style="padding-bottom: 0" v-if="lang !== 'markdown' || raw.length === 1">
+                        <b-card-body class="paste-content-viewer" v-if="lang !== 'markdown' || raw.length === 1">
                             <pre><code v-bind:class="'line-numbers ' + lang" v-text="this.content"></code></pre>
                         </b-card-body>
-                        <b-card-body style="padding-bottom: 0" v-else>
+                        <b-card-body class="paste-content-viewer" v-else>
                             <div class="markdown-body">
                                 <div v-html="markdown.render(content)"></div>
                             </div>
@@ -155,5 +155,10 @@
         .markdown-body {
             padding: 15px;
         }
+    }
+
+    .paste-content-viewer {
+        padding-bottom: 0;
+        tab-size: 4;
     }
 </style>
