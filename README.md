@@ -2,8 +2,6 @@
 
 Using Vue and Bootstrap.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/pasteus/pastemefrontend/badge)](https://www.codefactor.io/repository/github/pasteus/pastemefrontend)
-
 ## Project setup
 
 ```bash
