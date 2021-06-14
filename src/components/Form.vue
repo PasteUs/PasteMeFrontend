@@ -33,7 +33,7 @@
                             <b-form-textarea v-model="form.content" rows="10"
                                              :placeholder="$t('lang.form.textarea.placeholder.' +
                                              ($store.state.read_once ? 'read_once' : 'write_something_here'))"
-                                             required no-resize></b-form-textarea>
+                                             required no-resize style="tab-size: 4;"></b-form-textarea>
                         </b-form-group>
                         <b-form-group>
                             <b-checkbox-group switches>
