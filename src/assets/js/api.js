@@ -4,7 +4,10 @@ export default {
     get: function(url, params = {}, alert_error = true) {
         return new Promise((resolve, reject) => {
             axios.get(url, {
-                params: params
+                params: params,
+                headers: {
+                    'Accept': 'application/json'
+                }
             }).then(response => {
                 resolve(response.data);
             }).catch(error => {

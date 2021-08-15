@@ -63,7 +63,7 @@
         mixins: [stateMixin],
         data() {
             return {
-                base_url: location.origin + '/',
+                base_url: location.origin + '#',
                 copy_btn_status: 0,
                 popover_show: false,
             }
