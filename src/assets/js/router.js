@@ -26,7 +26,7 @@ export default new Router({
             component: Home
         },
         {
-            path: "/:namespace/:key([a-zA-Z0-9]{3,8})",
+            path: "/:key([a-zA-Z0-9]{3,8})",
             name: "view",
             component: View
         },

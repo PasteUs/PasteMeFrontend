@@ -75,13 +75,14 @@ export default {
     methods: {
         onSubmit() {
             this.api.post(
-                `${this.$store.getters.config.api.backend}v3/paste`,
+                `${this.$store.getters.config.api.backend}v3/paste/`,
                 this.form
             ).then(response => {
-                alert(JSON.stringify(response));
                 if (response.status === 201) {
                     this.updateView("success");
                     this.updateKey(response.key);
+                } else {
+                    // TODO
                 }
             })
         }

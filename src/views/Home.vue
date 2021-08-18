@@ -9,10 +9,6 @@ import stateMixins from "../assets/js/mixins/stateMixin";
 import {mapGetters} from "vuex"
 import Form from "../components/Form"
 import Success from "../components/Success"
-import PasswordAuth from "../components/PasswordAuth"
-import PasteView from "../components/PasteView";
-import Loading from "../components/Loading";
-import ManualDeleted from "../components/ManualDeleted";
 
 export default {
     name: "Home",
@@ -27,54 +23,13 @@ export default {
             "content"
         ])
     },
-    watch: {
-        "$route.params.key": function () {
-            this.init();
-        }
-    },
     mounted() {
-        this.init();
-    },
-    methods: {
-        init() {
-            this.$store.commit("init");
-            this.updateView("home");
-            /*
-            if (this.$route.params.key === "") {
-                this.updateView("home");
-            } else {
-                this.updateView("loading");
-                this.api.get(
-                    `${this.$store.getters.config.api.backend}v3/${this.$route.params.namespace}/${this.$route.params.key}`
-                ).then(response => {
-                    if (response.status === 200) {
-                        this.updateView("paste_view");
-                        this.updateContent(response.content);
-                        this.updateLang(response.lang === "plain" ? "plaintext" : response.lang);
-                    } else if (response.status === 401) {
-                        this.updateView("password_auth");
-                    } else if (response.status === 403) {
-                        this.updateView("manual_deleted");
-                    } else if (response.status === 404 && this.$route.params.key.search("[a-zA-Z]{1}") !== -1) {
-                        this.$store.commit("updateMode", {
-                            read_once: true,
-                        });
-                        this.updateView("home");
-                    } else {
-                        this.$router.push("What_are_you_nong_sha_lei?");
-                    }
-                });
-            }
-             */
-        },
+        this.$store.commit("init");
+        this.updateView("home");
     },
     components: {
         "home": Form,
         "success": Success,
-        "password_auth": PasswordAuth,
-        "paste_view": PasteView,
-        "loading": Loading,
-        "manual_deleted": ManualDeleted
     }
 }
 </script>

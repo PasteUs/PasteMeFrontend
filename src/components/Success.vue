@@ -16,13 +16,13 @@
                     </li>
                     <li>{{ $t('lang.success.ul.li[1].browser') }}
                         <a v-b-tooltip.hover="$t('lang.success.ul.li[1].tooltip')"
-                           :href="base_url + key"
+                           :href="paste_url"
                            target="_blank">
-                            {{ base_url + key }}
+                            {{ paste_url }}
                         </a>&nbsp;<b-badge
                                 variant="info"
                                 class="badge-fixed"
-                                :data-clipboard-text="base_url + key"
+                                :data-clipboard-text="paste_url"
                                 href="#">
                             {{ $t('lang.success.badge.' +
                             (copy_btn_status > 0 ? 'success' : (copy_btn_status === 0 ?  'copy' : 'fail')))  }}
@@ -49,7 +49,7 @@
                 placement="auto"
                 triggers="hover">
             <div class="text-center">
-                <QRCode :value="this.base_url + this.key" :options="{ width: 168 }"></QRCode>
+                <QRCode :value="paste_url" :options="{ width: 168 }"></QRCode>
             </div>
         </b-popover>
     </b-row>
@@ -63,15 +63,16 @@
         mixins: [stateMixin],
         data() {
             return {
-                base_url: location.origin + '#',
+                base_url: location.origin,
                 copy_btn_status: 0,
                 popover_show: false,
             }
         },
         computed: {
-            ...mapGetters([
-                "key"
-            ])
+            ...mapGetters(['key']),
+            paste_url: function () {
+                return `${this.base_url}#${this.key}`
+            }
         },
         mounted() {
             let clipboard = new this.clipboard('.badge-fixed');
@@ -91,11 +92,7 @@
         },
         methods: {
             goHome() {
-                if (this.$route.params.key !== '') {
-                    this.$router.push('/');
-                } else {
-                    this.updateView("home");
-                }
+                this.updateView("home");
             }
         }
     }
