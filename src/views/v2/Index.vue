@@ -5,16 +5,16 @@
 </template>
 
 <script>
-    import stateMixins from "../assets/js/mixins/stateMixin";
+    import stateMixins from "../../assets/js/mixins/stateMixin";
     import {mapGetters} from "vuex"
-    import Form from "../components/Form"
-    import Success from "../components/Success"
-    import PasswordAuth from "../components/PasswordAuth"
-    import PasteView from "../components/PasteView";
-    import Loading from "../components/Loading";
-    import ManualDeleted from "../components/ManualDeleted";
+    import Form from "../../components/Form"
+    import Success from "../../components/Success"
+    import PasswordAuth from "../../components/PasswordAuth"
+    import PasteView from "../../components/PasteView";
+    import Loading from "../../components/Loading";
+    import ManualDeleted from "../../components/ManualDeleted";
     export default {
-        name: "Index",
+        name: "v2Index",
         mixins: [stateMixins],
         data() {
             return {}
@@ -41,7 +41,7 @@
                     this.updateView("home");
                 } else {
                     this.updateView("loading");
-                    this.api.get(this.$store.getters.config.api.backend + this.$route.params.key, {
+                    this.api.get(`${this.$store.getters.config.api.backend}v2/${this.$route.params.key}`, {
                         json: true
                     }).then(response => {
                         if (response.status === 200) {

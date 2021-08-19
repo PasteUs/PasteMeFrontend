@@ -36,15 +36,15 @@
                                              required no-resize style="tab-size: 4;"></b-form-textarea>
                         </b-form-group>
                         <b-form-group>
-                            <b-checkbox-group switches>
-                                <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'"
-                                          style="margin-right: .65em">
-                                    {{ $t('lang.form.submit') }}
-                                </b-button>
-                                <b-form-checkbox v-model="read_once" v-show="!$store.state.read_once" switch>
-                                    {{ $t('lang.form.checkbox') }}
-                                </b-form-checkbox>
-                            </b-checkbox-group>
+                            <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'"
+                                      style="margin-right: .65em">
+                                {{ $t('lang.form.submit') }}
+                            </b-button>
+                            <b-form-checkbox
+                                v-model="form.self_destruct" v-show="!$store.state.read_once" inline="inline"
+                                :disabled="$store.state.namespace === 'nobody'" checked="checked" switch>
+                                {{ $t('lang.form.checkbox') }}
+                            </b-form-checkbox>
                         </b-form-group>
                     </b-col>
                 </b-row>
@@ -55,39 +55,39 @@
 </template>
 
 <script>
-    import stateMixins from "../assets/js/mixins/stateMixin";
-    export default {
-        name: "Form",
-        mixins: [stateMixins],
-        data() {
-            return {
-                form: {
-                    lang: 'plain',
-                    content: null,
-                    password: null,
-                },
-                read_once: []
-            }
-        },
-        methods: {
-            onSubmit() {
-                let key = "";
-                if (this.$route.params.key !== '') {
-                    key = this.$route.params.key;
-                } else if (this.read_once.length > 0) {
-                    key = "once"
+import stateMixins from "../assets/js/mixins/stateMixin";
+
+export default {
+    name: "Form",
+    mixins: [stateMixins],
+    data() {
+        return {
+            form: {
+                lang: 'plain',
+                content: null,
+                password: null,
+                self_destruct: true,
+                expire_type: 'count',
+                expiration: 1
+            },
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.api.post(
+                `${this.$store.getters.config.api.backend}v3/paste/`,
+                this.form
+            ).then(response => {
+                if (response.status === 201) {
+                    this.updateView("success");
+                    this.updateKey(response.key);
+                } else {
+                    // TODO
                 }
-                const sendArgs = [`${this.$store.getters.config.api.backend}${key}`, this.form];
-                const sendFunc = key === "" || key === "once" ? this.api.post : this.api.put;
-                sendFunc(...sendArgs).then(response => {
-                    if (response.status === 201) {
-                        this.updateView("success");
-                        this.updateKey(response.key);
-                    }
-                });
-            }
+            })
         }
     }
+}
 </script>
 
 <style scoped>
