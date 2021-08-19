@@ -1,5 +1,9 @@
 # PasteMe Frontend
 
+[![Node CI](https://github.com/PasteUs/PasteMeFrontend/actions/workflows/nodejs.yml/badge.svg)](https://github.com/PasteUs/PasteMeFrontend/actions/workflows/nodejs.yml)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/PasteUs/PasteMeFrontend?color=white&label=latest&sort=semver)](https://github.com/PasteUs/PasteMeFrontend/releases)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/pasteme/frontend?label=Docker%20Hub&sort=semver)](https://hub.docker.com/r/pasteme/frontend)
+
 Using Vue and Bootstrap.
 
 ## Project setup
