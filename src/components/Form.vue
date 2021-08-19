@@ -67,8 +67,8 @@ export default {
                 content: null,
                 password: null,
                 self_destruct: true,
-                expire_type: 'count',
-                expiration: 1
+                expire_count: 1,
+                expire_minute: 5
             },
         }
     },
