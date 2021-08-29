@@ -22,7 +22,8 @@ export default {
         ...mapGetters([
             "view",
             "lang",
-            "content"
+            "content",
+            "config"
         ])
     },
     watch: {
@@ -38,9 +39,8 @@ export default {
             this.$store.commit("init");
 
             this.updateView("loading");
-            this.api.get(
-                `${this.$store.getters.config.api.backend}v3/paste/${this.$route.params.key}`
-            ).then(response => {
+            let url = this.api.join(this.config.api.backend, 'paste', this.$route.params.key)
+            this.api.get(url).then(response => {
                 if (response.status === 200) {
                     this.updateView("paste_view");
                     this.updateContent(response.content);

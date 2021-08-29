@@ -48,10 +48,9 @@ const cdn = {
 module.exports = {
     devServer: {
         proxy: {
-            "/api/": {
+            "/api/v3/": {
                 secure: false,
-                // target: "http://dev.pasteme.lucien.ink/_api",
-                target: "http://localhost:8000",
+                target: "http://localhost:8000/api/v3/",
                 changeOrigin: true
             }
         }

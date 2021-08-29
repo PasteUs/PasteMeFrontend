@@ -1,6 +1,5 @@
 import Vue from "vue"
 import Router from "vue-router"
-import v2Index from "../../views/v2/Index";
 import View from "../../views/View";
 import Home from "../../views/Home";
 // eslint-disable-next-line no-unused-vars
@@ -29,11 +28,6 @@ export default new Router({
             path: "/:key([a-zA-Z0-9]{3,8})",
             name: "view",
             component: View
-        },
-        {
-            path: "/v2/:key(0{0}|[a-zA-Z0-9]{3,8})",
-            name: "v2index",
-            component: v2Index
         },
         {
             path: "/What_are_you_nong_sha_lei?",
