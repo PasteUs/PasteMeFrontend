@@ -32,7 +32,7 @@
         },
         methods: {
             onSubmit() {
-                const sendUrl = `${this.$store.getters.config.api.backend}v3/paste/${this.$route.params.key}`;
+                const sendUrl = this.api.join(this.$store.getters.config.api.backend, 'paste', this.$route.params.key);
                 this.api.get(sendUrl, this.form).then(({status, content, lang}) => {
                     if (status === 200) {
                         this.updateContent(content);

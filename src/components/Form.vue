@@ -75,7 +75,7 @@ export default {
     methods: {
         onSubmit() {
             this.api.post(
-                `${this.$store.getters.config.api.backend}v3/paste/`,
+                this.api.join(this.$store.getters.config.api.backend, 'paste'),
                 this.form
             ).then(response => {
                 if (response.status === 201) {

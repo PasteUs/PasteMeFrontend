@@ -1,7 +1,11 @@
 import axios from 'axios'
 
+function getLast(value) {
+    return value[value.length - 1];
+}
+
 export default {
-    get: function(url, params = {}, alert_error = true) {
+    get: function (url, params = {}, alert_error = true) {
         return new Promise((resolve, reject) => {
             axios.get(url, {
                 params: params,
@@ -18,7 +22,7 @@ export default {
             });
         });
     },
-    post: function(url, params = {}) {
+    post: function (url, params = {}) {
         return new Promise((resolve, reject) => {
             axios.post(url, params).then(response => {
                 resolve(response.data);
@@ -28,7 +32,7 @@ export default {
             });
         });
     },
-    put: function(url, params = {}) {
+    put: function (url, params = {}) {
         return new Promise((resolve, reject) => {
             axios.put(url, params).then(response => {
                 resolve(response.data);
@@ -37,5 +41,9 @@ export default {
                 reject(error);
             });
         });
+    },
+    join: function (...args) {
+        let result = args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/");
+        return result + (getLast(getLast(args)) === '/' ? '/' : '');
     }
 }
