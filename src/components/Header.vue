@@ -8,7 +8,7 @@
                     <b-nav-form @submit.prevent="onSubmit">
                         <b-input-group v-bind:prepend="location.host + '/'">
                             <b-form-input :placeholder="$t('lang.nav.form.placeholder')" v-model="key" maxlength="8"
-                                    autocomplete="off" required id="nav_input"></b-form-input>
+                                    autocomplete="off" required id="nav_input" type="search"></b-form-input>
                             <b-input-group-append>
                                 <b-button type="submit" variant="primary"
                                           required="required">{{ $t('lang.nav.form.button') }}</b-button>

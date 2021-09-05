@@ -5,11 +5,11 @@ export const lang = {
     form: {
         input: [
             {
-                prepend: 'Format'
+                prepend: 'Syntax'
             },
             {
-                prepend: 'Password',
-                placeholder: 'Blank for disabled'
+                prepend: 'Passwd',
+                placeholder: 'Empty disabled'
             }
         ],
         textarea: {

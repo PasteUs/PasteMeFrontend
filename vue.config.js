@@ -50,7 +50,7 @@ module.exports = {
         proxy: {
             "/api/v3/": {
                 secure: false,
-                target: "http://localhost:8000/api/v3/",
+                target: "http://dev.pasteme.lucien.ink/",
                 changeOrigin: true
             }
         }
