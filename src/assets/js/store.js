@@ -10,6 +10,7 @@ export default new Vuex.Store({
         not_found: false,
         config: null,
         view: "loading",
+        namespace: 'nobody',
         key: "",
         content: "",
         lang: ""

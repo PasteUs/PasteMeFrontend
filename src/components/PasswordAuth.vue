@@ -32,10 +32,8 @@
         },
         methods: {
             onSubmit() {
-                const sendUrl = `${this.$store.getters.config.api.backend}${this.$route.params.key},${this.form.password}`;
-                this.api.get(sendUrl, {
-                    json: 'true'
-                }).then(({status, content, lang}) => {
+                const sendUrl = this.api.join(this.$store.getters.config.api.backend, 'paste', this.$route.params.key);
+                this.api.get(sendUrl, this.form).then(({status, content, lang}) => {
                     if (status === 200) {
                         this.updateContent(content);
                         this.updateLang(lang === "plain" ? "plaintext" : lang);

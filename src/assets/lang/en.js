@@ -5,11 +5,11 @@ export const lang = {
     form: {
         input: [
             {
-                prepend: 'Format'
+                prepend: 'Syntax'
             },
             {
-                prepend: 'Password',
-                placeholder: 'Blank to disable encryption'
+                prepend: 'Passwd',
+                placeholder: 'Empty disabled'
             }
         ],
         textarea: {
@@ -82,12 +82,12 @@ export const lang = {
         },
         more: 'More',
         donate: 'Donation',
-        beg: '给个 Star 好不啦'
+        beg: 'Star'
     },
     not_found: {
         content: {
-            title: '您访问的页面没有找到',
-            go_home: '返回主页'
+            title: 'Page not found',
+            go_home: 'Home'
         },
         footer: {
             text: '如果您想了解更多信息，则可以稍后在线搜索此错误：Error 404 Girlfriend Not Found',

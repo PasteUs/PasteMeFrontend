@@ -22,7 +22,7 @@ export const lang = {
             plain: '纯文本'
         },
         submit: '保存',
-        checkbox: '阅后即焚'
+        checkbox: '自我销毁'
     },
     success: {
         h2: '保存成功',

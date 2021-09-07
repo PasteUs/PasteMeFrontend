@@ -1,6 +1,6 @@
 {
   "api": {
-    "backend": "/_api/backend/",
+    "backend": "/api/v3/",
     "admin": ""
   },
   "footer": [

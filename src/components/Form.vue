@@ -23,6 +23,10 @@
                             <b-input-group :prepend="$t('lang.form.input[1].prepend')">
                                 <b-form-input type="password" autocomplete="off" v-model="form.password"
                                               :placeholder="$t('lang.form.input[1].placeholder')"></b-form-input>
+                                <b-input-group-append is-text>
+                                    <b-form-checkbox switch class="mr-n2" :checked="form.password !== ''" disabled>
+                                    </b-form-checkbox>
+                                </b-input-group-append>
                             </b-input-group>
                         </b-form-group>
                     </b-col>
@@ -35,17 +39,33 @@
                                              ($store.state.read_once ? 'read_once' : 'write_something_here'))"
                                              required no-resize style="tab-size: 4;"></b-form-textarea>
                         </b-form-group>
-                        <b-form-group>
-                            <b-checkbox-group switches>
-                                <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'"
-                                          style="margin-right: .65em">
-                                    {{ $t('lang.form.submit') }}
-                                </b-button>
-                                <b-form-checkbox v-model="read_once" v-show="!$store.state.read_once" switch>
-                                    {{ $t('lang.form.checkbox') }}
-                                </b-form-checkbox>
-                            </b-checkbox-group>
-                        </b-form-group>
+                        <div class="form-inline"> <!-- 如果用 b-form-group 的话，会有 1.78 px 的偏移 -->
+                            <b-button type="submit" :variant="$store.state.read_once ? 'dark' : 'primary'"
+                                      style="margin-right: .65em">
+                                {{ $t('lang.form.submit') }}
+                            </b-button>
+                            <b-form-checkbox
+                                v-model="form.self_destruct" v-show="!$store.state.read_once" inline
+                                :disabled="nobody" checked="checked" switch>
+                                {{ $t('lang.form.checkbox') }}
+                            </b-form-checkbox>
+                            <div class="d-inline-flex">
+                                <div v-show="form.self_destruct" class="form-inline">
+                                    <b-input-group prepend="浏览" append="次">
+                                        <b-form-input type="number" :min="boundary.count.min" :max="boundary.count.max"
+                                                      v-model.number="form.expire_count"
+                                                      :disabled="nobody"></b-form-input>
+                                    </b-input-group>
+                                    <a>&nbsp;or&nbsp;</a>
+                                    <b-input-group append="分钟后">
+                                        <b-form-input type="number" :min="boundary.minute.min"
+                                                      :max="boundary.minute.max"
+                                                      v-model.number="form.expire_minute"
+                                                      :disabled="nobody"></b-form-input>
+                                    </b-input-group>
+                                </div>
+                            </div>
+                        </div>
                     </b-col>
                 </b-row>
             </b-form>
@@ -55,39 +75,54 @@
 </template>
 
 <script>
-    import stateMixins from "../assets/js/mixins/stateMixin";
-    export default {
-        name: "Form",
-        mixins: [stateMixins],
-        data() {
-            return {
-                form: {
-                    lang: 'plain',
-                    content: null,
-                    password: null,
+import stateMixins from "../assets/js/mixins/stateMixin";
+
+export default {
+    name: "Form",
+    mixins: [stateMixins],
+    data() {
+        return {
+            boundary: {
+                count: {
+                    min: 1,
+                    max: 3
                 },
-                read_once: []
-            }
-        },
-        methods: {
-            onSubmit() {
-                let key = "";
-                if (this.$route.params.key !== '') {
-                    key = this.$route.params.key;
-                } else if (this.read_once.length > 0) {
-                    key = "once"
+                minute: {
+                    min: 1,
+                    max: 60
+                },
+            },
+            form: {
+                lang: 'plain',
+                content: '',
+                password: '',
+                self_destruct: true,
+                expire_count: 1,
+                expire_minute: 5
+            },
+        }
+    },
+    computed: {
+        nobody: function () {
+            return this.$store.state.namespace === 'nobody'
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.api.post(
+                this.api.join(this.$store.getters.config.api.backend, 'paste'),
+                this.form
+            ).then(response => {
+                if (response.status === 201) {
+                    this.updateView("success");
+                    this.updateKey(response.key);
+                } else {
+                    alert(response.status + ': ' + response.message)
                 }
-                const sendArgs = [`${this.$store.getters.config.api.backend}${key}`, this.form];
-                const sendFunc = key === "" || key === "once" ? this.api.post : this.api.put;
-                sendFunc(...sendArgs).then(response => {
-                    if (response.status === 201) {
-                        this.updateView("success");
-                        this.updateKey(response.key);
-                    }
-                });
-            }
+            })
         }
     }
+}
 </script>
 
 <style scoped>

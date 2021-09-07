@@ -1,6 +1,7 @@
 import Vue from "vue"
 import Router from "vue-router"
-import Index from "../../views/Index";
+import View from "../../views/View";
+import Home from "../../views/Home";
 // eslint-disable-next-line no-unused-vars
 const emptyFunc = (arg) => {};
 // warn if in developing env
@@ -15,13 +16,18 @@ Router.prototype.push = function push(location, onResolve, onReject) {
 Vue.use(Router);
 
 export default new Router({
-    mode: "history",
+    mode: "hash",
     base: "/",
     routes: [
         {
-            path: "/:key(0{0}|[a-zA-Z0-9]{3,8})",
-            name: "index",
-            component: Index
+            path: "/",
+            name: "home",
+            component: Home
+        },
+        {
+            path: "/:key([a-zA-Z0-9]{3,8})",
+            name: "view",
+            component: View
         },
         {
             path: "/What_are_you_nong_sha_lei?",
