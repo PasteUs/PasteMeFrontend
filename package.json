@@ -37,7 +37,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.2.3",
     "html-webpack-plugin": "^4.5.2",
-    "markdown-it-anchor": "^5.2.4",
+    "markdown-it-anchor": "^8.3.0",
     "style-loader": "^0.23.1",
     "uslug": "^1.0.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "^1.4.0",
