@@ -28,11 +28,11 @@
   "devDependencies": {
     "@ryanlee2014/markdown-it-katex": "^1.0.4",
     "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^3.1.1",
     "@vue/cli-service": "^4.5.13",
     "acorn": "^8.5.0",
     "babel-eslint": "^10.0.3",
-    "compression-webpack-plugin": "^2.0.0",
+    "compression-webpack-plugin": "^8.0.1",
     "css-loader": "^5.2.7",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^7.17.0",
