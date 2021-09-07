@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap-vue": "^2.0.0-rc.28",
     "clipboard": "^2.0.4",
     "core-js": "^2.6.9",
