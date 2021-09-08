@@ -26,7 +26,8 @@ class MockBackend:
     def create(self, body: dict) -> dict:
         key = self.get_key()
         body['create_time'] = datetime.now()
-        self.database[key] = body
+        with self.db_lock:
+            self.database[key] = body
         return {
             'status': 201,
             'key': key
@@ -86,7 +87,7 @@ def get(key: str):
 
 
 def main():
-    app.run('127.0.0.1', 3000)
+    app.run('127.0.0.1', 8000)
 
 
 if __name__ == '__main__':

@@ -1,9 +1,52 @@
+import logging
+import multiprocessing
+import os
+import signal
+import subprocess
+import time
 import unittest
 
-from e2e_test import PasteMeDriver
+import requests
+
+from e2e_test import PasteMeDriver, reverse_proxy, backend
+
+logging.getLogger("requests").setLevel(logging.CRITICAL)
+
+
+def check() -> bool:
+    try:
+        response = requests.get('http://localhost:3000')
+        return response.status_code == 200
+    except (Exception, ):
+        pass
 
 
 class PasteMeEndToEndUnitTest(unittest.TestCase):
+    process = subprocess.Popen('npm run serve', subprocess.PIPE, shell=True, preexec_fn=os.setsid)
+    api = multiprocessing.Process(target=backend)
+
+    proxy = multiprocessing.Process(target=reverse_proxy)
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.proxy.start()
+        cls.api.start()
+
+        time.sleep(3)
+
+        while not check():
+            pass
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        os.killpg(os.getpgid(cls.process.pid), signal.SIGTERM)
+
+        cls.proxy.terminate()
+        cls.api.terminate()
+
+        cls.proxy.join()
+        cls.api.join()
+
     def main(self, password: str = None):
         content = 'print("Hello World!")'
 
