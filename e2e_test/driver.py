@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class PasteMe:
+class PasteMeDriver:
     def __init__(self, headless: bool = False, timeout: int = 3):
         self.timeout = timeout
         options = webdriver.ChromeOptions()
@@ -34,6 +34,9 @@ class PasteMe:
             self.browser.close()
         except AttributeError:
             pass
+
+    def screenshot(self, img_path: str):
+        self.browser.get_screenshot_as_file(img_path)
 
     def open(self, url):
         self.browser.get(url)

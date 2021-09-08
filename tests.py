@@ -1,15 +1,14 @@
-import time
 import unittest
 
-from e2e_test import PasteMe
+from e2e_test import PasteMeDriver
 
 
 class PasteMeEndToEndUnitTest(unittest.TestCase):
     def main(self, password: str = None):
         content = 'print("Hello World!")'
 
-        pasteme = PasteMe(headless=True)
-        pasteme.open('http://localhost:8080')
+        pasteme = PasteMeDriver(headless=True)
+        pasteme.open('http://localhost:3000')
 
         language_selector = pasteme.get('//a[@role = "button"]')
         language_selector.click()
@@ -61,7 +60,6 @@ class PasteMeEndToEndUnitTest(unittest.TestCase):
             password_submit_button.click()
 
         line_1 = pasteme.get('//td[@class = "hljs-ln-line hljs-ln-code" and @data-line-number="1"]')
-
         self.assertEqual(line_1.get_attribute('innerText'), content)
 
     def test_save_with_password(self):
