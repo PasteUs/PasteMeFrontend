@@ -19,7 +19,7 @@ jobs:
       with:
         node_version: ${{ matrix.node_version }}
 
-    - name: npm install, build, and test
+    - name: npm install, build, and ${{ matrix.action }}
       run: |
         npm ci
         npm run build --if-present

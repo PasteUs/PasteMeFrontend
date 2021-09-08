@@ -1,0 +1,36 @@
+name: End to End Testing
+
+on: [pull_request]
+
+jobs:
+
+  e2e_unittest:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node_version: [12.x]
+
+    name: End to End Unit Testing
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node_version: ${{ matrix.node_version }}
+
+      - name: npm install
+        run: |
+          npm ci
+        env:
+          CI: true
+
+      - name: pip install
+        run: |
+          pip3 install -r e2e_test/requirements.txt
+
+      - name: python unittest
+        run: |
+          python3 -m unittest tests.PasteMeEndToEndUnitTest
