@@ -15,6 +15,7 @@ logging.getLogger("requests").setLevel(logging.CRITICAL)
 
 def check() -> bool:
     try:
+        time.sleep(3)
         response = requests.get('http://localhost:3000')
         return response.status_code == 200
     except (Exception, ):
@@ -31,8 +32,6 @@ class PasteMeEndToEndUnitTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.proxy.start()
         cls.api.start()
-
-        time.sleep(3)
 
         while not check():
             pass

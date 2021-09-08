@@ -37,7 +37,7 @@ jobs:
       matrix:
         node_version: [12.x]
 
-    name: End to End Testing
+    name: E2E Testing
 
     steps:
       - uses: actions/checkout@v1
@@ -49,6 +49,7 @@ jobs:
       - name: npm install
         run: |
           npm ci
+          cp public/usr/config.example.json public/usr/config.json
         env:
           CI: true
 
