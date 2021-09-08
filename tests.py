@@ -1,25 +1,26 @@
-import logging
 import multiprocessing
 import os
 import signal
 import subprocess
 import time
 import unittest
-
-import requests
+import socket
 
 from e2e_test import PasteMeDriver, reverse_proxy, backend
 
-logging.getLogger("requests").setLevel(logging.CRITICAL)
+
+def check_port(port) -> True:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        return sock.connect_ex(('127.0.0.1', port)) == 0
 
 
 def check() -> bool:
-    try:
-        time.sleep(3)
-        response = requests.get('http://localhost:3000')
-        return response.status_code == 200
-    except (Exception, ):
-        pass
+    time.sleep(3)
+    for port in [8080, 8000, 3000]:
+        if not check_port(port):
+            print(f'port {port} not ready')
+            return False
+    return True
 
 
 class PasteMeEndToEndUnitTest(unittest.TestCase):
@@ -33,12 +34,22 @@ class PasteMeEndToEndUnitTest(unittest.TestCase):
         cls.proxy.start()
         cls.api.start()
 
-        while not check():
-            pass
+        cnt = 0
+        retry = 10
+
+        while not check() and cnt < retry:
+            cnt += 1
+
+        if cnt == retry:
+            cls.tearDownClass()
+            raise ChildProcessError
 
     @classmethod
     def tearDownClass(cls) -> None:
-        os.killpg(os.getpgid(cls.process.pid), signal.SIGTERM)
+        try:
+            os.killpg(os.getpgid(cls.process.pid), signal.SIGTERM)
+        except ProcessLookupError:
+            pass
 
         cls.proxy.terminate()
         cls.api.terminate()
