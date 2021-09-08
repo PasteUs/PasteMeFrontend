@@ -25,7 +25,7 @@ class PasteMeDriver:
         options.add_experimental_option("prefs", prefs)
         options.add_experimental_option('excludeSwitches', ['enable-automation'])
 
-        executable_path = os.environ.get('CHROMEWEBDRIVER')
+        executable_path = os.path.join(os.environ.get('CHROMEWEBDRIVER'), 'chromedriver')
         assert executable_path is not None, 'no chrome web driver founded in ENV'
         self.browser = webdriver.Chrome(executable_path=executable_path, options=options)
 
