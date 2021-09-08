@@ -110,7 +110,7 @@ export default {
     methods: {
         onSubmit() {
             this.api.post(
-                this.api.join(this.$store.getters.config.api.backend, 'paste'),
+                this.api.join(this.$store.getters.config.api.backend, 'paste/'),
                 this.form
             ).then(response => {
                 if (response.status === 201) {
