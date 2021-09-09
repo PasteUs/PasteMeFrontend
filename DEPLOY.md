@@ -2,7 +2,6 @@
 
 1. Download and unzip `pasteme.tar.gz` from [release](https://github.com/PasteUs/PasteMeFrontend/releases/latest)
 2. Edit `usr/config.json`
-3. Rewrite all requests to `index.html`
 
 ## 1. usr/config.json
 
@@ -21,7 +20,7 @@
 ```json
 {
   "api": {
-    "backend": "/_api/backend/",
+    "backend": "/api/v3/",
     "admin": ""
   },
   "footer": [
@@ -34,15 +33,5 @@
       "text": "鲁ICP备18007563号"
     }
   ]
-}
-```
-
-## 2. Rewrite (required)
-
-### 2.1 Nginx
-
-```
-location / {
-    try_files $uri $uri/ /index.html;
 }
 ```
