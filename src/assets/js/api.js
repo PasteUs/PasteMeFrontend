@@ -5,7 +5,6 @@ function getLast(value) {
 }
 
 function errorHandler(error, alert_error = true) {
-    console.error(JSON.stringify(error));
     if (alert_error) {
         alert(JSON.stringify({
             message: error.message,
