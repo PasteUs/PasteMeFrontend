@@ -8,7 +8,13 @@ export default new Vuex.Store({
     state: {
         read_once: false,
         not_found: false,
-        config: null,
+        config: {
+            api: {
+                backend: '',
+                admin: ''
+            },
+            footer: []
+        },
         view: "loading",
         namespace: 'nobody',
         key: "",

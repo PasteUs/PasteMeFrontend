@@ -4,6 +4,18 @@ function getLast(value) {
     return value[value.length - 1];
 }
 
+function errorHandler(error, alert_error = true) {
+    console.error(JSON.stringify(error));
+    if (alert_error) {
+        alert(JSON.stringify({
+            message: error.message,
+            method: error.config.method,
+            url: error.config.url,
+            params: error.config.params
+        }))
+    }
+}
+
 export default {
     get: function (url, params = {}, alert_error = true) {
         return new Promise((resolve, reject) => {
@@ -15,9 +27,7 @@ export default {
             }).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                if (alert_error) {
-                    alert('GET: ' + url + '\n' + JSON.stringify(error));
-                }
+                errorHandler(error, alert_error);
                 reject(error);
             });
         });
@@ -27,7 +37,7 @@ export default {
             axios.post(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert('POST: ' + url + '\n' + JSON.stringify(error));
+                errorHandler(error);
                 reject(error);
             });
         });
@@ -37,7 +47,7 @@ export default {
             axios.put(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                alert('PUT: ' + url + '\n' + JSON.stringify(error));
+                errorHandler(error);
                 reject(error);
             });
         });
@@ -45,5 +55,5 @@ export default {
     join: function (...args) {
         let result = args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/");
         return result + (getLast(getLast(args)) === '/' ? '/' : '');
-    }
+    },
 }

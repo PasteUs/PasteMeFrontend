@@ -112,12 +112,12 @@ export default {
             this.api.post(
                 this.api.join(this.$store.getters.config.api.backend, 'paste/'),
                 this.form
-            ).then(response => {
-                if (response.status === 201) {
+            ).then(({status, key, message}) => {
+                if (status === 201) {
                     this.updateView("success");
-                    this.updateKey(response.key);
+                    this.updateKey(key);
                 } else {
-                    alert(response.status + ': ' + response.message)
+                    alert(status + ': ' + message)
                 }
             })
         }
