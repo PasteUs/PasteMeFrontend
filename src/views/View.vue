@@ -50,8 +50,6 @@ export default {
                 } else {
                     this.$router.push("What_are_you_nong_sha_lei?");
                 }
-            }).catch(error => {
-                console.log(error)
             });
         },
     },
