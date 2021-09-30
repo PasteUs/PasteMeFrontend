@@ -4,16 +4,6 @@ function getLast(value) {
     return value[value.length - 1];
 }
 
-function errorHandler(error, alert_error = true) {
-    if (alert_error) {
-        alert(JSON.stringify({
-            message: error.message,
-            method: error.config.method,
-            url: error.config.url,
-            params: error.config.params
-        }))
-    }
-}
 
 export default {
     get: function (url, params = {}, alert_error = true) {
@@ -26,7 +16,7 @@ export default {
             }).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                errorHandler(error, alert_error);
+                this.errorHandler(error, alert_error);
                 reject(error);
             });
         });
@@ -36,7 +26,7 @@ export default {
             axios.post(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                errorHandler(error);
+                this.errorHandler(error);
                 reject(error);
             });
         });
@@ -46,7 +36,7 @@ export default {
             axios.put(url, params).then(response => {
                 resolve(response.data);
             }).catch(error => {
-                errorHandler(error);
+                this.errorHandler(error);
                 reject(error);
             });
         });
@@ -55,4 +45,14 @@ export default {
         let result = args.map(pathPart => pathPart.replace(/(^\/|\/$)/g, "")).join("/");
         return result + (getLast(getLast(args)) === '/' ? '/' : '');
     },
+    errorHandler: function (error, alert_error = true) {
+        if (alert_error) {
+            alert(JSON.stringify({
+                message: error.message,
+                method: error.config.method,
+                url: error.config.url,
+                params: error.config.params
+            }))
+        }
+    }
 }
