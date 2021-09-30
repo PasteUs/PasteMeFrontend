@@ -28,7 +28,7 @@ export const lang = {
         h2: '保存成功',
         p: [
             {
-                text: '欲访问 <strong>{key}</strong> 所对应的 Paste'
+                text: '欲访问 <strong>{key}</strong> 所对应的一贴'
             },
             {
                 button: '返回主页'
@@ -49,7 +49,7 @@ export const lang = {
             ],
         },
         popover: {
-            text: '在这里填入 <strong>索引</strong> 即可查看相应的 Paste'
+            text: '在这里填入 <strong>索引</strong> 即可查看相应的一贴'
         },
         badge: {
             copy: '复制链接',
@@ -59,7 +59,7 @@ export const lang = {
     },
     auth: {
         form: {
-            label: '此 Paste 已加密，请输入密码：',
+            label: '此一贴已加密，请输入密码：',
             button: '提交',
             placeholder: '密码错误'
         }
