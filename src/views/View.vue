@@ -46,7 +46,7 @@ export default {
                 this.updateLang(lang === "plain" ? "plaintext" : lang);
             }).catch(error => {
                 if (error.response) {
-                    let data = error.response.data
+                    let data = error.response.data;
                     if (data.code === 40301) {
                         this.updateView("password_auth");
                         return
@@ -55,7 +55,7 @@ export default {
                         return
                     }
                 }
-                this.api.errorHandler(error)
+                this.api.errorHandler(error);
             });
         },
     },

@@ -20,7 +20,7 @@ class MockBackend:
     @classmethod
     def beat(cls) -> dict:
         return {
-            'status': 200
+            'code': 200
         }
 
     def create(self, body: dict) -> dict:
@@ -29,11 +29,11 @@ class MockBackend:
         with self.db_lock:
             self.database[key] = body
         return {
-            'status': 201,
+            'code': 201,
             'key': key
         }
 
-    def get(self, key: str, password: str) -> dict:
+    def get(self, key: str, password: str) -> (dict, int):
         with self.db_lock:
             if key in self.database:
                 paste: dict = self.database[key]
@@ -42,9 +42,9 @@ class MockBackend:
                     if paste['create_time'] + timedelta(minutes=paste['expire_minute']) < datetime.now():
                         self.database.pop(key)
                         return {
-                            'status': 404,
+                            'code': 40402,
                             'message': 'paste not found'
-                        }
+                        }, 404
 
                 if password == paste.get('password', ''):
                     if paste['self_destruct']:
@@ -52,19 +52,19 @@ class MockBackend:
                         if paste['expire_count'] == 0:
                             self.database.pop(key)
                     return {
-                        'status': 200,
+                        'code': 200,
                         'lang': paste['lang'],
                         'content': paste['content']
-                    }
+                    }, 200
                 else:
                     return {
-                        'status': 403,
+                        'code': 40301,
                         'message': 'wrong password'
-                    }
+                    }, 403
             return {
-                'status': 404,
+                'code': 40402,
                 'message': 'paste not found'
-            }
+            }, 404
 
 
 app = Flask(__name__)
@@ -83,7 +83,8 @@ def create():
 
 @app.route('/api/v3/paste/<key>', methods=['GET'])
 def get(key: str):
-    return jsonify(backend.get(key, request.args.get('password', '')))
+    response, code = backend.get(key, request.args.get('password', ''))
+    return jsonify(response), code
 
 
 def main():
