@@ -39,7 +39,7 @@ class MockBackend:
                 paste: dict = self.database[key]
 
                 if paste['self_destruct']:
-                    if paste['create_time'] + timedelta(minutes=paste['expire_minute']) < datetime.now():
+                    if paste['create_time'] + timedelta(seconds=paste['expire_second']) < datetime.now():
                         self.database.pop(key)
                         return {
                             'code': 40402,
@@ -83,8 +83,12 @@ def create():
 
 @app.route('/api/v3/paste/<key>', methods=['GET'])
 def get(key: str):
-    response, code = backend.get(key, request.args.get('password', ''))
-    return jsonify(response), code
+    try:
+        response, code = backend.get(key, request.args.get('password', ''))
+        return jsonify(response), code
+    except Exception as e:
+        return jsonify({'code': 500, 'message': str(e)}), 500
+
 
 
 def main():
