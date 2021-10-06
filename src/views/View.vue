@@ -40,22 +40,16 @@ export default {
 
             this.updateView("loading");
             let url = this.api.join(this.config.api.backend, 'paste', this.$route.params.key)
-            this.api.get(url, {}, false).then(({content, lang}) => {
-                this.updateView("paste_view");
-                this.updateContent(content);
-                this.updateLang(lang === "plain" ? "plaintext" : lang);
-            }).catch(error => {
-                if (error.response) {
-                    let data = error.response.data;
-                    if (data.code === 40301) {
-                        this.updateView("password_auth");
-                        return
-                    } else if (data.code === 40402) {
-                        this.$router.push("What_are_you_nong_sha_lei?");
-                        return
-                    }
+            this.api.get(url, {}, [40301, 40402]).then(({code, content, lang}) => {
+                if (code === 40301) {
+                    this.updateView("password_auth");
+                } else if (code === 40402) {
+                    this.$router.push("What_are_you_nong_sha_lei?");
+                } else {
+                    this.updateView("paste_view");
+                    this.updateContent(content);
+                    this.updateLang(lang === "plain" ? "plaintext" : lang);
                 }
-                this.api.errorHandler(error);
             });
         },
     },
