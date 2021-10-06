@@ -34,23 +34,17 @@ export default {
     methods: {
         onSubmit() {
             const sendUrl = this.api.join(this.$store.getters.config.api.backend, 'paste', this.$route.params.key);
-            this.api.get(sendUrl, this.form, false).then(({content, lang}) => {
-                this.updateContent(content);
-                this.updateLang(lang === "plain" ? "plaintext" : lang);
-                this.updateView("paste_view");
-            }).catch(error => {
-                if (error.response) {
-                    let data = error.response.data;
-                    if (data.code === 40301) {
-                        this.flag = false;
-                        this.form.password = null;
-                        return
-                    } else if (data.code === 40402) {
-                        this.$router.push("What_are_you_nong_sha_lei?");
-                        return
-                    }
+            this.api.get(sendUrl, this.form, [40301, 40402]).then(({code, content, lang}) => {
+                if (code === 40301) {
+                    this.flag = false;
+                    this.form.password = null;
+                } else if (code === 40402) {
+                    this.$router.push("What_are_you_nong_sha_lei?");
+                } else {
+                    this.updateContent(content);
+                    this.updateLang(lang === "plain" ? "plaintext" : lang);
+                    this.updateView("paste_view");
                 }
-                this.api.errorHandler(error);
             });
         }
     }
