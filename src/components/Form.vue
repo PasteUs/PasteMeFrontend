@@ -60,7 +60,7 @@
                                     <b-input-group append="分钟后">
                                         <b-form-input type="number" :min="boundary.minute.min"
                                                       :max="boundary.minute.max"
-                                                      v-model.number="form.expire_minute"
+                                                      v-model.number="expire_minute"
                                                       :disabled="nobody"></b-form-input>
                                     </b-input-group>
                                 </div>
@@ -98,8 +98,14 @@ export default {
                 password: '',
                 self_destruct: true,
                 expire_count: 1,
-                expire_minute: 5
+                expire_second: 300
             },
+            expire_minute: 5
+        }
+    },
+    watch: {
+        "expire_minute": function () {
+            this.form.expire_second = this.expire_minute * 60
         }
     },
     computed: {
