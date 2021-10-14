@@ -29,7 +29,7 @@
   "devDependencies": {
     "@ryanlee2014/markdown-it-katex": "^1.0.4",
     "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.14",
     "@vue/cli-service": "^4.5.13",
     "acorn": "^8.5.0",
     "babel-eslint": "^10.0.3",
@@ -38,7 +38,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.19.1",
     "html-webpack-plugin": "^4.5.2",
-    "markdown-it-anchor": "^8.3.1",
+    "markdown-it-anchor": "^8.4.1",
     "style-loader": "^0.23.1",
     "uslug": "^1.0.4",
     "vue-cli-plugin-webpack-bundle-analyzer": "^1.4.0",
