@@ -44,20 +44,32 @@
                                       style="margin-right: .65em">
                                 {{ $t('lang.form.submit') }}
                             </b-button>
-                            <b-form-checkbox
-                                v-model="form.self_destruct" v-show="!$store.state.read_once" inline
-                                :disabled="nobody" checked="checked" switch>
-                                {{ $t('lang.form.checkbox') }}
-                            </b-form-checkbox>
+                            <div id="self-destruct-checkbox">
+                                <b-form-checkbox
+                                    v-model="form.self_destruct" v-show="!$store.state.read_once" inline
+                                    :disabled="nobody" checked="checked" switch>
+                                    {{ $t('lang.form.checkbox.text') }}
+                                </b-form-checkbox>
+                            </div>
+                            <b-popover
+                                target="self-destruct-checkbox"
+                                triggers="hover"
+                                placement="top">
+                                <a id="self-destruct-checkbox-popover">{{
+                                        $t('lang.form.checkbox.popover')
+                                    }}</a>
+                            </b-popover>
                             <div class="d-inline-flex">
                                 <div v-show="form.self_destruct" class="form-inline">
-                                    <b-input-group prepend="浏览" append="次">
+                                    <b-input-group :prepend="$t('lang.form.count.prepend')"
+                                                   :append="$t('lang.form.count.append')">
                                         <b-form-input type="number" :min="boundary.count.min" :max="boundary.count.max"
                                                       v-model.number="form.expire_count"
                                                       :disabled="nobody"></b-form-input>
                                     </b-input-group>
                                     <a>&nbsp;or&nbsp;</a>
-                                    <b-input-group append="分钟后">
+                                    <b-input-group :prepend="$t('lang.form.time.prepend')"
+                                                   :append="$t('lang.form.time.append')">
                                         <b-form-input type="number" :min="boundary.minute.min"
                                                       :max="boundary.minute.max"
                                                       v-model.number="expire_minute"
