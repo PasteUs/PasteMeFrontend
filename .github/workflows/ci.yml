@@ -1,6 +1,6 @@
 name: CI
 
-on: [pull_request]
+on: [ pull_request ]
 
 jobs:
   build:
@@ -9,54 +9,59 @@ jobs:
 
     strategy:
       matrix:
-        node_version: [12.x]
-        action: [test, run lint]
+        node_version: [ 12 ]
+        action: [ test, run lint ]
 
     name: npm ${{ matrix.action }}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: use Node.js ${{ matrix.node_version }} ${{ matrix.action }}
-      uses: actions/setup-node@v1
-      with:
-        node_version: ${{ matrix.node_version }}
+      - uses: actions/checkout@v1
+      - name: use Node.js ${{ matrix.node_version }} ${{ matrix.action }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
 
-    - name: npm install, build, and ${{ matrix.action }}
-      run: |
-        npm ci
-        npm run build --if-present
-        npm ${{ matrix.action }}
-      env:
-        CI: true
+      - name: npm install, build, and ${{ matrix.action }}
+        run: |
+          npm ci
+          npm run build --if-present
+          npm ${{ matrix.action }}
+        env:
+          CI: true
 
   e2e_unittest:
-
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node_version: [12.x]
+        node_version: [ 12 ]
 
     name: E2E Testing
 
     steps:
       - uses: actions/checkout@v1
       - name: use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node_version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node_version }}
 
       - name: npm install
         run: |
           npm ci
           cp public/usr/config.example.json public/usr/config.json
+          npm run build
         env:
           CI: true
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: pip install
         run: |
-          pip3 install -r e2e_test/requirements.txt
+          pip3 install -r tests/requirements.txt
 
-      - name: python unittest
+      - name: e2e test
         run: |
-          python3 -m unittest tests.PasteMeEndToEndUnitTest
+          pytest

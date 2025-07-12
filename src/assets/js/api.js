@@ -15,8 +15,8 @@ function validator(error) {
         error.response.data.code > 20000;
 }
 
-function defaultErrorHandler(error, alert_error = true) {
-    if (alert_error) {
+function defaultErrorHandler(error, alertError = true) {
+    if (alertError) {
         if (validator(error)) {
             let data = error.response.data;
             alert(data.code + ': ' + data.message);
@@ -32,7 +32,7 @@ function defaultErrorHandler(error, alert_error = true) {
 }
 
 function wrapper(func) {
-    return function (url, params = {}, acceptedCode = [], errorHandler = defaultErrorHandler) {
+    return function (url, params = {}, acceptedCode = [], alertError = true, errorHandler = null) {
         return new Promise((resolve, reject) => {
             func(url, params).then(response => {
                 resolve(response.data);
@@ -44,7 +44,11 @@ function wrapper(func) {
                         return
                     }
                 }
-                errorHandler(error);
+                if (errorHandler) {
+                    errorHandler(error, alertError);
+                } else {
+                    defaultErrorHandler(error, alertError);
+                }
                 reject(error);
             });
         });

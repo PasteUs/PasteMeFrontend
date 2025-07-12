@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Router from "vue-router"
-import View from "../../views/View";
-import Home from "../../views/Home";
+import Paste from "../../views/Paste.vue";
+import Home from "../../views/Home.vue";
 // eslint-disable-next-line no-unused-vars
 const emptyFunc = (arg) => {};
 // warn if in developing env
@@ -27,7 +27,7 @@ export default new Router({
         {
             path: "/:key([a-zA-Z0-9]{3,8})",
             name: "view",
-            component: View
+            component: Paste
         },
         {
             path: "/What_are_you_nong_sha_lei?",

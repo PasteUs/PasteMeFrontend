@@ -1,12 +1,17 @@
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse, Response
 from datetime import datetime, timedelta
 from threading import Lock
-
-from flask import Flask, request, jsonify
+from fastapi import FastAPI, Request, HTTPException, status
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+from typing import Optional, Dict, Any
+from fastapi.staticfiles import StaticFiles
 
 
 class MockBackend:
     def __init__(self):
-        self.database = {}
+        self.database: Dict[str, Dict[str, Any]] = {}
         self.key = 0
         self.key_lock = Lock()
         self.db_lock = Lock()
@@ -33,7 +38,7 @@ class MockBackend:
             'key': key
         }
 
-    def get(self, key: str, password: str) -> (dict, int):
+    def get(self, key: str, password: str) -> tuple[dict, int]:
         with self.db_lock:
             if key in self.database:
                 paste: dict = self.database[key]
@@ -44,7 +49,7 @@ class MockBackend:
                         return {
                             'code': 40402,
                             'message': 'paste not found'
-                        }, 404
+                        }, status.HTTP_404_NOT_FOUND
 
                 if password == paste.get('password', ''):
                     if paste['self_destruct']:
@@ -55,45 +60,14 @@ class MockBackend:
                         'code': 200,
                         'lang': paste['lang'],
                         'content': paste['content']
-                    }, 200
+                    }, status.HTTP_200_OK
                 else:
                     return {
                         'code': 40301,
                         'message': 'wrong password'
-                    }, 403
+                    }, status.HTTP_403_FORBIDDEN
             return {
                 'code': 40402,
                 'message': 'paste not found'
-            }, 404
+            }, status.HTTP_404_NOT_FOUND
 
-
-app = Flask(__name__)
-backend = MockBackend()
-
-
-@app.route('/api/v3/', methods=['GET'])
-def beat():
-    return jsonify(backend.beat())
-
-
-@app.route('/api/v3/paste/', methods=['POST'])
-def create():
-    return jsonify(backend.create(request.get_json()))
-
-
-@app.route('/api/v3/paste/<key>', methods=['GET'])
-def get(key: str):
-    try:
-        response, code = backend.get(key, request.args.get('password', ''))
-        return jsonify(response), code
-    except Exception as e:
-        return jsonify({'code': 500, 'message': str(e)}), 500
-
-
-
-def main():
-    app.run('127.0.0.1', 8000)
-
-
-if __name__ == '__main__':
-    main()

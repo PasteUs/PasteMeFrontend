@@ -13,7 +13,7 @@ import Loading from "../components/Loading";
 import ManualDeleted from "../components/ManualDeleted";
 
 export default {
-    name: "View",
+    name: "Paste",
     mixins: [stateMixins],
     data() {
         return {}
