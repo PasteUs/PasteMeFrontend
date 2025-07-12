@@ -30,7 +30,6 @@ jobs:
           CI: true
 
   e2e_unittest:
-    if: false
     runs-on: ubuntu-latest
 
     strategy:
@@ -50,6 +49,7 @@ jobs:
         run: |
           npm ci
           cp public/usr/config.example.json public/usr/config.json
+          npm run build
         env:
           CI: true
 
@@ -61,6 +61,6 @@ jobs:
         run: |
           pip3 install -r e2e_test/requirements.txt
 
-      - name: python unittest
+      - name: e2e test
         run: |
-          python3 -m unittest tests.PasteMeEndToEndUnitTest
+          pytest

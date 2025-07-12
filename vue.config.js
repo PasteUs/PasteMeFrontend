@@ -3,6 +3,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 // 取消用 tag 来区分版本
 // const version = require("./build.config").version;
 const version = 'master';
+const useCDN = false;
 
 let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
 
@@ -56,7 +57,7 @@ module.exports = {
             }
         }
     },
-    publicPath: process.env.NODE_ENV === 'production' ? webPath : '/',
+    publicPath: (process.env.NODE_ENV === 'production' && useCDN) ? webPath : '/',
     outputDir: 'pasteme',
     productionSourceMap: false,
     configureWebpack: config => { // eslint-disable-line
