@@ -35,7 +35,7 @@ class PasteMeEndToEndUnitTest(unittest.TestCase):
         cls.api.start()
 
         cnt = 0
-        retry = 10
+        retry = 100
 
         while not check() and cnt < retry:
             cnt += 1
