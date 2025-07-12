@@ -84,5 +84,6 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
       - name: Trigger Webhook
+        if: false
         run: |
           curl -X POST "${{ secrets.RELEASE_WEBHOOK }}frontend"
