@@ -53,6 +53,10 @@ jobs:
         env:
           CI: true
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - name: pip install
         run: |
           pip3 install -r e2e_test/requirements.txt
