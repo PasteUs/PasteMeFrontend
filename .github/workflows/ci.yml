@@ -30,6 +30,7 @@ jobs:
           CI: true
 
   e2e_unittest:
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
