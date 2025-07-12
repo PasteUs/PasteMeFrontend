@@ -16,6 +16,7 @@
                                     <option value="markdown">Markdown</option>
                                     <option value="json">JSON</option>
                                     <option value="go">Go</option>
+                                    <option value="rust">Rust</option>
                                 </b-form-select>
                             </b-input-group>
                         </b-form-group>

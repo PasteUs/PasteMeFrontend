@@ -128,6 +128,7 @@ export const lang = {
             go: 'Go',
             json: 'JSON',
             plaintext: '纯文本',
+            rust: 'Rust'
         },
         copy: '复制',
         tooltip: {
