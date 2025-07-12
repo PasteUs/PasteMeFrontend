@@ -5,7 +5,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const version = 'master';
 const useCDN = false;
 
-let webPath = 'https://cdn.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
+let webPath = 'https://fastly.jsdelivr.net/gh/PasteUs/CDN@' + version + '/pasteme/';
 
 const cdn = {
     // 开发环境
@@ -17,7 +17,7 @@ const cdn = {
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.css"
         ],
         js: [
-            "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.9/build/highlight.min.js"
+            "https://fastly.jsdelivr.net/gh/highlightjs/cdn-release@9.15.9/build/highlight.min.js"
         ]
     },
     // 生产环境
@@ -35,13 +35,13 @@ const cdn = {
             'https://shadow.elemecdn.com/npm/axios@0.19.0/dist/axios.min.js',
             'https://shadow.elemecdn.com/npm/katex@0.11.0/dist/katex.min.js',
             "https://shadow.elemecdn.com/npm/mermaid@8.2.3/dist/mermaid.min.js",
-            "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.9/build/highlight.min.js",
-            "https://cdn.jsdelivr.net/npm/d3@5.9.7/dist/d3.min.js",
+            "https://fastly.jsdelivr.net/gh/highlightjs/cdn-release@9.15.9/build/highlight.min.js",
+            "https://fastly.jsdelivr.net/npm/d3@5.9.7/dist/d3.min.js",
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.js",
-            "https://cdn.jsdelivr.net/npm/markdown-it@9.1.0/dist/markdown-it.min.js",
-            "https://cdn.jsdelivr.net/npm/unorm@1.6.0/lib/unorm.min.js",
-            "https://cdn.jsdelivr.net/npm/@chenfengyuan/vue-qrcode@1.0.1/dist/vue-qrcode.min.js",
-            "https://cdn.jsdelivr.net/npm/vue-i18n@8.14.0/dist/vue-i18n.min.js"
+            "https://fastly.jsdelivr.net/npm/markdown-it@9.1.0/dist/markdown-it.min.js",
+            "https://fastly.jsdelivr.net/npm/unorm@1.6.0/lib/unorm.min.js",
+            "https://fastly.jsdelivr.net/npm/@chenfengyuan/vue-qrcode@1.0.1/dist/vue-qrcode.min.js",
+            "https://fastly.jsdelivr.net/npm/vue-i18n@8.14.0/dist/vue-i18n.min.js"
         ]
     }
 };
