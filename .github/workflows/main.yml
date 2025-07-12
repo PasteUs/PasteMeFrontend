@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: main-push-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
 
   release:
@@ -25,8 +29,14 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - name: build and update cdn
+        if: false
         run: |
           GH_TOKEN=${{ secrets.PRIVATE_TOKEN }} bash .github/shell/build_and_update_cdn.sh
+
+      - name: npm build
+        run: |
+          npm ci
+          npm run build --if-present
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -55,9 +65,6 @@ jobs:
           platforms: |
             linux/amd64
             linux/arm64
-            linux/arm/v7
-            linux/arm/v6
-            linux/386
           push: true
           tags: |
             pasteme/frontend:beta
