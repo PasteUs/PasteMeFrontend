@@ -2,15 +2,15 @@ name: Upload to release and publish
 
 on:
   release:
-    types: [published]
+    types: [ published ]
 
 jobs:
 
   release:
     strategy:
       matrix:
-        node_version: [12.x]
-        os: [ubuntu-latest]
+        node_version: [ 12 ]
+        os: [ ubuntu-latest ]
 
     if: github.repository == 'PasteUs/PasteMeFrontend'
     name: Build with node ${{ matrix.node_version }} on ${{ matrix.os }} and upload
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node_version: ${{ matrix.node_version }}
 

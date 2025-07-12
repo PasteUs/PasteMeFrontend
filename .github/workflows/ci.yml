@@ -1,6 +1,6 @@
 name: CI
 
-on: [pull_request]
+on: [ pull_request ]
 
 jobs:
   build:
@@ -9,25 +9,25 @@ jobs:
 
     strategy:
       matrix:
-        node_version: [12.x]
-        action: [test, run lint]
+        node_version: [ 12 ]
+        action: [ test, run lint ]
 
     name: npm ${{ matrix.action }}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: use Node.js ${{ matrix.node_version }} ${{ matrix.action }}
-      uses: actions/setup-node@v1
-      with:
-        node_version: ${{ matrix.node_version }}
+      - uses: actions/checkout@v1
+      - name: use Node.js ${{ matrix.node_version }} ${{ matrix.action }}
+        uses: actions/setup-node@v4
+        with:
+          node_version: ${{ matrix.node_version }}
 
-    - name: npm install, build, and ${{ matrix.action }}
-      run: |
-        npm ci
-        npm run build --if-present
-        npm ${{ matrix.action }}
-      env:
-        CI: true
+      - name: npm install, build, and ${{ matrix.action }}
+        run: |
+          npm ci
+          npm run build --if-present
+          npm ${{ matrix.action }}
+        env:
+          CI: true
 
   e2e_unittest:
 
@@ -35,14 +35,14 @@ jobs:
 
     strategy:
       matrix:
-        node_version: [12.x]
+        node_version: [ 12 ]
 
     name: E2E Testing
 
     steps:
       - uses: actions/checkout@v1
       - name: use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node_version: ${{ matrix.node_version }}
 
