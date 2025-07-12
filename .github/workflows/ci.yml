@@ -59,7 +59,7 @@ jobs:
 
       - name: pip install
         run: |
-          pip3 install -r e2e_test/requirements.txt
+          pip3 install -r tests/requirements.txt
 
       - name: e2e test
         run: |
