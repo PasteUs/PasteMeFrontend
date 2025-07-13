@@ -134,7 +134,7 @@
                 </div>
             </b-popover>
             <b-modal id="modal-donate" hide-footer lazy>
-                <img src="https://fastly.jsdelivr.net/gh/PasteUs/CDN@0.0.11/pasteme/img/sponsor.png" alt="sponsor.png">
+                <img src="https://cdn.jsdelivr.net/gh/PasteUs/CDN@0.0.11/pasteme/img/sponsor.png" alt="sponsor.png">
             </b-modal>
         </b-col>
     </b-row>
