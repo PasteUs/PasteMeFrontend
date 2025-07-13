@@ -23,7 +23,7 @@
                 <p title="赞助商">
                     <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=30tfqka6"
                        title="阿里云限量红包，上云就上阿里云，享数字化转型，市场占有率超过第 2-5 名总和" class="logo" target="_blank">
-                        <img src="https://fastly.jsdelivr.net/gh/PasteUs/CDN@0.0.11/pasteme/img/aliyun.svg" alt="Aliyun">
+                        <img src="https://cdn.jsdelivr.net/gh/PasteUs/CDN@0.0.11/pasteme/img/aliyun.svg" alt="Aliyun">
                     </a>
                     <a href="https://www.bt.cn/?invite_code=MV9ibGZqbWs="
                        title="宝塔服务器面板，一键全能部署及管理，送你3188元礼包，点我领取" target="_blank" class="logo">
