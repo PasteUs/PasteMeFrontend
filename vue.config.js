@@ -12,7 +12,7 @@ const cdn = {
     dev: {
         css: [
             "https://shadow.elemecdn.com/npm/katex@0.11.0/dist/katex.min.css",
-            "https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css",
+            "https://unpkg.com/github-markdown-css@3.0.1/github-markdown.css",
             "https://shadow.elemecdn.com/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css",
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.css"
         ],
@@ -24,7 +24,7 @@ const cdn = {
     build: {
         css: [
             "https://shadow.elemecdn.com/npm/katex@0.11.0/dist/katex.min.css",
-            "https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css",
+            "https://unpkg.com/github-markdown-css@3.0.1/github-markdown.css",
             "https://shadow.elemecdn.com/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css",
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.css"
         ],
