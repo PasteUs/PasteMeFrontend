@@ -40,7 +40,6 @@ jobs:
       - name: Release Version
         id: release_version
         run: |
-          $GITHUB_OUTPUT
           echo "tag=$(echo "${GITHUB_REF}" | sed -e "s/refs\/tags\///g")" >> $GITHUB_OUTPUT
 
       - name: gzip
