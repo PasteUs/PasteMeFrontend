@@ -17,7 +17,6 @@ const cdn = {
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.css"
         ],
         js: [
-            "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/9.15.9/highlight.min.js"
         ]
     },
     // 生产环境
@@ -35,13 +34,9 @@ const cdn = {
             'https://shadow.elemecdn.com/npm/axios@0.19.0/dist/axios.min.js',
             'https://shadow.elemecdn.com/npm/katex@0.11.0/dist/katex.min.js',
             "https://shadow.elemecdn.com/npm/mermaid@8.2.3/dist/mermaid.min.js",
-            "https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-y/highlight.js/9.15.9/highlight.min.js",
-            "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-y/d3/5.9.7/d3.min.js",
             "https://shadow.elemecdn.com/npm/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.min.js",
-            "https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-y/markdown-it/9.1.0/markdown-it.min.js",
             "https://unpkg.com/unorm@1.6.0/lib/unorm.js",
             "https://unpkg.com/@chenfengyuan/vue-qrcode@1.0.1/dist/vue-qrcode.min.js",
-            "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-y/vue-i18n/8.14.0/vue-i18n.min.js"
         ]
     }
 };
