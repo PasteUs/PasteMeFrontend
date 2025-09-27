@@ -67,13 +67,9 @@ module.exports = {
                 "katex": "katex",
                 "axios": "axios",
                 "mermaid": "mermaid",
-                "highlight.js": "hljs",
-                "d3": "d3",
                 "bootstrap-vue": "BootstrapVue",
-                "markdown-it": "markdownit",
                 "unorm": "unorm",
                 "@chenfengyuan/vue-qrcode": "VueQrcode",
-                "vue-i18n": "VueI18n"
             };
         }
         return {
