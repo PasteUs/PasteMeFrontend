@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { lang as zhCN } from '@/assets/lang/zh-CN';
-import { lang as en } from '@/assets/lang/en';
+import zhCN from '@/assets/lang/zh-CN.json';
+import en from '@/assets/lang/en.json';
 
 i18n
   .use(initReactI18next)
