@@ -37,30 +37,31 @@ export const lang = {
     },
     success: {
         h2: 'Success!',
-        p: [
-            {
-                text: 'How to access this Paste <strong>{key}</strong> :',
+        access_paste: {
+            prefix: 'How to access this Paste',
+            suffix: ':',
+        },
+        return_home: {
+            button: 'Return',
+        },
+        methods: {
+            input_in_navbar: {
+                prefix: 'Enter',
+                highlight: 'Paste\'s number',
+                suffix: 'in the nav bar area.',
             },
-            {
-                button: 'Return',
+            browser_link: {
+                browser: 'Direct click to access: ',
+                tooltip: 'Open on a new window',
             },
-        ],
-        ul: {
-            li: [
-                {
-                    text: 'Enter <strong>Paste\'s number</strong> in the nav bar area.',
-                },
-                {
-                    browser: 'Direct click to access: ',
-                    tooltip: 'Open on a new window',
-                },
-                {
-                    scan_qr_code: 'Scan the QR code',
-                }
-            ],
+            qr_code: {
+                scan_qr_code: 'Scan the QR code',
+            }
         },
         popover: {
-            text: 'Enter <strong>Paste\'s number</strong> here to access to it.',
+            prefix: 'Enter',
+            highlight: 'Paste\'s number',
+            suffix: 'here to access to it.',
         },
         badge: {
             copy: 'Copy',

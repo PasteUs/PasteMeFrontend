@@ -37,30 +37,30 @@ export const lang = {
     },
     success: {
         h2: '保存成功',
-        p: [
-            {
-                text: '欲访问 <strong>{key}</strong> 所对应的一贴',
+        access_paste: {
+            prefix: '欲访问',
+            suffix: '所对应的一贴',
+        },
+        return_home: {
+            button: '返回主页',
+        },
+        methods: {
+            input_in_navbar: {
+                prefix: '在导航栏中输入',
+                highlight: '索引',
             },
-            {
-                button: '返回主页',
+            browser_link: {
+                browser: '在浏览器中访问',
+                tooltip: '在新页面中查看',
             },
-        ],
-        ul: {
-            li: [
-                {
-                    text: '在导航栏中输入<strong>索引</strong>',
-                },
-                {
-                    browser: '在浏览器中访问',
-                    tooltip: '在新页面中查看',
-                },
-                {
-                    scan_qr_code: '扫描二维码',
-                }
-            ],
+            qr_code: {
+                scan_qr_code: '扫描二维码',
+            }
         },
         popover: {
-            text: '在这里填入 <strong>索引</strong> 即可查看相应的一贴',
+            prefix: '在这里填入',
+            highlight: '索引',
+            suffix: '即可查看相应的一贴',
         },
         badge: {
             copy: '复制链接',

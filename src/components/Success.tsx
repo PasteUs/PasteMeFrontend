@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
 import { useAppStore } from '@/store/useAppStore';
@@ -50,16 +50,12 @@ export default function Success() {
         <h2 className="text-3xl font-bold mb-4">{t('success.h2')}</h2>
 
         <p className="mb-4">
-          <Trans i18nKey="success.p.0.text" values={{ key }}>
-            欲访问 <strong>{{ key }}</strong> 所对应的一贴
-          </Trans>
+          {t('success.access_paste.prefix')} <strong>{key}</strong> {t('success.access_paste.suffix')}
         </p>
 
         <ul className="list-disc list-inside space-y-3 mb-6">
           <li>
-            <Trans i18nKey="success.ul.li.0.text">
-              在导航栏中输入<strong>索引</strong>
-            </Trans>
+            {t('success.methods.input_in_navbar.prefix')}<strong>{t('success.methods.input_in_navbar.highlight')}</strong>
             &nbsp;
             <Popover open={isHelpOpen} onOpenChange={setIsHelpOpen}>
               <PopoverTrigger asChild>
@@ -73,22 +69,20 @@ export default function Success() {
                 </Badge>
               </PopoverTrigger>
               <PopoverContent>
-                <Trans i18nKey="success.popover.text">
-                  在这里填入 <strong>索引</strong> 即可查看相应的一贴
-                </Trans>
+                {t('success.popover.prefix')} <strong>{t('success.popover.highlight')}</strong> {t('success.popover.suffix')}
               </PopoverContent>
             </Popover>
           </li>
 
           <li>
-            {t('success.ul.li.1.browser')}
+            {t('success.methods.browser_link.browser')}
             &nbsp;
             <a
               href={pasteUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
-              title={t('success.ul.li.1.tooltip')}
+              title={t('success.methods.browser_link.tooltip')}
             >
               {pasteUrl}
             </a>
@@ -110,7 +104,7 @@ export default function Success() {
                   onMouseEnter={() => setIsQROpen(true)}
                   onMouseLeave={() => setIsQROpen(false)}
                 >
-                  {t('success.ul.li.2.scan_qr_code')}
+                  {t('success.methods.qr_code.scan_qr_code')}
                 </span>
               </PopoverTrigger>
               <PopoverContent>
@@ -123,7 +117,7 @@ export default function Success() {
         </ul>
 
         <Button onClick={goHome}>
-          {t('success.p.1.button')}
+          {t('success.return_home.button')}
         </Button>
       </div>
     </div>
