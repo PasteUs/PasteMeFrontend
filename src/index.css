@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Syntax highlighting */
+@import "highlight.js/styles/github.css";
+
+/* Math rendering */
+@import "katex/dist/katex.min.css";
+
+/* GitHub markdown styles */
+@import url("https://unpkg.com/github-markdown-css@5.5.0/github-markdown.css");
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -116,5 +125,56 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer utilities {
+  /* Router fade transition */
+  .router-fade-enter {
+    opacity: 0;
+  }
+
+  .router-fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease;
+  }
+
+  .router-fade-exit {
+    opacity: 1;
+  }
+
+  .router-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+
+  /* Markdown body styles */
+  .markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+  }
+
+  @media (max-width: 767px) {
+    .markdown-body {
+      padding: 15px;
+    }
+  }
+
+  .markdown-body code {
+    color: black !important;
+  }
+
+  .markdown-body pre {
+    padding-left: 1em;
+    tab-size: 4;
   }
 }

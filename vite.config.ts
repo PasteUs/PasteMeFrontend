@@ -11,4 +11,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: 'pasteme',
+    sourcemap: false,
+  },
+  server: {
+    proxy: {
+      '/api/v3/': {
+        target: 'http://beta.pasteme.lucien.ink/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

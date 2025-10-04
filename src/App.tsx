@@ -1,26 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import { Button } from '@/components/ui/button'
+import { Outlet } from 'react-router-dom';
+import { useAppStore } from '@/store/useAppStore';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { readOnce, notFound } = useAppStore();
+
+  const bgClass = readOnce ? 'bg-paste-gray' : notFound ? 'bg-paste-blue' : 'bg-white';
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className={`min-h-screen flex flex-col ${bgClass} transition-colors duration-300`}>
+      {!notFound && <Header />}
+      <main className="flex-1 pt-20">
+        <Outlet />
+      </main>
+      {!notFound && <Footer />}
+    </div>
+  );
 }
 
 export default App
