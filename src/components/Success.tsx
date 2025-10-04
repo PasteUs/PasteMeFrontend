@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
-import ClipboardJS from 'clipboard';
 import { useAppStore } from '@/store/useAppStore';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -16,33 +15,32 @@ export default function Success() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const key = useAppStore(state => state.key);
-  const [copyStatus, setCopyStatus] = useState(0);
+  const updateState = useAppStore(state => state.updateState);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isQROpen, setIsQROpen] = useState(false);
   const baseUrl = window.location.origin;
   const pasteUrl = `${baseUrl}/#/${key}`;
 
-  useEffect(() => {
-    const clipboard = new ClipboardJS('.copy-badge');
-
-    clipboard.on('success', () => {
-      setCopyStatus(1);
-      setTimeout(() => setCopyStatus(0), 2000);
-    });
-
-    clipboard.on('error', () => {
-      setCopyStatus(-1);
-      setTimeout(() => setCopyStatus(0), 2000);
-    });
-
-    return () => clipboard.destroy();
-  }, []);
-
   const goHome = () => {
+    updateState({ view: 'form' });
     navigate('/');
   };
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(pasteUrl);
+      setCopyStatus('success');
+      setTimeout(() => setCopyStatus('idle'), 2000);
+    } catch (err) {
+      setCopyStatus('error');
+      setTimeout(() => setCopyStatus('idle'), 2000);
+    }
+  };
+
   const getCopyText = () => {
-    if (copyStatus > 0) return t('success.badge.success');
-    if (copyStatus < 0) return t('success.badge.fail');
+    if (copyStatus === 'success') return t('success.badge.success');
+    if (copyStatus === 'error') return t('success.badge.fail');
     return t('success.badge.copy');
   };
 
@@ -51,21 +49,33 @@ export default function Success() {
       <div className="my-8 bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold mb-4">{t('success.h2')}</h2>
 
-        <p
-          className="mb-4"
-          dangerouslySetInnerHTML={{ __html: t('success.p.0.text', { key }) }}
-        />
+        <p className="mb-4">
+          <Trans i18nKey="success.p.0.text" values={{ key }}>
+            欲访问 <strong>{{ key }}</strong> 所对应的一贴
+          </Trans>
+        </p>
 
         <ul className="list-disc list-inside space-y-3 mb-6">
           <li>
-            <span dangerouslySetInnerHTML={{ __html: t('success.ul.li.0.text') }} />
+            <Trans i18nKey="success.ul.li.0.text">
+              在导航栏中输入<strong>索引</strong>
+            </Trans>
             &nbsp;
-            <Popover>
+            <Popover open={isHelpOpen} onOpenChange={setIsHelpOpen}>
               <PopoverTrigger asChild>
-                <Badge variant="secondary" className="cursor-help">?</Badge>
+                <Badge
+                  variant="secondary"
+                  className="cursor-help"
+                  onMouseEnter={() => setIsHelpOpen(true)}
+                  onMouseLeave={() => setIsHelpOpen(false)}
+                >
+                  ?
+                </Badge>
               </PopoverTrigger>
               <PopoverContent>
-                <div dangerouslySetInnerHTML={{ __html: t('success.popover.text') }} />
+                <Trans i18nKey="success.popover.text">
+                  在这里填入 <strong>索引</strong> 即可查看相应的一贴
+                </Trans>
               </PopoverContent>
             </Popover>
           </li>
@@ -85,17 +95,21 @@ export default function Success() {
             &nbsp;
             <Badge
               variant="default"
-              className="copy-badge cursor-pointer"
-              data-clipboard-text={pasteUrl}
+              className="cursor-pointer"
+              onClick={handleCopy}
             >
               {getCopyText()}
             </Badge>
           </li>
 
           <li>
-            <Popover>
+            <Popover open={isQROpen} onOpenChange={setIsQROpen}>
               <PopoverTrigger asChild>
-                <span className="text-blue-600 cursor-pointer hover:underline">
+                <span
+                  className="text-blue-600 cursor-pointer hover:underline"
+                  onMouseEnter={() => setIsQROpen(true)}
+                  onMouseLeave={() => setIsQROpen(false)}
+                >
                   {t('success.ul.li.2.scan_qr_code')}
                 </span>
               </PopoverTrigger>

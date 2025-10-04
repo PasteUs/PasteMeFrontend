@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Switch } from '@/components/ui/switch';
 import {
   Select,
   SelectContent,
@@ -77,17 +78,17 @@ export default function Form() {
   ];
 
   return (
-    <div className="container mx-auto px-4 max-w-6xl">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Language Selector */}
-          <div className="space-y-2">
-            <Label>{t('form.input.0.prepend')}</Label>
+          <div className="flex items-center gap-3 flex-1">
+            <Label className="w-16 text-right shrink-0">{t('form.input.0.prepend')}</Label>
             <Select
               value={form.lang}
               onValueChange={(value) => setForm({ ...form, lang: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="flex-1">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -101,19 +102,17 @@ export default function Form() {
           </div>
 
           {/* Password Input */}
-          <div className="space-y-2">
-            <Label>{t('form.input.1.prepend')}</Label>
-            <div className="flex items-center gap-2">
-              <Input
-                type="password"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                placeholder={t('form.input.1.placeholder')}
-                autoComplete="off"
-                className="flex-1"
-              />
-              <Checkbox checked={form.password !== ''} disabled />
-            </div>
+          <div className="flex items-center gap-3 flex-1">
+            <Label className="w-16 text-right shrink-0">{t('form.input.1.prepend')}</Label>
+            <Input
+              type="password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              placeholder={t('form.input.1.placeholder')}
+              autoComplete="off"
+              className="flex-1"
+            />
+            <Switch checked={form.password !== ''} disabled />
           </div>
         </div>
 
@@ -131,24 +130,78 @@ export default function Form() {
         </div>
 
         {/* Submit and Options */}
-        <div className="flex flex-wrap items-center gap-4">
-          <Button type="submit" variant={readOnce ? 'secondary' : 'default'}>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button type="submit" variant={readOnce ? 'secondary' : 'default'} size="default">
             {t('form.submit')}
           </Button>
 
-          {!readOnce && (
+          {!readOnce && form.self_destruct && (
+            <>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      id="self-destruct"
+                      checked={form.self_destruct}
+                      onCheckedChange={(checked) =>
+                        setForm({ ...form, self_destruct: checked })
+                      }
+                      disabled={nobody}
+                    />
+                    <Label htmlFor="self-destruct" className="cursor-pointer text-sm">
+                      {t('form.checkbox.text')}
+                    </Label>
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent>
+                  {t('form.checkbox.popover')}
+                </PopoverContent>
+              </Popover>
+
+              <div className="flex items-center gap-1 text-sm">
+                <span>{t('form.count.prepend')}</span>
+                <Input
+                  type="number"
+                  min={1}
+                  max={3}
+                  value={form.expire_count}
+                  onChange={(e) => setForm({ ...form, expire_count: parseInt(e.target.value, 10) })}
+                  disabled={nobody}
+                  className="w-16 h-8 text-center"
+                />
+                <span>{t('form.count.append')}</span>
+              </div>
+
+              <span className="text-sm text-gray-400">or</span>
+
+              <div className="flex items-center gap-1 text-sm">
+                <Input
+                  type="number"
+                  min={1}
+                  max={60}
+                  value={expireMinute}
+                  onChange={(e) => handleExpireMinuteChange(e.target.value)}
+                  disabled={nobody}
+                  className="w-16 h-8 text-center"
+                />
+                <span>{t('form.time.append')}</span>
+              </div>
+            </>
+          )}
+
+          {!readOnce && !form.self_destruct && (
             <Popover>
               <PopoverTrigger asChild>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
+                <div className="flex items-center gap-2">
+                  <Switch
                     id="self-destruct"
                     checked={form.self_destruct}
                     onCheckedChange={(checked) =>
-                      setForm({ ...form, self_destruct: checked as boolean })
+                      setForm({ ...form, self_destruct: checked })
                     }
                     disabled={nobody}
                   />
-                  <Label htmlFor="self-destruct" className="cursor-pointer">
+                  <Label htmlFor="self-destruct" className="cursor-pointer text-sm">
                     {t('form.checkbox.text')}
                   </Label>
                 </div>
@@ -157,40 +210,6 @@ export default function Form() {
                 {t('form.checkbox.popover')}
               </PopoverContent>
             </Popover>
-          )}
-
-          {form.self_destruct && (
-            <div className="flex items-center gap-2 flex-wrap">
-              <div className="flex items-center gap-1">
-                <span className="text-sm">{t('form.count.prepend')}</span>
-                <Input
-                  type="number"
-                  min={1}
-                  max={3}
-                  value={form.expire_count}
-                  onChange={(e) => setForm({ ...form, expire_count: parseInt(e.target.value, 10) })}
-                  disabled={nobody}
-                  className="w-20"
-                />
-                <span className="text-sm">{t('form.count.append')}</span>
-              </div>
-
-              <span className="text-sm">or</span>
-
-              <div className="flex items-center gap-1">
-                <span className="text-sm">{t('form.time.prepend')}</span>
-                <Input
-                  type="number"
-                  min={1}
-                  max={60}
-                  value={expireMinute}
-                  onChange={(e) => handleExpireMinuteChange(e.target.value)}
-                  disabled={nobody}
-                  className="w-20"
-                />
-                <span className="text-sm">{t('form.time.append')}</span>
-              </div>
-            </div>
           )}
         </div>
       </form>

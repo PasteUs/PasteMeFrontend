@@ -33,13 +33,13 @@ export default function Header() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900 text-white shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800 text-white shadow-md">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link
             to="/"
-            className="text-xl font-bold hover:text-gray-300 transition"
+            className="text-lg font-semibold hover:text-gray-300 transition"
             title={t('nav.router_link')}
           >
             PasteMe
@@ -56,21 +56,21 @@ export default function Header() {
               value={key}
               onChange={(e) => setKey(e.target.value)}
               maxLength={8}
-              className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500"
+              className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400 h-8"
               required
             />
-            <Button type="submit" size="sm">
+            <Button type="submit" size="sm" className="h-8">
               {t('nav.form.button')}
             </Button>
           </form>
 
           {/* Right side menu */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
-                  <Globe className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="text-white hover:text-gray-300 h-9 w-9">
+                  <Globe className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -87,8 +87,8 @@ export default function Header() {
             {config.api.admin && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-white hover:text-gray-300">
-                    <Bell className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="text-white hover:text-gray-300 h-9 w-9">
+                    <Bell className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -98,39 +98,18 @@ export default function Header() {
             )}
 
             {/* More Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300">
-                  {t('nav.something.text')}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <a href="https://docs.pasteme.cn/#/developer/api" target="_blank" rel="noopener noreferrer">
-                    API
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="https://docs.pasteme.cn/#/documentation" target="_blank" rel="noopener noreferrer">
-                    {t('nav.something.help')}
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="https://github.com/LucienShui/PasteMe/issues" target="_blank" rel="noopener noreferrer">
-                    {t('nav.something.feedback')}
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300 h-8">
+              {t('nav.something.text')}
+            </Button>
 
             {/* Donate */}
-            <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300">
+            <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300 h-8">
               {t('nav.donate')}
             </Button>
 
             {/* Mobile Menu */}
-            <Button variant="ghost" size="icon" className="md:hidden text-white">
-              <Menu className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="md:hidden text-white h-9 w-9">
+              <Menu className="h-4 w-4" />
             </Button>
           </div>
         </div>
