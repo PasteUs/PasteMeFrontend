@@ -1,14 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url("https://unpkg.com/github-markdown-css@5.5.0/github-markdown.css");
 
 /* Syntax highlighting */
 @import "highlight.js/styles/github.css";
 
 /* Math rendering */
 @import "katex/dist/katex.min.css";
-
-/* GitHub markdown styles */
-@import url("https://unpkg.com/github-markdown-css@5.5.0/github-markdown.css");
 
 @custom-variant dark (&:is(.dark *));
 

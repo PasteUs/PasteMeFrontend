@@ -23,11 +23,18 @@ class Api {
       const config: AxiosRequestConfig = {
         params,
         validateStatus: (status) => {
-          return status === 200 || allowedCodes.includes(status * 100 + (status % 100));
+          return status === 200 || (status >= 400 && status < 600);
         },
       };
 
       const response: AxiosResponse<T> = await axios.get(url, config);
+
+      // Check if response has a code property and if it's in allowedCodes
+      const responseData = response.data as any;
+      if (response.status !== 200 && responseData?.code && !allowedCodes.includes(responseData.code)) {
+        throw new Error(`Unexpected response code: ${responseData.code}`);
+      }
+
       return response.data;
     } catch (error) {
       console.error('API GET Error:', error);
@@ -46,11 +53,18 @@ class Api {
     try {
       const config: AxiosRequestConfig = {
         validateStatus: (status) => {
-          return status === 200 || status === 201 || allowedCodes.includes(status * 100 + (status % 100));
+          return status === 200 || status === 201 || (status >= 400 && status < 600);
         },
       };
 
       const response: AxiosResponse<T> = await axios.post(url, data, config);
+
+      // Check if response has a code property and if it's in allowedCodes
+      const responseData = response.data as any;
+      if (response.status !== 200 && response.status !== 201 && responseData?.code && !allowedCodes.includes(responseData.code)) {
+        throw new Error(`Unexpected response code: ${responseData.code}`);
+      }
+
       return response.data;
     } catch (error) {
       console.error('API POST Error:', error);

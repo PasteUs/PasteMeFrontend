@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppStore } from '@/store/useAppStore';
 import { api } from '@/lib/api';
+import { toast } from 'sonner';
 import Loading from '@/components/Loading';
 import PasswordAuth from '@/components/PasswordAuth';
 import PasteView from '@/components/PasteView';
@@ -26,7 +27,8 @@ export default function Paste() {
         if (response.code === 40301) {
           updateState({ view: 'password_auth' });
         } else if (response.code === 40402) {
-          navigate('/What_are_you_nong_sha_lei');
+          toast.error('Paste not found');
+          navigate('/');
         } else {
           updateState({
             view: 'paste_view',
@@ -36,7 +38,8 @@ export default function Paste() {
         }
       } catch (error) {
         console.error('Failed to load paste:', error);
-        navigate('/What_are_you_nong_sha_lei');
+        toast.error('Paste not found');
+        navigate('/');
       }
     };
 

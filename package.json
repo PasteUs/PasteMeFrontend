@@ -32,11 +32,13 @@
     "markdown-it-highlightjs": "^4.2.0",
     "markdown-it-task-checkbox": "^1.0.6",
     "mermaid": "^11.12.0",
+    "next-themes": "^0.4.6",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.0.0",
     "react-router-dom": "^7.9.3",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.14",
     "zustand": "^5.0.8"

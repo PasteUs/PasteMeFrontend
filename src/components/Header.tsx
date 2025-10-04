@@ -15,7 +15,7 @@ import { useAppStore } from '@/store/useAppStore';
 export default function Header() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const config = useAppStore(state => state.config);
+  const { config, updateState } = useAppStore();
   const [key, setKey] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,6 +24,12 @@ export default function Header() {
       navigate(`/${key}`);
       setKey('');
     }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    updateState({ view: 'form' });
+    navigate('/');
   };
 
   const setLang = (lang: string) => {
@@ -37,13 +43,14 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link
-            to="/"
-            className="text-lg font-semibold hover:text-gray-300 transition"
+          <a
+            href="/"
+            onClick={handleHomeClick}
+            className="text-lg font-semibold hover:text-gray-300 transition cursor-pointer"
             title={t('nav.router_link')}
           >
             PasteMe
-          </Link>
+          </a>
 
           {/* Search Form */}
           <form onSubmit={handleSubmit} className="hidden md:flex items-center gap-2 flex-1 max-w-md mx-4">
@@ -98,9 +105,30 @@ export default function Header() {
             )}
 
             {/* More Menu */}
-            <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300 h-8">
-              {t('nav.something.text')}
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300 h-8">
+                  {t('nav.something.text')}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <a href="https://github.com/LucienShui/PasteMe/releases" target="_blank" rel="noopener noreferrer">
+                    {t('nav.something.log')}
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="https://github.com/LucienShui/PasteMe/blob/master/README.md" target="_blank" rel="noopener noreferrer">
+                    {t('nav.something.help')}
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href="https://github.com/LucienShui/PasteMe/issues" target="_blank" rel="noopener noreferrer">
+                    {t('nav.something.feedback')}
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Donate */}
             <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300 h-8">
