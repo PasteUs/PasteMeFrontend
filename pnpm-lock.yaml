@@ -27,10 +27,10 @@ importers:
         specifier: ^0.544.0
         version: 0.544.0(react@19.2.0)
       react:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       tailwind-merge:
         specifier: ^3.3.1
@@ -40,28 +40,28 @@ importers:
         version: 4.1.14
     devDependencies:
       '@eslint/js':
-        specifier: ^9.36.0
+        specifier: ^9.37.0
         version: 9.37.0
       '@types/node':
-        specifier: ^24.6.0
+        specifier: ^24.6.2
         version: 24.6.2
       '@types/react':
-        specifier: ^19.1.16
+        specifier: ^19.2.0
         version: 19.2.0
       '@types/react-dom':
-        specifier: ^19.1.9
+        specifier: ^19.2.0
         version: 19.2.0(@types/react@19.2.0)
       '@vitejs/plugin-react':
         specifier: ^5.0.4
         version: 5.0.4(rolldown-vite@7.1.14(@types/node@24.6.2)(jiti@2.6.1))
       eslint:
-        specifier: ^9.36.0
+        specifier: ^9.37.0
         version: 9.37.0(jiti@2.6.1)
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.37.0(jiti@2.6.1))
       eslint-plugin-react-refresh:
-        specifier: ^0.4.22
+        specifier: ^0.4.23
         version: 0.4.23(eslint@9.37.0(jiti@2.6.1))
       globals:
         specifier: ^16.4.0
