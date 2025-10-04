@@ -3,15 +3,15 @@ export const lang = {
         text: '遇到一个致命错误，请将输出的信息发送给管理员',
     },
     form: {
-        input: [
-            {
+        input: {
+            0: {
                 prepend: '高亮',
             },
-            {
+            1: {
                 prepend: '密码',
                 placeholder: '无需设置密码请留空',
             }
-        ],
+        },
         textarea: {
             placeholder: {
                 write_something_here: '写点什么进来吧',
@@ -37,27 +37,27 @@ export const lang = {
     },
     success: {
         h2: '保存成功',
-        p: [
-            {
+        p: {
+            0: {
                 text: '欲访问 <strong>{key}</strong> 所对应的一贴',
             },
-            {
+            1: {
                 button: '返回主页',
             },
-        ],
+        },
         ul: {
-            li: [
-                {
+            li: {
+                0: {
                     text: '在导航栏中输入<strong>索引</strong>',
                 },
-                {
+                1: {
                     browser: '在浏览器中访问',
                     tooltip: '在新页面中查看',
                 },
-                {
+                2: {
                     scan_qr_code: '扫描二维码',
                 }
-            ],
+            },
         },
         popover: {
             text: '在这里填入 <strong>索引</strong> 即可查看相应的一贴',

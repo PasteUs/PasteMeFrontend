@@ -51,7 +51,7 @@ export default function Footer() {
         <a
           onClick={handleRefresh}
           className="text-blue-700 hover:text-blue-900 cursor-pointer select-none"
-          title={cutDownTime > 0 ? t('lang.footer.tooltip.wait', { sec: cutDownTime }) : t('lang.footer.tooltip.refresh')}
+          title={cutDownTime > 0 ? t('footer.tooltip.wait', { sec: cutDownTime }) : t('footer.tooltip.refresh')}
         >
           {oneWord}
         </a>

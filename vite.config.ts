@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/v3/': {
-        target: 'http://beta.pasteme.lucien.ink/',
+        target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
       },

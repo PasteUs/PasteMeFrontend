@@ -40,7 +40,7 @@ export default function Header() {
           <Link
             to="/"
             className="text-xl font-bold hover:text-gray-300 transition"
-            title={t('lang.nav.router_link')}
+            title={t('nav.router_link')}
           >
             PasteMe
           </Link>
@@ -52,7 +52,7 @@ export default function Header() {
             </div>
             <Input
               type="search"
-              placeholder={t('lang.nav.form.placeholder')}
+              placeholder={t('nav.form.placeholder')}
               value={key}
               onChange={(e) => setKey(e.target.value)}
               maxLength={8}
@@ -60,7 +60,7 @@ export default function Header() {
               required
             />
             <Button type="submit" size="sm">
-              {t('lang.nav.form.button')}
+              {t('nav.form.button')}
             </Button>
           </form>
 
@@ -75,10 +75,10 @@ export default function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => setLang('zh-CN')}>
-                  {t('lang.nav.lang.zh_CN')}
+                  {t('nav.lang.zh_CN')}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setLang('en')}>
-                  {t('lang.nav.lang.en')}
+                  {t('nav.lang.en')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -92,7 +92,7 @@ export default function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>{t('lang.nav.more')}</DropdownMenuItem>
+                  <DropdownMenuItem>{t('nav.more')}</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
@@ -101,7 +101,7 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300">
-                  {t('lang.nav.something.text')}
+                  {t('nav.something.text')}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -112,12 +112,12 @@ export default function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <a href="https://docs.pasteme.cn/#/documentation" target="_blank" rel="noopener noreferrer">
-                    {t('lang.nav.something.help')}
+                    {t('nav.something.help')}
                   </a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <a href="https://github.com/LucienShui/PasteMe/issues" target="_blank" rel="noopener noreferrer">
-                    {t('lang.nav.something.feedback')}
+                    {t('nav.something.feedback')}
                   </a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -125,7 +125,7 @@ export default function Header() {
 
             {/* Donate */}
             <Button variant="ghost" size="sm" className="hidden md:flex text-white hover:text-gray-300">
-              {t('lang.nav.donate')}
+              {t('nav.donate')}
             </Button>
 
             {/* Mobile Menu */}
@@ -143,7 +143,7 @@ export default function Header() {
         rel="noopener noreferrer"
         className="github-corner hidden lg:block"
         aria-label="View source on GitHub"
-        title={t('lang.nav.beg')}
+        title={t('nav.beg')}
       >
         <svg width="80" height="80" viewBox="0 0 250 250" style={{ fill: '#151513', color: '#fff', position: 'absolute', top: '3.5em', border: 0, right: 0 }} aria-hidden="true">
           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>

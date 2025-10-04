@@ -3,15 +3,15 @@ export const lang = {
         text: 'A fatal error was detected. Please contact the administrator with the information',
     },
     form: {
-        input: [
-            {
+        input: {
+            0: {
                 prepend: 'Syntax',
             },
-            {
+            1: {
                 prepend: 'Passwd',
                 placeholder: 'Empty disabled',
             }
-        ],
+        },
         textarea: {
             placeholder: {
                 write_something_here: 'Make the most of your creativity.',
@@ -37,27 +37,27 @@ export const lang = {
     },
     success: {
         h2: 'Success!',
-        p: [
-            {
+        p: {
+            0: {
                 text: 'How to access this Paste <strong>{key}</strong> :',
             },
-            {
+            1: {
                 button: 'Return',
             },
-        ],
+        },
         ul: {
-            li: [
-                {
+            li: {
+                0: {
                     text: 'Enter <strong>Paste\'s number</strong> in the nav bar area.',
                 },
-                {
+                1: {
                     browser: 'Direct click to access: ',
                     tooltip: 'Open on a new window',
                 },
-                {
+                2: {
                     scan_qr_code: 'Scan the QR code',
                 }
-            ],
+            },
         },
         popover: {
             text: 'Enter <strong>Paste\'s number</strong> here to access to it.',

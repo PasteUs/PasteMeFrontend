@@ -50,9 +50,9 @@ export default function PasteView() {
   }, [content, lang, raw]);
 
   const getCopyTooltip = () => {
-    if (copyStatus > 0) return t('lang.view.tooltip.success');
-    if (copyStatus < 0) return t('lang.view.tooltip.fail');
-    return t('lang.view.tooltip.click');
+    if (copyStatus > 0) return t('view.tooltip.success');
+    if (copyStatus < 0) return t('view.tooltip.fail');
+    return t('view.tooltip.click');
   };
 
   const renderContent = () => {
@@ -78,9 +78,9 @@ export default function PasteView() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 bg-gray-50 border-b">
           <div className="flex items-center gap-4 text-sm text-gray-600">
-            <span>{linesCount} {t('lang.view.lines')}</span>
+            <span>{linesCount} {t('view.lines')}</span>
             <span>|</span>
-            <span>{t(`lang.view.lang.${lang}`)}</span>
+            <span>{t(`view.lang.${lang}`)}</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -103,7 +103,7 @@ export default function PasteView() {
               className="text-blue-600 hover:text-blue-800 text-sm"
               title={getCopyTooltip()}
             >
-              {t('lang.view.copy')}
+              {t('view.copy')}
             </button>
           </div>
         </div>

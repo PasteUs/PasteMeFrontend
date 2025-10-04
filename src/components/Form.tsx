@@ -65,7 +65,7 @@ export default function Form() {
   };
 
   const languages = [
-    { value: 'plain', label: t('lang.form.select.plain') },
+    { value: 'plain', label: t('form.select.plain') },
     { value: 'cpp', label: 'C/C++' },
     { value: 'java', label: 'Java' },
     { value: 'python', label: 'Python' },
@@ -82,7 +82,7 @@ export default function Form() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Language Selector */}
           <div className="space-y-2">
-            <Label>{t('lang.form.input[0].prepend')}</Label>
+            <Label>{t('form.input.0.prepend')}</Label>
             <Select
               value={form.lang}
               onValueChange={(value) => setForm({ ...form, lang: value })}
@@ -102,13 +102,13 @@ export default function Form() {
 
           {/* Password Input */}
           <div className="space-y-2">
-            <Label>{t('lang.form.input[1].prepend')}</Label>
+            <Label>{t('form.input.1.prepend')}</Label>
             <div className="flex items-center gap-2">
               <Input
                 type="password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
-                placeholder={t('lang.form.input[1].placeholder')}
+                placeholder={t('form.input.1.placeholder')}
                 autoComplete="off"
                 className="flex-1"
               />
@@ -122,7 +122,7 @@ export default function Form() {
           <Textarea
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
-            placeholder={t(`lang.form.textarea.placeholder.${readOnce ? 'read_once' : 'write_something_here'}`)}
+            placeholder={t(`form.textarea.placeholder.${readOnce ? 'read_once' : 'write_something_here'}`)}
             rows={10}
             required
             className="font-mono resize-none"
@@ -133,7 +133,7 @@ export default function Form() {
         {/* Submit and Options */}
         <div className="flex flex-wrap items-center gap-4">
           <Button type="submit" variant={readOnce ? 'secondary' : 'default'}>
-            {t('lang.form.submit')}
+            {t('form.submit')}
           </Button>
 
           {!readOnce && (
@@ -149,12 +149,12 @@ export default function Form() {
                     disabled={nobody}
                   />
                   <Label htmlFor="self-destruct" className="cursor-pointer">
-                    {t('lang.form.checkbox.text')}
+                    {t('form.checkbox.text')}
                   </Label>
                 </div>
               </PopoverTrigger>
               <PopoverContent>
-                {t('lang.form.checkbox.popover')}
+                {t('form.checkbox.popover')}
               </PopoverContent>
             </Popover>
           )}
@@ -162,7 +162,7 @@ export default function Form() {
           {form.self_destruct && (
             <div className="flex items-center gap-2 flex-wrap">
               <div className="flex items-center gap-1">
-                <span className="text-sm">{t('lang.form.count.prepend')}</span>
+                <span className="text-sm">{t('form.count.prepend')}</span>
                 <Input
                   type="number"
                   min={1}
@@ -172,13 +172,13 @@ export default function Form() {
                   disabled={nobody}
                   className="w-20"
                 />
-                <span className="text-sm">{t('lang.form.count.append')}</span>
+                <span className="text-sm">{t('form.count.append')}</span>
               </div>
 
               <span className="text-sm">or</span>
 
               <div className="flex items-center gap-1">
-                <span className="text-sm">{t('lang.form.time.prepend')}</span>
+                <span className="text-sm">{t('form.time.prepend')}</span>
                 <Input
                   type="number"
                   min={1}
@@ -188,7 +188,7 @@ export default function Form() {
                   disabled={nobody}
                   className="w-20"
                 />
-                <span className="text-sm">{t('lang.form.time.append')}</span>
+                <span className="text-sm">{t('form.time.append')}</span>
               </div>
             </div>
           )}

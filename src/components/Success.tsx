@@ -41,44 +41,44 @@ export default function Success() {
   };
 
   const getCopyText = () => {
-    if (copyStatus > 0) return t('lang.success.badge.success');
-    if (copyStatus < 0) return t('lang.success.badge.fail');
-    return t('lang.success.badge.copy');
+    if (copyStatus > 0) return t('success.badge.success');
+    if (copyStatus < 0) return t('success.badge.fail');
+    return t('success.badge.copy');
   };
 
   return (
     <div className="container mx-auto px-4 max-w-4xl">
       <div className="my-8 bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold mb-4">{t('lang.success.h2')}</h2>
+        <h2 className="text-3xl font-bold mb-4">{t('success.h2')}</h2>
 
         <p
           className="mb-4"
-          dangerouslySetInnerHTML={{ __html: t('lang.success.p[0].text', { key }) }}
+          dangerouslySetInnerHTML={{ __html: t('success.p.0.text', { key }) }}
         />
 
         <ul className="list-disc list-inside space-y-3 mb-6">
           <li>
-            <span dangerouslySetInnerHTML={{ __html: t('lang.success.ul.li[0].text') }} />
+            <span dangerouslySetInnerHTML={{ __html: t('success.ul.li.0.text') }} />
             &nbsp;
             <Popover>
               <PopoverTrigger asChild>
                 <Badge variant="secondary" className="cursor-help">?</Badge>
               </PopoverTrigger>
               <PopoverContent>
-                <div dangerouslySetInnerHTML={{ __html: t('lang.success.popover.text') }} />
+                <div dangerouslySetInnerHTML={{ __html: t('success.popover.text') }} />
               </PopoverContent>
             </Popover>
           </li>
 
           <li>
-            {t('lang.success.ul.li[1].browser')}
+            {t('success.ul.li.1.browser')}
             &nbsp;
             <a
               href={pasteUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
-              title={t('lang.success.ul.li[1].tooltip')}
+              title={t('success.ul.li.1.tooltip')}
             >
               {pasteUrl}
             </a>
@@ -96,7 +96,7 @@ export default function Success() {
             <Popover>
               <PopoverTrigger asChild>
                 <span className="text-blue-600 cursor-pointer hover:underline">
-                  {t('lang.success.ul.li[2].scan_qr_code')}
+                  {t('success.ul.li.2.scan_qr_code')}
                 </span>
               </PopoverTrigger>
               <PopoverContent>
@@ -109,7 +109,7 @@ export default function Success() {
         </ul>
 
         <Button onClick={goHome}>
-          {t('lang.success.p[1].button')}
+          {t('success.p.1.button')}
         </Button>
       </div>
     </div>

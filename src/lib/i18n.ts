@@ -8,10 +8,10 @@ i18n
   .init({
     resources: {
       'zh-CN': {
-        translation: { lang: zhCN }
+        translation: zhCN
       },
       'en': {
-        translation: { lang: en }
+        translation: en
       }
     },
     lng: 'zh-CN',

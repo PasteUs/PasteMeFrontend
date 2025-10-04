@@ -46,20 +46,20 @@ export default function PasswordAuth() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium mb-2">
-            {t('lang.auth.form.label')}
+            {t('auth.form.label')}
           </label>
           <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder={error ? t('lang.auth.form.placeholder') : ''}
+            placeholder={error ? t('auth.form.placeholder') : ''}
             autoFocus
             required
             className={error ? 'border-red-500' : ''}
           />
         </div>
         <Button type="submit">
-          {t('lang.auth.form.button')}
+          {t('auth.form.button')}
         </Button>
       </form>
     </div>
